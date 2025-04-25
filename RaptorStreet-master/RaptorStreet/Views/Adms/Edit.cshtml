@@ -1,0 +1,44 @@
+﻿@model RaptorStreet.Models.Adm
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Adm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdAdm" />
+            <div class="form-group">
+                <label asp-for="NomeAdm" class="control-label"></label>
+                <input asp-for="NomeAdm" class="form-control" />
+                <span asp-validation-for="NomeAdm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAdm" class="control-label"></label>
+                <input asp-for="EmailAdm" class="form-control" />
+                <span asp-validation-for="EmailAdm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SenhaAdm" class="control-label"></label>
+                <input asp-for="SenhaAdm" class="form-control" />
+                <span asp-validation-for="SenhaAdm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
