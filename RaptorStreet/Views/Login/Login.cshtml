@@ -1,0 +1,38 @@
+﻿
+@{
+	ViewData["Title"] = "Login";
+}
+@{
+	ViewBag.ExibirNavbar = false;
+}
+
+<body>
+	<main class="login-container">
+		<div class="login-central">
+			<div class="login-box">
+				<div class="login-image">
+					<img src="~/assets/img/dinossauro-verde.png" class="img-raptor-logo" alt="Raptor">
+				</div>
+				<div class="login-form">
+					<h2>Entrar</h2>
+					<form>
+						<input type="email" placeholder="E-mail" required>
+						<input type="password" placeholder="Senha" required>
+
+						<div class="options">
+							<label>
+								<input type="checkbox">
+								<span>Lembrar de mim</span>
+							</label>
+							<a href="#">esqueceu a senha?</a>
+						</div>
+						<button type="submit" class="btn btn-primary">Login</button>
+						<button type="submit" class="btn btn-primary" onclick="location.href='/home/index'">Voltar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+

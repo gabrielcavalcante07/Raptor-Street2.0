@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Raptor Street</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/RaptorStreet.styles.css" asp-append-version="true" />
+</head>
+<body>
+	<header>
+		@if (ViewBag.ExibirNavbar != false)
+		{
+			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
+				<div class="container-fluid justify-content-between mx-4">
+					<div class="logo">
+						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo.png" /></a>
+						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Filtro">Raptor Street</a>
+					</div>
+
+					@*input search*@
+					<div class="search-container">
+					<form class="d-flex" asp-controller="Home" asp-action="Pesquisar" method="get" role="search">
+						<img src="~/assets/icons/icon-search-dark.svg" id="icon-search" />
+						<input class="form-control" type="search" name="nome" placeholder="Pesquisar" aria-label="Search">
+					</form>
+					</div>
+
+
+					<div class="d-flex gap-3">
+						@*perfil*@
+						<img src="~/assets/img/perfil.png" id="perfil" />
+
+						@*icon cart*@
+						<a asp-area="" asp-controller="Home" asp-action="Carrinho"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+
+						@*button login*@
+						<a class="btn btn-danger" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+					</div>
+
+
+					@*menu-hamburguer*@
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+							aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+				</div>
+			</nav>
+		}
+	</header>
+	<div class="container-fluid p-0">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="footer text-muted">
+		<div class="container  text-center">
+			&copy; 2024 - Raptor Street
+		</div>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

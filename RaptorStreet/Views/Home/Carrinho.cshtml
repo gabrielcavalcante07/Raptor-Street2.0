@@ -1,0 +1,119 @@
+﻿@* <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> *@
+
+
+
+<body>
+    <section class="fodase2" style="padding-top: 15px;" >
+<section class="container mt-4">
+    <h1 class="mb-4" style="color: white">CARRINHO</h1>
+
+    <div class="row">
+        <!-- Seção de Produto -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">PRODUTO</h2>
+                    <div class="row">
+                        <div class="col-3">
+                           <img src="~/assets/tenis/air-jordan4.png" class="product-image" alt="Jordan 4 Retro" style="width: 150px;height: 100px;">
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-1 fw-bold">Jordan 4 Retro</p>
+                            <p class="mb-1 text-muted">Cor: Red Thunder</p>
+                            <p class="mb-1 text-muted">Tamanho: 38</p>
+                        </div>
+                        <div class="col-3 text-end">
+                            <button class="btn btn-sm btn-outline-danger">EXCLUIR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <h3 class="h6">QUANTIDADE</h3>
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(-1)">-</button>
+                                <div id="quantityValue" class="px-3 py-1 mx-2 border">1</div>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h3 class="h6">VALOR UNITÁRIO</h3>
+                            <p class="mb-0">R$580,98</p>
+                            <p class="mb-0 text-muted"><small>R$499,99</small></p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h3 class="h6">VALOR TOTAL</h3>
+                            <p class="mb-0 fw-bold">R$509,98</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Resumo -->
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">PRAZO DE ENTREGA</h2>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="00000-000">
+                        <button class="btn btn-dark" type="button">CALCULAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">CUPOM DE DESCONTO</h2>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Digite seu cupom">
+                        <button class="btn btn-dark" type="button">APLICAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">RESUMO</h2>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Valor dos produtos</span>
+                        <span>R$499,99</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Frete</span>
+                        <span>R$9,99</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Desconto</span>
+                        <span class="text-danger">-R$250,00</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total da compra</span>
+                        <span>R$509,98</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-dark w-100 py-2 mb-2">CONTINUAR</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    let quantity = 1;
+    function changeQuantity(delta) {
+        quantity = Math.max(1, quantity + delta);
+        document.getElementById('quantityValue').textContent = quantity;
+        // Adicionar a lógica para atualizar os valores
+    }
+</script>
+</section>
+
+</body>
