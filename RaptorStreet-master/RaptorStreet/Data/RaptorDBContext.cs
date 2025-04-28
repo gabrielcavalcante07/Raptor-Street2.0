@@ -29,7 +29,7 @@ namespace RaptorStreet.Data
             modelBuilder.Entity<Adm>().ToTable("tbAdm");
             modelBuilder.Entity<Cliente>().ToTable("tbClientes");
             modelBuilder.Entity<ClienteEndereco>().ToTable("tbClienteEnderecos");
-            modelBuilder.Entity<Produto>().ToTable("tbMarcaProduto");
+            modelBuilder.Entity<MarcaProduto>().ToTable("tbMarcaProduto");
             modelBuilder.Entity<Produto>().ToTable("tbProdutos");
             modelBuilder.Entity<ClienteFav>().ToTable("tbClienteFav"); 
             modelBuilder.Entity<Carrinho>().ToTable("tbCarrinho");

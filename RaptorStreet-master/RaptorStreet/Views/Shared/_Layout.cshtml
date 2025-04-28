@@ -27,17 +27,25 @@
 				</div>
 
 
-				<div class="d-flex gap-3">
+				<div class="d-flex gap-3 justify-content-center align-items-center">
 					@*perfil*@
-					<img src="~/assets/img/perfil.png" id="perfil" />
+					<div class="nav-item dropdown">
+						<a class="nav-link" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="~/assets/img/perfil.png" id="perfil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="perfilDropdown">
+							<li><a class="dropdown-item" href="#">Perfil</a></li>
+							<li><a class="dropdown-item" href="#">Favoritos</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">Sair</a></li>
+						</ul>
+					</div>
 
 					@*icon cart*@
 					<img src="~/assets/icons/icon-cart.svg" id="cart" />
 
 					@*button login*@
 					<button type="button" class="btn btn-danger">Login</button>
-
-
 				</div>
 
 

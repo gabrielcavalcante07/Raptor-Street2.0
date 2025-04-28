@@ -32,9 +32,8 @@ body {
     overflow-x: hidden;
     margin-bottom: 60px;
     padding: 0;
-    background-color: white;
+    background-color: #1A1A1A;
     padding-top: 70px;
-   
 }
 
 .gap-5{
@@ -53,7 +52,7 @@ header {
 .navbar {
     display: flex;
     width: 80vw;
-    height: 10vh;
+    height: 9vh;
     /*background-color: #1A1A1A;*/
     border-radius: 50px;
     background-color: currentColor;

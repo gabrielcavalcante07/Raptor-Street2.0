@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using RaptorStreet.Data;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 // Configurar o Entity Framework Core para usar MySQL
 builder.Services.AddDbContext<RaptorDBContext>(options =>
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<RaptorDBContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
