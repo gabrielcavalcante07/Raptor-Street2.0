@@ -1,3 +1,5 @@
+/*CSS*/
+
 html {
     font-size: 14px;
 }
@@ -10,8 +12,22 @@ html {
 :focus {
     outline: none !important;
     box-shadow: none !important;
-    border:none;
+    border: none;
 }
+
+.modal-content {
+    border: none !important;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    border: none !important;
+}
+
+    .modal-body hr {
+        display: none !important;
+    }
 
 
 @media (min-width: 768px) {
@@ -32,17 +48,17 @@ body {
     overflow-x: hidden;
     margin-bottom: 60px;
     padding: 0;
-    background-color: #1A1A1A;
-    padding-top: 70px;
+    background-color: var(--body);
 }
 
-.gap-5{
-    color: white
-}
-
-.row{
+.gap-5 {
     color: black;
 }
+
+.row {
+    color: black;
+}
+
 header {
     display: flex;
     justify-content: center;
@@ -52,13 +68,13 @@ header {
 .navbar {
     display: flex;
     width: 80vw;
-    height: 9vh;
+    height: 10vh;
     /*background-color: #1A1A1A;*/
     border-radius: 50px;
     background-color: currentColor;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 10px;
+    margin-top: 5px;
     background-color: rgba(0, 0, 0, 0.3); /* Fundo preto transparente */
     backdrop-filter: blur(5px); /* Efeito de vidro fosco */
 }
@@ -98,7 +114,7 @@ header {
     height: 60px;
 }
 
-.carousel {
+.carousel-inner {
     margin-top: 11vh;
 }
 
@@ -122,6 +138,14 @@ header {
 .carousel-indicators .active {
     background-color: var(--vermelho); /* Cor do botão ativo */
     width: 30px;
+}
+
+.carousel-control-prev-icon .carousel-control-next-icon {
+    /*background-color: red;*/
+}
+
+.text-justify {
+    text-align: justify;
 }
 
 
@@ -161,7 +185,7 @@ header {
     margin-top: 150px;
 }
 
-.image-contrainer{
+.image-contrainer {
     width: 40vw;
     height: 50vw;
     display: flex;
@@ -169,10 +193,10 @@ header {
     align-items: center;
 }
 
-#jordan4{
+#jordan4 {
     width: 100%;
     height: auto;
-    object-fit:contain;
+    object-fit: contain;
 }
 
 .select {
@@ -186,16 +210,132 @@ header {
 }
 
 
-/*Nike*/
-
-.area_nike{
-    
+.product-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 2rem 1rem;
+    overflow: hidden;
 }
 
+.product-carousel-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.product-carousel-track {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+}
+
+.product-card {
+    flex: 0 0 auto;
+    width: 250px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1rem;
+}
+
+.product-image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+    .product-image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+    }
+
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    color: #888;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+    .favorite-icon.active {
+        color: red;
+    }
+
+.product-info {
+    margin-top: 0.5rem;
+}
+
+.product-name {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.product-price {
+    color: #333;
+    font-weight: 600;
+    margin: 0.2rem 0;
+}
+
+.rating {
+    color: #FFD700;
+}
+
+.product-carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    padding: 0.5rem 0.8rem;
+    font-size: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+    .product-carousel-button.prev {
+        left: 10px;
+    }
+
+    .product-carousel-button.next {
+        right: 10px;
+    }
+
+
+/*Nike*/
+.page-title {
+    color: black;
+    text-align: center;
+    margin-top: 130px; /* afasta do topo/nav */
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.main-container {
+    padding-top: 30px; /* distância confortável da navbar */
+}
+
+
 .filter-sidebar {
-    background-color: rgba(217, 217, 217, 1);
+    background-color: #D9D9D9;
+    border: solid 1px #969696;
     border-radius: 8px;
+    padding-top: 16px;
     margin-bottom: 20px;
+}
+
+.filter-content {
+    margin-left: 10px;
 }
 
 .filter-title {
@@ -219,70 +359,74 @@ header {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 16px;
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
     margin-top: 20px;
+    margin-right: 20px;
 }
 
 .product-card {
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza horizontalmente */
+    justify-content: center; /* centraliza verticalmente se necessário */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .product-image-container {
     position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.product-image {
-    width: 100%;
+.card-img {
+    width: 150px;
+    height: auto;
     display: block;
-    aspect-ratio: 1/1; /* Proporção quadrada para as imagens */
-    object-fit: cover;
 }
 
 .favorite-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
+    top: 8px;
+    right: 8px;
+    background: transparent;
     border: none;
+    font-size: 20px;
     cursor: pointer;
-    font-size: 1.2rem;
-    color: #ccc; /* Cor padrão do coração */
+    color: #888;
 }
 
-    .favorite-icon.active {
-        color: red; /* Cor do coração quando "favoritado" */
-    }
-
 .product-info {
-    padding: 15px;
     text-align: center;
 }
 
 .product-name {
-    font-weight: bold;
+    font-size: 1.1rem;
     margin-bottom: 5px;
 }
 
 .product-price {
-    color: green;
     font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.rating {
-    color: gold;
-    font-size: 0.9rem;
+    color: #333;
     margin-bottom: 5px;
 }
 
+.rating {
+    margin-bottom: 10px;
+    color: gold;
+}
+
+
+
 .btn-primary {
-    background-color: #007bff;
+    background-color: #dc3545;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -290,7 +434,7 @@ header {
     cursor: pointer;
     font-size: 0.9rem;
     transition: background-color 0.3s ease;
-    text-decoration: none; /* Para remover o sublinhado do link */
+    text-decoration: none;
 }
 
     .btn-primary:hover {
@@ -299,4 +443,264 @@ header {
 
 .promotion-banner {
     /* Estilos para o banner de promoção */
+}
+
+/*Login*/
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.login-central {
+    height: 750px;
+    display: flex;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 0 3px;
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+}
+
+.login-box {
+    padding: 100px 0px;
+    display: flex;
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    margin-left: 45px;
+}
+
+.login-image {
+    background-color: #9b5de5;
+    padding: 40px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+    .login-image img {
+        width: 300px;
+        height: auto;
+    }
+
+.login-form {
+    flex: 1;
+    padding: 50px 40px;
+}
+
+    .login-form h2 {
+        color: #c62828;
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+    .options label {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #c62828;
+    }
+
+    .options input[type="checkbox"] {
+        margin-right: 8px;
+    }
+
+    .options a {
+        font-size: 13px;
+        color: #c62828;
+        text-decoration: none;
+    }
+
+
+/*Carrinho*/
+
+/* Estilos Gerais */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 80px;
+}
+
+/* Títulos */
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eee;
+}
+
+h2, .h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+h3, .h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s;
+}
+
+    .card:hover {
+        transform: translateY(-2px);
+    }
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Seção de Produto */
+
+.product-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.product-details {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Controle de Quantidade */
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.quantity-value {
+    width: 40px;
+    text-align: center;
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* Valores */
+.price {
+    font-weight: 600;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.discount {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.total-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Formulários */
+.form-control {
+    border-radius: 4px;
+    padding: 10px 35px;
+    border: 1px solid #ced4da;
+}
+
+.input-group .btn {
+    border-radius: 0 4px 4px 0;
+}
+
+/* Botões */
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-dark {
+    background-color: #000;
+    border-color: #000;
+}
+
+    .btn-dark:hover {
+        background-color: #333;
+        border-color: #333;
+    }
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+/* Resumo da Compra */
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.summary-divider {
+    margin: 1rem 0;
+    border-top: 1px solid #eee;
 }

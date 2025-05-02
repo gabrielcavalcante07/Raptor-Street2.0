@@ -1,0 +1,143 @@
+﻿@{
+    ViewData["Title"] = "Tênis";
+}
+
+<body>
+    <section style="padding-top: 100px;">
+        <div class="product d-flex container img-fluid justify-content-around">
+            <div class="image-container col-md-6 text-center">
+                <img src="~/assets/tenis/air-jordan4.png" class="img-fluid" id="jordan4" />
+            </div>
+
+            <div class="gap-5 text-white">
+                <h1>Jordan 4</h1>
+                <h2 class="text-danger">R$399,99</h2>
+                <p>10% de Desconto <br />Parcelamos em até 10x sem juros</p>
+
+                <select class="form-select select" aria-label="Default select example">
+                    <option value="value">Escolha seu tamanho</option>
+                    <option value="value">35</option>
+                    <option value="value">36</option>
+                    <option value="value">37</option>
+                    <option value="value">38</option>
+                    <option value="value">39</option>
+                    <option value="value">40</option>
+                    <option value="value">41</option>
+                    <option value="value">42</option>
+                </select>
+
+                <select class="form-select mt-1 select" aria-label="Default select example">
+                    <option value="value">Escolha a cor</option>
+                    <option value="value">Preto</option>
+                    <option value="value">Branco</option>
+                    <option value="value">Roxo</option>
+                    <option value="value">Azul</option>
+                </select>
+
+                <button type="button" class="btn btn-danger mt-2 container">Adicionar ao carrinho</button>
+                <h6 class="mt-4">Calcular Frete e Entrega</h6>
+
+                <div class="input-group mb-3">
+                    <input type="tel" class="form-control" name="CEP" value="" id="calcular" placeholder="Insira seu CEP" maxlength="8" />
+                    <button class="btn btn-dark" type="button">Calcular</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5 text-white">
+            <h3 class="text-center">Sobre o Produto</h3>
+            <p class="mt-4 text-justify">
+                Esta nova abordagem ao clássico Suede inspira-se na herança da PUMA no breakdance e na sua influência no streetwear moderno.
+                O Suede XL mantém o DNA icônico do Suede, mas dá um toque diferente com uma boca e língua acolchoadas exageradas,
+                além de uma sola mais robusta. Esta execução apresenta uma parte superior totalmente em camurça com uma Formstrip de couro.
+            </p>
+        </div>
+
+
+
+
+        <!--Carrousel de cards-->
+        <div class="product-carousel-wrapper">
+            <button class="product-carousel-button prev">&#10094;</button>
+
+            <div class="product-carousel-container">
+                <div class="product-carousel-track">
+                    <!-- CARD 1 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
+                            <button class="favorite-icon active">&#x2665;</button>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Outro Modelo Nike</h5>
+                            <p class="product-price">R$ 549,50</p>
+                            <div class="rating">★★★★☆</div>
+                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
+                            <button class="favorite-icon">&#x2661;</button>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Mais um Nike Legal</h5>
+                            <p class="product-price">R$ 720,00</p>
+                            <div class="rating">★★★☆☆</div>
+                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                        </div>
+                    </div>
+
+                    <!-- CARD 1 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
+                            <button class="favorite-icon active">&#x2665;</button>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Outro Modelo Nike</h5>
+                            <p class="product-price">R$ 549,50</p>
+                            <div class="rating">★★★★☆</div>
+                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                        </div>
+                    </div>
+
+                    <!-- CARD 1 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
+                            <button class="favorite-icon active">&#x2665;</button>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Outro Modelo Nike</h5>
+                            <p class="product-price">R$ 549,50</p>
+                            <div class="rating">★★★★☆</div>
+                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                        </div>
+                    </div>
+
+                    <!-- CARD 1 -->
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
+                            <button class="favorite-icon active">&#x2665;</button>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name">Outro Modelo Nike</h5>
+                            <p class="product-price">R$ 549,50</p>
+                            <div class="rating">★★★★☆</div>
+                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="product-carousel-button next">&#10095;</button>
+        </div>
+
+        <script src="@Url.Content("~/js/site.js")"></script>
+    </section>
+</body>

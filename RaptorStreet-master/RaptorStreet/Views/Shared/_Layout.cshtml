@@ -8,55 +8,57 @@
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/RaptorStreet.styles.css" asp-append-version="true" />
 </head>
-<body class="body1">
+<body>
 	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
-			<div class="container-fluid justify-content-between mx-4">
-				<div class="logo">
-					<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo.png" /></a>
-					<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Privacy">Raptor Street</a>
-					<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Nikes" asp-action="Index">Área Nike</a>
-				</div>
-
-				@*input search*@
-				<div class="search-container">
-					<img src="~/assets/icons/icon-search-dark.svg" id="icon-search" />
-					<form class="d-flex" role="search">
-						<input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search">
-					</form>
-				</div>
-
-
-				<div class="d-flex gap-3 justify-content-center align-items-center">
-					@*perfil*@
-					<div class="nav-item dropdown">
-						<a class="nav-link" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="~/assets/img/perfil.png" id="perfil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
-						</a>
-						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="perfilDropdown">
-							<li><a class="dropdown-item" href="#">Perfil</a></li>
-							<li><a class="dropdown-item" href="#">Favoritos</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">Sair</a></li>
-						</ul>
+		@if (ViewBag.ExibirNavbar != false)
+		{
+			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
+				<div class="container-fluid justify-content-between mx-4">
+					<div class="logo">
+						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo.png" /></a>
+						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Filtro">Raptor Street</a>
 					</div>
 
-					@*icon cart*@
-					<img src="~/assets/icons/icon-cart.svg" id="cart" />
+					@*input search*@
+					<div class="search-container">
+						<form class="d-flex" asp-controller="Home" asp-action="Pesquisar" method="get" role="search">
+							<img src="~/assets/icons/icon-search-dark.svg" id="icon-search" />
+							<input class="form-control" type="search" name="nome" placeholder="Pesquisar" aria-label="Search">
+						</form>
+					</div>
 
-					@*button login*@
-					<button type="button" class="btn btn-danger">Login</button>
+
+					<div class="d-flex gap-3 justify-content-center align-items-center">
+						@*perfil*@
+						<div class="nav-item dropdown">
+							<a class="nav-link" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="~/assets/img/perfil.png" id="perfil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="perfilDropdown">
+								<li><a class="dropdown-item" href="#">Perfil</a></li>
+								<li><a class="dropdown-item" href="#">Favoritos</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="#">Sair</a></li>
+							</ul>
+						</div>
+
+						@*icon cart*@
+						<a asp-area="" asp-controller="Home" asp-action="Carrinho"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+
+						@*button login*@
+						<a class="btn btn-danger" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+					</div>
+
+
+					@*menu-hamburguer*@
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+							aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
 				</div>
-
-
-				@*menu-hamburguer*@
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-			</div>
-		</nav>
+			</nav>
+		}
 	</header>
 	<div class="container-fluid p-0">
 		<main role="main" class="pb-3">
