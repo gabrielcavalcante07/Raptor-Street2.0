@@ -83,13 +83,13 @@ header {
     height: 25px;
 }
 
-.form-control {
-    padding-left: 35px; /* Garante espaço para o ícone */
-    width: 100%;
+/*.form-control {
+    padding-left: 35px;*/ /* Garante espaço para o ícone */
+    /*width: 100%;
     height: 40px;
     border-radius: 20px;
     border: none;
-}
+}*/
 
 /*INDEX*/
 .container-fluid img {

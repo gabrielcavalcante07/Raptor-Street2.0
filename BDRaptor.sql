@@ -1,116 +1,127 @@
-create database DBRaptor;
-use DBRaptor;
+CREATE DATABASE DBRaptor;
+USE DBRaptor;
+-- DROP DATABASE DBRaptor;
 
-CREATE TABLE tbEnderecos(
-IdEndereco int PRIMARY KEY auto_increment,
-CEP varchar (10) not null,
-NumeroEndereco smallint not null,
-Logradouro varchar(200) not null,
-Complemento varchar (100),
-Bairro varchar(100) not null,
-Cidade varchar(100) not null,
-Estado varchar(100) not null
+-- Tabela de Endereços
+CREATE TABLE tbEnderecos (
+    IdEndereco INT PRIMARY KEY AUTO_INCREMENT,
+    CEP VARCHAR(10) NOT NULL,
+    NumeroEndereco SMALLINT NOT NULL,
+    Logradouro VARCHAR(200) NOT NULL,
+    Complemento VARCHAR(100),
+    Bairro VARCHAR(100) NOT NULL,
+    Cidade VARCHAR(100) NOT NULL,
+    Estado VARCHAR(100) NOT NULL
 );
 
-Create table tbAdm(
-IdAdm int primary key auto_increment,
-NomeAdm varchar (100) not null,
-EmailAdm enum ('administradorn1@gmail.com','administradorn2@gmail.com'),
-SenhaAdm varchar (30) not null
+-- Tabela de Administradores
+CREATE TABLE tbAdm (
+    IdAdm INT PRIMARY KEY AUTO_INCREMENT,
+    NomeAdm VARCHAR(100) NOT NULL,
+    EmailAdm ENUM('administradorn1@gmail.com','administradorn2@gmail.com'),
+    SenhaAdm VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE tbClientes(
-IdCliente int PRIMARY KEY auto_increment,
-NomeCliente varchar(100) not null,
-DataNascimento date not null,
-CPF Int not null,
-Telefone numeric (11,0) not null,
-SenhaCliente varchar (30) not null,
-EmailCliente varchar (100) not null
+-- Tabela de Clientes
+CREATE TABLE tbClientes (
+    IdCliente INT PRIMARY KEY AUTO_INCREMENT,
+    NomeCliente VARCHAR(100) NOT NULL,
+    DataNascimento DATE NOT NULL,
+    CPF CHAR(11) NOT NULL, -- Corrigido para CHAR(11) para CPF
+    Telefone CHAR(11) NOT NULL, -- Corrigido para CHAR(11) também
+    SenhaCliente VARCHAR(30) NOT NULL,
+    EmailCliente VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE tbClienteEnderecos(
-IdEndCliente int primary key auto_increment,
-IdEnd int not null,
-foreign key (IdEndCliente) references tbEnderecos(IdEndereco) on delete cascade,
-Fk_IdCliente int not null,
-foreign key (Fk_IdCliente) references tbClientes(IdCliente) on delete cascade
+-- Associação de Clientes com Endereços
+CREATE TABLE tbClienteEnderecos (
+    IdEndCliente INT PRIMARY KEY AUTO_INCREMENT,
+    Fk_IdEndereco INT NOT NULL,
+    FOREIGN KEY (Fk_IdEndereco) REFERENCES tbEnderecos(IdEndereco) ON DELETE CASCADE,
+    Fk_IdCliente INT NOT NULL,
+    FOREIGN KEY (Fk_IdCliente) REFERENCES tbClientes(IdCliente) ON DELETE CASCADE
 );
 
-CREATE TABLE tbMarcaProduto(
-IdMarca int primary key auto_increment,
-NomeMarca varchar (50) not null
+-- Tabela de Marcas
+CREATE TABLE tbMarcaProduto (
+    IdMarca INT PRIMARY KEY AUTO_INCREMENT,
+    NomeMarca VARCHAR(50) NOT NULL
 );
 
+-- Tabela de Produtos
 CREATE TABLE tbProdutos (
-NomeProduto Varchar(100) not null,
-PrecoProduto Decimal(6,2) not null,
-Qtd int unsigned not null,
-Descricao Varchar(200) not null,
-IdProduto int primary key auto_increment,
-Tipo varchar(50) not null,
-Desconto bool not null,
-Tamanho tinyint unsigned not null,
-Fk_IdMarca int not null,
-foreign key (Fk_IdMarca) references tbMarcaProduto(IdMarca) on delete cascade
+    IdProduto INT PRIMARY KEY AUTO_INCREMENT,
+    NomeProduto VARCHAR(100) NOT NULL,
+    PrecoProduto DECIMAL(6,2) NOT NULL,
+    Qtd INT UNSIGNED NOT NULL,
+    Descricao VARCHAR(200) NOT NULL,
+    Tipo VARCHAR(50) NOT NULL,
+    Desconto BOOLEAN NOT NULL,
+    Tamanho TINYINT UNSIGNED NOT NULL,
+    Fk_IdMarca INT NOT NULL,
+    FOREIGN KEY (Fk_IdMarca) REFERENCES tbMarcaProduto(IdMarca) ON DELETE CASCADE
 );
 
-CREATE TABLE tbClienteFav(
-IdClienteFav int primary key auto_increment,
-IdCliente int not null,
-foreign key (IdCliente) references tbClientes(IdCliente) on delete cascade,
-IdProduto int not null,
-foreign key (IdProduto) references tbProdutos(IdProduto) on delete cascade,
-ativado boolean not null default true,
-constraint unique_client_product unique (IdCliente, IdProduto)
+ALTER TABLE tbProdutos ADD COLUMN Image LONGBLOB;
+
+
+-- Tabela de Favoritos do Cliente
+CREATE TABLE tbClienteFav (
+    IdClienteFav INT PRIMARY KEY AUTO_INCREMENT,
+    IdCliente INT NOT NULL,
+    FOREIGN KEY (IdCliente) REFERENCES tbClientes(IdCliente) ON DELETE CASCADE,
+    IdProduto INT NOT NULL,
+    FOREIGN KEY (IdProduto) REFERENCES tbProdutos(IdProduto) ON DELETE CASCADE,
+    ativado BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT unique_client_product UNIQUE (IdCliente, IdProduto)
 );
 
+-- Tabela de Carrinho
 CREATE TABLE tbCarrinho (
-TipoProduto varchar(50) not null,
-TotalVenda Int not null,
-Qtd int unsigned not null,
-IdVenda int PRIMARY KEY auto_increment,
-DataVenda Datetime not null,
-Fk_IdCliente Int not null,
-FOREIGN KEY (Fk_IdCliente) REFERENCES tbClientes (IdCliente)
+    IdCarrinho INT PRIMARY KEY AUTO_INCREMENT,
+    TipoProduto VARCHAR(50) NOT NULL,
+    TotalVenda INT NOT NULL,
+    Qtd INT UNSIGNED NOT NULL,
+    DataVenda DATETIME NOT NULL,
+    Fk_IdCliente INT NOT NULL,
+    FOREIGN KEY (Fk_IdCliente) REFERENCES tbClientes(IdCliente)
 );
 
+-- Tabela de Pagamentos
 CREATE TABLE tbPagamentos (
-IdPag Int primary key auto_increment,
-StatusPag enum('Pendente','Pago','Não Realizado'),
-MetodoPag varchar(50)
+    IdPag INT PRIMARY KEY AUTO_INCREMENT,
+    StatusPag ENUM('Pendente','Pago','Não Realizado'),
+    MetodoPag VARCHAR(50)
 );
 
-CREATE TABLE tbNotaFiscal(
-IdNota int primary key auto_increment,
-dataNf date not null,
-valorNF decimal(10,2) not null
+-- Tabela de Nota Fiscal
+CREATE TABLE tbNotaFiscal (
+    IdNota INT PRIMARY KEY AUTO_INCREMENT,
+    dataNf DATE NOT NULL,
+    valorNF DECIMAL(10,2) NOT NULL
 );
 
+-- Tabela de Pedidos
 CREATE TABLE tbPedido (
-IdPedido Int PRIMARY KEY auto_increment,
-Fk_IdNota int not null,
-foreign key (Fk_IdNota) references tbNotaFiscal(IdNota),
-Fk_IdEndereco int not null,
-foreign key (Fk_IdEndereco) references tbEnderecos(IdEndereco),
-Fk_IdPag int not null,
-foreign key (Fk_IdPag) references tbPagamentos(IdPag),
-Fk_IdCliente int not null,
-foreign key (Fk_IdCliente) references tbClientes (IdCliente),
-dataPed datetime not null,
-totalPedido decimal (10,2) not null
+    IdPedido INT PRIMARY KEY AUTO_INCREMENT,
+    Fk_IdNota INT NOT NULL,
+    FOREIGN KEY (Fk_IdNota) REFERENCES tbNotaFiscal(IdNota),
+    Fk_IdEndereco INT NOT NULL,
+    FOREIGN KEY (Fk_IdEndereco) REFERENCES tbEnderecos(IdEndereco),
+    Fk_IdPag INT NOT NULL,
+    FOREIGN KEY (Fk_IdPag) REFERENCES tbPagamentos(IdPag),
+    Fk_IdCliente INT NOT NULL,
+    FOREIGN KEY (Fk_IdCliente) REFERENCES tbClientes(IdCliente),
+    dataPed DATETIME NOT NULL,
+    totalPedido DECIMAL(10,2) NOT NULL
 );
 
-CREATE TABLE tbItemPedido(
-IdProdutoPedido int primary key auto_increment,
-Fk_IdPedido int not null,
-foreign key (Fk_IdPedido) references tbPedido(IdPedido),
-Fk_IdProduto int not null,
-foreign key (Fk_IdProduto) references tbProdutos(IdProduto),
-PrecoUnitario Decimal (10,2) not null
-); 
-
-
-
-
-
+-- Itens do Pedido
+CREATE TABLE tbItemPedido (
+    IdProdutoPedido INT PRIMARY KEY AUTO_INCREMENT,
+    Fk_IdPedido INT NOT NULL,
+    FOREIGN KEY (Fk_IdPedido) REFERENCES tbPedido(IdPedido),
+    Fk_IdProduto INT NOT NULL,
+    FOREIGN KEY (Fk_IdProduto) REFERENCES tbProdutos(IdProduto),
+    PrecoUnitario DECIMAL(10,2) NOT NULL
+);

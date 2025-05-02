@@ -48,7 +48,7 @@ namespace RaptorStreet.Controllers
         // GET: Produtoes/Create
         public IActionResult Create()
         {
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca");
+            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "NomeMarca");
             return View();
         }
 
@@ -63,9 +63,6 @@ namespace RaptorStreet.Controllers
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca", produto.Fk_IdMarca);
-            return View(produto);
         }
 
         // GET: Produtoes/Edit/5
@@ -81,7 +78,7 @@ namespace RaptorStreet.Controllers
             {
                 return NotFound();
             }
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca", produto.Fk_IdMarca);
+            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "NomeMarca", produto.Fk_IdMarca);
             return View(produto);
         }
 
@@ -114,10 +111,7 @@ namespace RaptorStreet.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-            
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca", produto.Fk_IdMarca);
-            return View(produto);
+                return RedirectToAction(nameof(Index)); 
         }
 
         // GET: Produtoes/Delete/5

@@ -15,9 +15,7 @@ namespace RaptorStreet.Models
         public bool Desconto { get; set; }
         public int Tamanho { get; set; }
         public int Fk_IdMarca { get; set; }
-
         public MarcaProduto MarcaProdutos { get; set; }
-
         public ICollection<ClienteFav> ClienteFavs { get; set; }
         public ICollection<ItemPedido> ItemPedidos { get; set; }
     }

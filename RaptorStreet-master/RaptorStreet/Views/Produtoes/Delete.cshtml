@@ -1,69 +1,86 @@
 ﻿@model RaptorStreet.Models.Produto
 
 @{
-    ViewData["Title"] = "Delete";
+	ViewData["Title"] = "Delete";
 }
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Você realmente quer excluir este produto?</h3>
 <div>
-    <h4>Produto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeProduto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeProduto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecoProduto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrecoProduto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Qtd)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Qtd)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tipo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Desconto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Desconto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tamanho)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tamanho)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MarcaProdutos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MarcaProdutos.IdMarca)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdProduto" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+	<h4>Produto</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.NomeProduto)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.NomeProduto)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PrecoProduto)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PrecoProduto)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Qtd)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Qtd)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Descricao)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Descricao)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tipo)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tipo)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Desconto)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Desconto)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tamanho)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tamanho)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.MarcaProdutos)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MarcaProdutos.IdMarca)
+		</dd>
+	</dl>
+
+	<form asp-action="Delete">
+		<input type="hidden" asp-for="IdProduto" />
+		<input type="submit" value="Delete" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" />
+		<a class="btn btn-dark" asp-controller="home" asp-action="crudadm">Voltar</a>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content bg-dark text-white">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Produto?</h1>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Você realmente deseja excluir o produto?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+						<a class="btn btn-danger" asp-controller="produtoes" asp-action="delete">Excluir</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
