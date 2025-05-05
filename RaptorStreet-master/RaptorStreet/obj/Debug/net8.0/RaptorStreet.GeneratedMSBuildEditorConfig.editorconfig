@@ -1,0 +1,325 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = RaptorStreet
+build_property.RootNamespace = RaptorStreet
+build_property.ProjectDir = C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Adms/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Adms/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Adms/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Adms/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Adms/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Carrinhoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9lc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Carrinhoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9lc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Carrinhoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9lc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Carrinhoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9lc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Carrinhoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmluaG9lc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteEnderecoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUVuZGVyZWNvZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteEnderecoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUVuZGVyZWNvZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteEnderecoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUVuZGVyZWNvZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteEnderecoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUVuZGVyZWNvZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteEnderecoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUVuZGVyZWNvZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteFavs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUZhdnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteFavs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUZhdnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteFavs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUZhdnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteFavs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUZhdnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ClienteFavs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZUZhdnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Clientes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Clientes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Clientes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Clientes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Clientes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Enderecoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29lc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Enderecoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29lc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Enderecoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29lc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Enderecoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29lc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Enderecoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29lc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Home/Carrinho.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXJyaW5oby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Home/CrudAdm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcnVkQWRtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Home/Filtro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGaWx0cm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Home/Produto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdXRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Home/TelaCompra.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZWxhQ29tcHJhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ItemPedidoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVBlZGlkb2VzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ItemPedidoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVBlZGlkb2VzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ItemPedidoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVBlZGlkb2VzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ItemPedidoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVBlZGlkb2VzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/ItemPedidoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVBlZGlkb2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Login/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/MarcaProdutoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFyY2FQcm9kdXRvZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/MarcaProdutoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFyY2FQcm9kdXRvZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/MarcaProdutoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFyY2FQcm9kdXRvZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/MarcaProdutoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFyY2FQcm9kdXRvZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/MarcaProdutoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFyY2FQcm9kdXRvZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Nikes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmlrZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/NotaFiscals/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/NotaFiscals/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/NotaFiscals/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/NotaFiscals/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/NotaFiscals/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pagamentoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pagamentoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pagamentoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pagamentoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pagamentoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnYW1lbnRvZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pedidoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pedidoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pedidoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pedidoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Pedidoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVkaWRvZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Produtoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b2VzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Produtoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b2VzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Produtoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b2VzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Produtoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b2VzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Produtoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b2VzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/degom/Documents/raptar/Raptor-Street2.0/RaptorStreet-master/RaptorStreet/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-54kc2nrj3a
