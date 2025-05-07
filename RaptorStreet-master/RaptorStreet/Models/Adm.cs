@@ -10,5 +10,7 @@ namespace RaptorStreet.Models
         public string NomeAdm { get; set; }
         public string EmailAdm { get; set; }
         public string SenhaAdm { get; set; }
+
+        public ICollection<Login> Logins { get; set; }
     }
 }

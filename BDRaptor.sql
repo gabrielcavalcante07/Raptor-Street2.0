@@ -29,6 +29,14 @@ SenhaCliente varchar (30) not null,
 EmailCliente varchar (100) not null
 );
 
+CREATE TABLE tbLogin(
+IdLogin  int primary key auto_increment,
+IdCliente int, 
+foreign key (idCliente) references tbCliente(idCliente),
+IdAdm int, 
+foreign key (idAdm) references tbAdm(idAdm)
+);
+
 CREATE TABLE tbClienteEnderecos(
 IdEndCliente int primary key auto_increment,
 IdEnd int not null,

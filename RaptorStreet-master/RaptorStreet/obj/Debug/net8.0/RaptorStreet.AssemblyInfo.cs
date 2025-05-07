@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RaptorStreet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e790e6f68d91a760a91e0e07ff02beb38d50970")]
 [assembly: System.Reflection.AssemblyProductAttribute("RaptorStreet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RaptorStreet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

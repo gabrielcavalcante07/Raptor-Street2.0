@@ -4,7 +4,6 @@ namespace RaptorStreet.Repositorio.Interface
 {
     public interface ILoginRepositorio
     {
-        Cliente Login(string EmailCliente, string SenhaCliente);
-        Adm LoginAdm(string EmailAdm, string SenhaAdm);
+        object Login(string email, string senha);
     }
 }

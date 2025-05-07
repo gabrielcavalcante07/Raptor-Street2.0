@@ -14,14 +14,11 @@ namespace RaptorStreet.Models
         public string SenhaCliente { get; set; }
         public string EmailCliente { get; set; }
 
+        public ICollection<Login> Logins { get; set; }
         public ICollection<ClienteEndereco> ClienteEnderecos { get; set; }
         public ICollection<ClienteFav> ClienteFavs { get; set; }
         public ICollection<Carrinho> Carrinhos { get; set; }
         public ICollection<Pedido> Pedidos { get; set; }
 
-        internal static void Login(Cliente loginDB)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

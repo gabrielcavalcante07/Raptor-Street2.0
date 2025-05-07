@@ -11,63 +11,61 @@ namespace RaptorStreet.Repositorio
     public class LoginRepositorio : ILoginRepositorio
     {
         private readonly RaptorDBContext _context;
-        private readonly string? _conexaoMySQL;
-
-        public LoginRepositorio(RaptorDBContext context, IConfiguration conf)
+        private readonly string _conexaoMySQL;
+        public LoginRepositorio(RaptorDBContext context, IConfiguration configuration)
         {
             _context = context;
-            _conexaoMySQL = conf.GetConnectionString("ConexaoMySQL");
+            _conexaoMySQL = configuration.GetConnectionString("conexaoMySQL");
         }
-
-        public Cliente Login(string EmailCliente, string SenhaCliente)
+        public object Login(string email, string senha)
         {
-            return _context.Clientes
-                .FirstOrDefault(c => c.EmailCliente == EmailCliente && c.SenhaCliente == SenhaCliente);
-        }
-
-        public Adm LoginAdm(string EmailAdm, string SenhaAdm)
-        {
-            return _context.Adms
-                .FirstOrDefault(a => a.EmailAdm == EmailAdm && a.SenhaAdm == SenhaAdm);
-        }
-
-        //Login Cliente(metodo)
-        public Cliente LoginSql(string EmailCliente, string SenhaCliente)
-        {
-            //usando a variavel conexao 
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
-                //abre a conexão com o banco de dados
                 conexao.Open();
 
-                // variavel cmd que receb o select do banco de dados buscando email e senha
-                MySqlCommand cmd = new MySqlCommand("select * from tbCliente where EmailCliente = @Usuario and SenhaCliente = @Senha", conexao);
+                // parte de cleinte
+                var cmdCliente = new MySqlCommand("SELECT * FROM tbCliente WHERE emailCliente = @Email AND senhaCliente = @Senha", conexao);
+                cmdCliente.Parameters.AddWithValue("@Email", email);
+                cmdCliente.Parameters.AddWithValue("@Senha", senha);
 
-                //os paramentros do usuario e da senha 
-                cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = EmailCliente;
-                cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = SenhaCliente;
-
-                //Le os dados que foi pego do email e senha do banco de dados
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                //guarda os dados que foi pego do email e senha do banco de dados
-                MySqlDataReader dr;
-
-                //instanciando a model Login
-                Cliente login = new Cliente();
-                //executando os comandos do mysql e passsando paa a variavel dr
-                dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                //verifica todos os dados que foram pego do banco e pega o email e senha
-                while (dr.Read())
+                using (var dr = cmdCliente.ExecuteReader())
                 {
-
-                    login.EmailCliente = Convert.ToString(dr["usuario"]);
-                    login.SenhaCliente = Convert.ToString(dr["senha"]);
+                    if (dr.Read())
+                    {
+                        var cliente = new Cliente
+                        {
+                            IdCliente = Convert.ToInt32(dr["idCliente"]),
+                            NomeCliente = dr["nomeCompleto"].ToString(),
+                            EmailCliente = dr["emailCliente"].ToString(),
+                            SenhaCliente = dr["senhaCliente"].ToString()
+                        };
+                        return cliente;
+                    }
                 }
-                return _context.Clientes
-                .FirstOrDefault(c => c.EmailCliente == EmailCliente && c.SenhaCliente == SenhaCliente);
+
+                // parte de adm
+                var cmdAdm = new MySqlCommand("SELECT * FROM tbAdm WHERE emailAdm = @Email AND senhaAdm = @Senha", conexao);
+                cmdAdm.Parameters.AddWithValue("@Email", email);
+                cmdAdm.Parameters.AddWithValue("@Senha", senha);
+
+                using (var dr = cmdAdm.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        var adm = new Adm
+                        {
+                            IdAdm = Convert.ToInt32(dr["idAdm"]),
+                            NomeAdm = dr["nomeAdm"].ToString(),
+                            EmailAdm = dr["emailAdm"].ToString(),
+                            SenhaAdm = dr["senhaAdm"].ToString()
+                        };
+                        return adm;
+                    }
+                }
+
+                return null;
             }
         }
-    }
 
+    }
 }

@@ -3,6 +3,7 @@ using RaptorStreet.Data;
 using RaptorStreet.Libraries.LoginUsuarios;
 using RaptorStreet.Repositorio.Interface;
 using RaptorStreet.Repositorio;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,17 +16,33 @@ builder.Services.AddDbContext<RaptorDBContext>(options =>
 );
 
 //  Registrar todos os serviços ANTES do builder.Build()
-builder.Services.AddControllersWithViews();
+// Autenticação com cookies
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Home/Login";
+    });
+
+// Acesso ao contexto HTTP
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddScoped<ILoginRepositorio, LoginRepositorio>();
-builder.Services.AddScoped<RaptorStreet.Libraries.Sessao.Sessao>();
-builder.Services.AddScoped<LoginUsuarios>();
+// Sessão
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
-//  Build do app depois de registrar os serviços
+// MVC
+builder.Services.AddControllersWithViews();
+
+// Repositórios
+builder.Services.AddScoped<ILoginRepositorio, LoginRepositorio>();
+
+
 var app = builder.Build();
 
-// Configuração do pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -37,10 +54,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+
+
+app.UseAuthentication();   // Autenticação
+app.UseSession();          // Ativando a sessão
+app.UseAuthorization();    // Autorização
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.Run();
