@@ -6,11 +6,12 @@ namespace RaptorStreet.Models
     public class ClienteEndereco
     {
         public int IdEndCliente { get; set; }
-        public int IdEnd { get; set; }
-        public Endereco Enderecos { get; set; }
+
         public int Fk_IdCliente { get; set; }
         public Cliente Clientes { get; set; }
 
-
+        public int Fk_IdEndereco { get; set; }
+        public Endereco Enderecos { get; set; }
     }
+
 }

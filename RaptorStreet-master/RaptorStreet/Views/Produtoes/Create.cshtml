@@ -1,67 +1,69 @@
 ﻿@model RaptorStreet.Models.Produto
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="container text-center text-white">
 
-<h4>Produto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NomeProduto" class="control-label"></label>
-                <input asp-for="NomeProduto" class="form-control" />
-                <span asp-validation-for="NomeProduto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrecoProduto" class="control-label"></label>
-                <input asp-for="PrecoProduto" class="form-control" />
-                <span asp-validation-for="PrecoProduto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Qtd" class="control-label"></label>
-                <input asp-for="Qtd" class="form-control" />
-                <span asp-validation-for="Qtd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tipo" class="control-label"></label>
-                <input asp-for="Tipo" class="form-control" />
-                <span asp-validation-for="Tipo" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Desconto" /> @Html.DisplayNameFor(model => model.Desconto)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tamanho" class="control-label"></label>
-                <input asp-for="Tamanho" class="form-control" />
-                <span asp-validation-for="Tamanho" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Fk_IdMarca" class="control-label"></label>
-                <select asp-for="Fk_IdMarca" class ="form-control" asp-items="ViewBag.Fk_IdMarca"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+	<h1>Cadastrar</h1>
+
+	<h4>Produto</h4>
+	<hr />
+	<div class="row justify-content-center">
+		<div class="col-md-4 text-white text-start">
+			<form asp-action="Create">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="form-group">
+					<label asp-for="NomeProduto" class="control-label"></label>
+					<input asp-for="NomeProduto" class="form-control" />
+					<span asp-validation-for="NomeProduto" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="PrecoProduto" class="control-label"></label>
+					<input asp-for="PrecoProduto" class="form-control" />
+					<span asp-validation-for="PrecoProduto" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Qtd" class="control-label"></label>
+					<input asp-for="Qtd" class="form-control" />
+					<span asp-validation-for="Qtd" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Descricao" class="control-label"></label>
+					<input asp-for="Descricao" class="form-control" />
+					<span asp-validation-for="Descricao" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Tipo" class="control-label"></label>
+					<input asp-for="Tipo" class="form-control" />
+					<span asp-validation-for="Tipo" class="text-danger"></span>
+				</div>
+				<div class="form-group form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" asp-for="Desconto" /> @Html.DisplayNameFor(model => model.Desconto)
+					</label>
+				</div>
+				<div class="form-group">
+					<label asp-for="Tamanho" class="control-label"></label>
+					<input asp-for="Tamanho" class="form-control" />
+					<span asp-validation-for="Tamanho" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Fk_IdMarca" class="control-label"></label>
+					<select asp-for="Fk_IdMarca" class="form-control" asp-items="ViewBag.Fk_IdMarca"></select>
+				</div>
+				<div class="form-group">
+					<a class="btn btn-dark" asp-controller="home" asp-action="crudadm">Voltar</a>
+					<input type="submit" value="Create" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+	@section Scripts {
+		@{
+			await Html.RenderPartialAsync("_ValidationScriptsPartial");
+		}
+	}
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

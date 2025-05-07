@@ -1,34 +1,28 @@
-﻿
-<body>
-    <section class="fodase1" style="padding-top: 100px;">
-        <div class="container d-flex flex-column align-items-center">
-            <img src="~/assets/img/logo-combination.png" class="d-flex w-25 h-25 rounded mx-auto d-block" id="logocrud" alt="Alternate Text" />
+﻿<div class="container d-flex flex-column align-items-center">
+    <img src="~/assets/img/logo-combination.png" class="d-flex w-25 h-25 rounded mx-auto d-block" id="logocrud" alt="Alternate Text" />
 
-            <div class="gap-1 d-flex flex-column w-25">
-                <button class="btn btn-danger">Cadastrar Produto</button>
-                <button class="btn btn-danger">Listar Produto</button>
-                <button class="btn btn-danger">Alterar Produto</button>
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir Produto</button>
-            </div>
+    <div class="gap-1 d-flex flex-column w-25">
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Create">Cadastrar Produto</a>
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Index">Listar Produto</a>
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Index">Alterar Produto</a>
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Index">Excluir Produto</a>
+    </div>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content bg-dark text-white">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Produto?</h1>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Você realmente deseja excluir o produto?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger">Excluir</button>
-                        </div>
-                    </div>
+    @*     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Produto?</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Você realmente deseja excluir o produto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger" asp-controller="produtoes" asp-action="delete">Excluir</a>
                 </div>
             </div>
         </div>
-    </section>>
-
-</body>   
+    </div> *@
+</div>
