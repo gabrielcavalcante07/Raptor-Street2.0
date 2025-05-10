@@ -32,15 +32,15 @@ EmailCliente varchar (100) not null
 CREATE TABLE tbLogin(
 IdLogin  int primary key auto_increment,
 IdCliente int, 
-foreign key (idCliente) references tbCliente(idCliente),
+foreign key (IdCliente) references tbClientes(IdCliente),
 IdAdm int, 
-foreign key (idAdm) references tbAdm(idAdm)
+foreign key (IdAdm) references tbAdm(IdAdm)
 );
 
 CREATE TABLE tbClienteEnderecos(
 IdEndCliente int primary key auto_increment,
 IdEnd int not null,
-foreign key (IdEndCliente) references tbEnderecos(IdEndereco) on delete cascade,
+foreign key (IdEnd) references tbEnderecos(IdEndereco) on delete cascade,
 Fk_IdCliente int not null,
 foreign key (Fk_IdCliente) references tbClientes(IdCliente) on delete cascade
 );

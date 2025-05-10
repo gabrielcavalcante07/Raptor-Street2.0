@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+	var emailCliente = Context.Session.GetString("EmailCliente");
+}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8" />
@@ -29,25 +33,30 @@
 
 
 					<div class="d-flex gap-3 justify-content-center align-items-center">
-						@*perfil*@
-						<div class="nav-item dropdown">
-							<a class="nav-link" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="~/assets/img/perfil.png" id="perfil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
-							</a>
-							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="perfilDropdown">
-								<li><a class="dropdown-item" href="#">Perfil</a></li>
-								<li><a class="dropdown-item" href="#">Favoritos</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#">Sair</a></li>
-							</ul>
-						</div>
+						@* Se cliente está logado *@
+						@if (!string.IsNullOrEmpty(emailCliente))
+						{
+							<div class="nav-item dropdown">
+								<a class="nav-link" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<img src="~/assets/img/perfil.png" id="perfil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+								</a>
+								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="perfilDropdown">
+									<li><a class="dropdown-item" asp-controller="Clientes" asp-action="Painel">Painel do Cliente</a></li>
+									<li><a class="dropdown-item" asp-controller="Clientes" asp-action="Favoritos">Favoritos</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" asp-controller="Logins" asp-action="Logout">Sair</a></li>
+								</ul>
+							</div>
+						}
+						else
+						{
+							<a class="btn btn-danger" asp-area="" asp-controller="Logins" asp-action="Login">Login</a>
+						}
 
-						@*icon cart*@
+						@* Ícone do carrinho sempre visível *@
 						<a asp-area="" asp-controller="Home" asp-action="Carrinho"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
-
-						@*button login*@
-						<a class="btn btn-danger" asp-area="" asp-controller="Logins" asp-action="Login">Login</a>
 					</div>
+
 
 
 					@*menu-hamburguer*@

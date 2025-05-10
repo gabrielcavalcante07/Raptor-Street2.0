@@ -267,7 +267,6 @@ C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStree
 C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\obj\Debug\net8.0\RaptorStreet.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\obj\Debug\net8.0\RaptorStreet.RazorAssemblyInfo.cache
 C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\obj\Debug\net8.0\RaptorStreet.RazorAssemblyInfo.cs
-C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\obj\Debug\net8.0\RaptorStreet.sourcelink.json
 C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\obj\Debug\net8.0\scopedcss\bundle\RaptorStreet.styles.css
 C:\Users\degom\Documents\raptar\Raptor-Street2.0\RaptorStreet-master\RaptorStreet\obj\Debug\net8.0\scopedcss\projectbundle\RaptorStreet.bundle.scp.css

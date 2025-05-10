@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using RaptorStreet.Repositorio;
 using RaptorStreet.Repositorio.Interface;
+using System.Runtime.ConstrainedExecution;
 
 namespace RaptorStreet.Controllers
 {
@@ -190,8 +191,110 @@ namespace RaptorStreet.Controllers
             TempData["Login"] = "Cadastro efetuado com sucesso!";
             return RedirectToAction("Index", "Home");
 
-
-
         }
+
+        public async Task<IActionResult> Painel()
+        {
+            var idCliente = HttpContext.Session.GetInt32("IdCliente");
+
+            if (idCliente == null)
+            {
+                TempData["Login"] = "É necessário estar logado para acessar o painel.";
+                return RedirectToAction("Login", "Logins");
+            }
+
+            var cliente = await _context.Clientes
+                .Include(c => c.ClienteEnderecos)
+                    .ThenInclude(ce => ce.Enderecos)
+                .FirstOrDefaultAsync(c => c.IdCliente == idCliente);
+
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarCliente(int IdCliente, string Nome, string Email, int Telefone)
+        {
+            var cliente = await _context.Clientes.FindAsync(IdCliente);
+
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            cliente.NomeCliente = Nome;
+            cliente.EmailCliente = Email;
+            cliente.Telefone = Telefone;
+
+            _context.Clientes.Update(cliente);
+            await _context.SaveChangesAsync();
+
+            TempData["Msg"] = "Seus Dados foram atualizados com sucesso!";
+            return RedirectToAction("Painel");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdicionarEndereco(int idCliente, string CEP, int NumeroEndereco, string Logradouro, string Complemento, string Bairro, string Cidade, string Estado)
+        {
+            // Cria o novo endereço
+            var novoEndereco = new Endereco
+            {
+                CEP = CEP,
+                NumeroEndereco = NumeroEndereco,
+                Logradouro = Logradouro,
+                Complemento = Complemento,
+                Bairro = Bairro,
+                Cidade = Cidade,
+                Estado = Estado
+            };
+
+            // Adiciona o novo endereço ao banco de dados
+            _context.Enderecos.Add(novoEndereco);
+            await _context.SaveChangesAsync();
+
+            // Cria a ligação entre Cliente e Endereço (tabela ClienteEndereco)
+            var clienteEndereco = new ClienteEndereco
+            {
+                IdEnd = novoEndereco.IdEndereco, // Chave primária do Endereço
+                Fk_IdCliente = idCliente // ID do cliente logado
+            };
+
+            // Adiciona a relação Cliente-Endereco
+            _context.ClienteEnderecos.Add(clienteEndereco);
+            await _context.SaveChangesAsync();
+
+            TempData["Msg"] = "Endereço adicionado com sucesso!";
+            return RedirectToAction("Painel");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletarEndereco(int idEndereco, int idCliente)
+        {
+            // Remove a relação ClienteEndereco primeiro
+            var clienteEndereco = await _context.ClienteEnderecos
+                .FirstOrDefaultAsync(ce => ce.IdEnd == idEndereco && ce.Fk_IdCliente == idCliente);
+
+            if (clienteEndereco != null)
+            {
+                _context.ClienteEnderecos.Remove(clienteEndereco);
+            }
+
+            // Agora remove o endereço
+            var endereco = await _context.Enderecos.FindAsync(idEndereco);
+            if (endereco != null)
+            {
+                _context.Enderecos.Remove(endereco);
+            }
+
+            await _context.SaveChangesAsync();
+
+            TempData["Msg"] = "Endereço removido com sucesso!";
+            return RedirectToAction("Painel");
+        }
+
     }
 }

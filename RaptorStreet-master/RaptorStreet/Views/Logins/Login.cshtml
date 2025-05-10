@@ -2,12 +2,19 @@
 
 @{
 	ViewData["Title"] = "Login";
+	var mensagem = TempData["Login"] as string;
 }
 @{
 	ViewBag.ExibirNavbar = false;
 }
 
+
 <body>
+	@if (!string.IsNullOrEmpty(mensagem))
+	{
+		// Exibe a mensagem na view
+		<div class="alert alert-info">@mensagem</div>
+	}
 	<main class="login-container">
 		<div class="login-central">
 			<div class="login-box">

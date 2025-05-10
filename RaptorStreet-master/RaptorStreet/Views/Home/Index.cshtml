@@ -1,8 +1,15 @@
 ﻿@{
 	ViewData["Title"] = "Home Page";
+	var mensagem = TempData["Login"] as string;
 }
 
 <body>
+	@if (!string.IsNullOrEmpty(mensagem))
+	{
+		// Exibe a mensagem na view
+		<div class="alert alert-info">@mensagem</div>
+	}
+
 	<section style="padding-top: 30px;">
 		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="hover">
 			<div class="carousel-inner">

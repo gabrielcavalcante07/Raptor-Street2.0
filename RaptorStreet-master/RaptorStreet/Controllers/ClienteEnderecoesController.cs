@@ -50,7 +50,7 @@ namespace RaptorStreet.Controllers
         public IActionResult Create()
         {
             ViewData["IdEndCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
-            ViewData["IdEndCliente"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco");
+            ViewData["IdEnd"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco");
             return View();
         }
 
@@ -61,13 +61,14 @@ namespace RaptorStreet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdEndCliente,IdEnd,Fk_IdCliente")] ClienteEndereco clienteEndereco)
         {
-
+            if (ModelState.IsValid)
+            {
                 _context.Add(clienteEndereco);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            
+            }
             ViewData["IdEndCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", clienteEndereco.IdEndCliente);
-            ViewData["IdEndCliente"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco", clienteEndereco.IdEndCliente);
+            ViewData["IdEnd"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco", clienteEndereco.IdEnd);
             return View(clienteEndereco);
         }
 
@@ -85,7 +86,7 @@ namespace RaptorStreet.Controllers
                 return NotFound();
             }
             ViewData["IdEndCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", clienteEndereco.IdEndCliente);
-            ViewData["IdEndCliente"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco", clienteEndereco.IdEndCliente);
+            ViewData["IdEnd"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco", clienteEndereco.IdEnd);
             return View(clienteEndereco);
         }
 
@@ -101,7 +102,8 @@ namespace RaptorStreet.Controllers
                 return NotFound();
             }
 
-    
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(clienteEndereco);
@@ -119,9 +121,9 @@ namespace RaptorStreet.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            
+            }
             ViewData["IdEndCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", clienteEndereco.IdEndCliente);
-            ViewData["IdEndCliente"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco", clienteEndereco.IdEndCliente);
+            ViewData["IdEnd"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco", clienteEndereco.IdEnd);
             return View(clienteEndereco);
         }
 

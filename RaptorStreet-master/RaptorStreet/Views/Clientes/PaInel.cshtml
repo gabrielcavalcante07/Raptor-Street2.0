@@ -1,0 +1,120 @@
+﻿@model RaptorStreet.Models.Cliente
+@{
+    ViewData["Title"] = "Painel do Cliente";
+    var enderecos = ViewBag.Enderecos as List<RaptorStreet.Models.Endereco>;
+}
+
+<h2>Painel do Cliente</h2>
+
+@if (TempData["Msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Msg"]
+    </div>
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        Dados do Cliente
+    </div>
+    <div class="card-body">
+        <form asp-action="EditarCliente" method="post">
+            <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input class="form-control" name="Nome" value="@Model.NomeCliente" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input class="form-control" name="Email" value="@Model.EmailCliente" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                <input class="form-control" name="Telefone" value="@Model.Telefone" />
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </form>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        Endereços Cadastrados
+    </div>
+    <div class="card-body">
+        @if (Model.ClienteEnderecos != null && Model.ClienteEnderecos.Any())
+        {
+            <ul class="list-group">
+                @foreach (var ce in Model.ClienteEnderecos)
+                {
+                    var end = ce.Enderecos;
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div>
+                            <strong>@end.Logradouro, @end.NumeroEndereco</strong><br />
+                            @end.Bairro - @end.Cidade/@end.Estado<br />
+                            CEP: @end.CEP
+                        </div>
+                        <form asp-action="DeletarEndereco" method="post" class="ms-3">
+                            <input type="hidden" name="idEndereco" value="@end.IdEndereco" />
+                            <input type="hidden" name="idCliente" value="@Model.IdCliente" />
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este endereço?');">Excluir</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Nenhum endereço cadastrado.</p>
+        }
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-header">
+        Adicionar Novo Endereço
+    </div>
+    <div class="card-body">
+        <form asp-action="AdicionarEndereco" method="post">
+            <input type="hidden" name="idCliente" value="@Model.IdCliente" />
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label>CEP</label>
+                    <input type="text" name="CEP" class="form-control" required />
+                </div>
+                <div class="col">
+                    <label>Logradouro</label>
+                    <input type="text" name="Logradouro" class="form-control" required />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <label>Número</label>
+                    <input type="number" name="NumeroEndereco" class="form-control" required />
+                </div>
+                <div class="col">
+                    <label>Complemento</label>
+                    <input type="text" name="Complemento" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <label>Bairro</label>
+                    <input type="text" name="Bairro" class="form-control" required />
+                </div>
+                <div class="col">
+                    <label>Cidade</label>
+                    <input type="text" name="Cidade" class="form-control" required />
+                </div>
+                <div class="col">
+                    <label>Estado</label>
+                    <input type="text" name="Estado" class="form-control" required />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Adicionar Endereço</button>
+        </form>
+    </div>
+</div>
