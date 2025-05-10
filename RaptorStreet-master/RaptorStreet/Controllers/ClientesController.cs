@@ -18,14 +18,12 @@ namespace RaptorStreet.Controllers
     public class ClientesController : Controller
     {
         private readonly RaptorDBContext _context;
-        private readonly IHttpContextAccessor _httpContextAcessor;
-        private readonly ILoginRepositorio _loginRepositorio;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ClientesController(RaptorDBContext context, IHttpContextAccessor httpContextAcessor, ILoginRepositorio loginRepositorio)
+        public ClientesController(RaptorDBContext context, IHttpContextAccessor httpcontextacessor, ILoginRepositorio loginRepositorio)
         {
             _context = context;
-            _httpContextAcessor = httpContextAcessor;
-            _loginRepositorio = loginRepositorio;
+            _httpContextAccessor = httpcontextacessor;
         }
 
         // GET: Clientes
@@ -65,12 +63,11 @@ namespace RaptorStreet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdCliente,NomeCliente,DataNascimento,CPF,Telefone,SenhaCliente,EmailCliente")] Cliente cliente)
         {
-            if (ModelState.IsValid)
-            {
+
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+         
             return View(cliente);
         }
 
@@ -102,8 +99,7 @@ namespace RaptorStreet.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+       
                 try
                 {
                     _context.Update(cliente);
@@ -121,7 +117,7 @@ namespace RaptorStreet.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            
             return View(cliente);
         }
 
@@ -163,34 +159,39 @@ namespace RaptorStreet.Controllers
             return _context.Clientes.Any(e => e.IdCliente == id);
         }
 
-
-        [HttpPost]
-        public IActionResult Login(string emailCliente, string senhaCliente)
+        public async Task<IActionResult> Cadastro(Cliente cliente)
         {
-            var cliente = _loginRepositorio.Login(emailCliente, senhaCliente);
-
-            if (cliente != null)
+            // COLOCAR ISSO NA CONTYROLLER DO ADMMM  cliente.datacad_User = DateTime.Now;
+            //Cliente cliente = await _context.Clientes.FirstOrDefault(c => c.idUser == usuario.idUser);
+            await _context.Clientes.AddAsync(cliente);
+            await _context.SaveChangesAsync();
+            // Criando a lista de claims
+            //Claims são um tipo de identificadores do usuario
+            var claims = new List<Claim> // guarda os dados dos usuarios
             {
-                // Login válido
+                new Claim(ClaimTypes.Name, cliente.EmailCliente),
+                new Claim(ClaimTypes.SerialNumber, Convert.ToString(cliente.IdCliente)),
+                // Convert.ToInt32(User.FindFirst(ClaimTypes.SerialNumber)?.Value)
+                new Claim(ClaimTypes.Role, "Cliente")
+            };
+            //[Authorize(Roles = "Usuario")] para tipos especificos
+            //[Authorize] logado
 
-                TempData["Login"] = "Bem-vindo de volta!";
-                return RedirectToAction("Index", "Home");
+            //Criando o Claim de identidade do usuario, juntamente de coockies
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            //Permite que o usuario continue logado mesmo se fechar o navegador
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true // Mantém o cookie ao fechar o navegador
+            };
+            //Vai logar o usuario com o HTTP usando tanto os coockies quanto a identidade do usuario
+            await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-
-            }
-
-            // Login inválido
-            TempData["Login"] = "E-mail ou senha inválidos";
+            TempData["Login"] = "Cadastro efetuado com sucesso!";
             return RedirectToAction("Index", "Home");
-        }
 
-        public IActionResult Logout()
-        {
-            // Remove o ID do cliente da sessão
-            HttpContext.Session.Remove("idCliente");
 
-            TempData["Login"] = "Você foi desconectado.";
-            return RedirectToAction("Index", "Home");
+
         }
     }
 }

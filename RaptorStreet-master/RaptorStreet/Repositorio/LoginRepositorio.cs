@@ -1,10 +1,13 @@
-﻿using RaptorStreet.Data;
-using RaptorStreet.Libraries.LoginUsuarios;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using MySqlX.XDevAPI;
+using RaptorStreet.Data;
 using RaptorStreet.Models;
 using RaptorStreet.Repositorio.Interface;
-using MySql.Data.MySqlClient;
+using System.Configuration;
 using System.Data;
 using System.Linq;
+using MySql.Data.MySqlClient;
 
 namespace RaptorStreet.Repositorio
 {
@@ -23,8 +26,8 @@ namespace RaptorStreet.Repositorio
             {
                 conexao.Open();
 
-                // parte de cleinte
-                var cmdCliente = new MySqlCommand("SELECT * FROM tbCliente WHERE emailCliente = @Email AND senhaCliente = @Senha", conexao);
+                // nucleo cliente
+                var cmdCliente = new MySqlCommand("SELECT * FROM tbClientes WHERE EmailCliente = @Email AND SenhaCliente = @Senha", conexao);
                 cmdCliente.Parameters.AddWithValue("@Email", email);
                 cmdCliente.Parameters.AddWithValue("@Senha", senha);
 
@@ -34,16 +37,16 @@ namespace RaptorStreet.Repositorio
                     {
                         var cliente = new Cliente
                         {
-                            IdCliente = Convert.ToInt32(dr["idCliente"]),
-                            NomeCliente = dr["nomeCompleto"].ToString(),
-                            EmailCliente = dr["emailCliente"].ToString(),
-                            SenhaCliente = dr["senhaCliente"].ToString()
+                            IdCliente = Convert.ToInt32(dr["IdCliente"]),
+                            NomeCliente = dr["NomeCliente"].ToString(),
+                            EmailCliente = dr["EmailCliente"].ToString(),
+                            SenhaCliente = dr["SenhaCliente"].ToString()
                         };
                         return cliente;
                     }
                 }
 
-                // parte de adm
+                // nucleo adm
                 var cmdAdm = new MySqlCommand("SELECT * FROM tbAdm WHERE emailAdm = @Email AND senhaAdm = @Senha", conexao);
                 cmdAdm.Parameters.AddWithValue("@Email", email);
                 cmdAdm.Parameters.AddWithValue("@Senha", senha);
@@ -54,10 +57,10 @@ namespace RaptorStreet.Repositorio
                     {
                         var adm = new Adm
                         {
-                            IdAdm = Convert.ToInt32(dr["idAdm"]),
-                            NomeAdm = dr["nomeAdm"].ToString(),
-                            EmailAdm = dr["emailAdm"].ToString(),
-                            SenhaAdm = dr["senhaAdm"].ToString()
+                            IdAdm = Convert.ToInt32(dr["IdAdm"]),
+                            NomeAdm = dr["NomeAdm"].ToString(),
+                            EmailAdm = dr["EmailAdm"].ToString(),
+                            SenhaAdm = dr["SenhaAdm"].ToString()
                         };
                         return adm;
                     }

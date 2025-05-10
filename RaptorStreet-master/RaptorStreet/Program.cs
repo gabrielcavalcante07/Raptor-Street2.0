@@ -1,9 +1,10 @@
-using Microsoft.EntityFrameworkCore;
 using RaptorStreet.Data;
-using RaptorStreet.Libraries.LoginUsuarios;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using RaptorStreet.Repositorio.Interface;
 using RaptorStreet.Repositorio;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<RaptorDBContext>(options =>
     )
 );
 
-//  Registrar todos os serviços ANTES do builder.Build()
+
 // Autenticação com cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -63,4 +64,5 @@ app.UseAuthorization();    // Autorização
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

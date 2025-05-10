@@ -71,20 +71,6 @@ namespace RaptorStreet.Data
             .WithMany(e => e.ClienteEnderecos)
             .HasForeignKey(ce => ce.IdEndCliente);
 
-            // Relacionamento Login -> Cliente
-            modelBuilder.Entity<Login>()
-           .HasOne(log => log.Clientes)
-           .WithMany(c => c.Logins)
-           .HasForeignKey(log => log.IdCliente)
-           .OnDelete(DeleteBehavior.Restrict);
-
-            // Relacionamento Login -> Adm
-            modelBuilder.Entity<Login>()
-           .HasOne(log => log.Adms)
-           .WithMany(ad => ad.Logins)
-           .HasForeignKey(log => log.IdAdm)
-           .OnDelete(DeleteBehavior.Restrict);
-
             // Relacionamento Produto -> MarcaProduto (1:N)
             modelBuilder.Entity<Produto>()
            .HasOne(p => p.MarcaProdutos)
@@ -153,6 +139,20 @@ namespace RaptorStreet.Data
            .HasOne(ip => ip.Produtos)
            .WithMany(p => p.ItemPedidos)
            .HasForeignKey(pe => pe.Fk_IdProduto)
+           .OnDelete(DeleteBehavior.Restrict);
+
+            // Relacionamento Login -> Cliente
+            modelBuilder.Entity<Login>()
+           .HasOne(log => log.Clientes)
+           .WithMany(c => c.Logins)
+           .HasForeignKey(log => log.IdCliente)
+           .OnDelete(DeleteBehavior.Restrict);
+
+            // Relacionamento Login -> Adm
+            modelBuilder.Entity<Login>()
+           .HasOne(log => log.Adms)
+           .WithMany(ad => ad.Logins)
+           .HasForeignKey(log => log.IdAdm)
            .OnDelete(DeleteBehavior.Restrict);
 
         }

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using RaptorStreet.Libraries.LoginUsuarios;
 using RaptorStreet.Models;
 using RaptorStreet.Repositorio.Interface;
 using System.Diagnostics;
@@ -15,14 +14,14 @@ namespace RaptorStreet.Controllers
         //DECLARANDO OS OBJETOS QUE SERÃO UTILIZADOS NO PROJETO
         private readonly ILogger<HomeController> _logger;
         private ILoginRepositorio? _loginRepositorio;
-        private LoginUsuarios _loginUsuarios;
+        
 
         //CRIANDO O CONSTRUTOR COM OS OBJETOS CRIADOS
-        public HomeController(ILogger<HomeController> logger, ILoginRepositorio loginRepositorio, LoginUsuarios loginUsuarios)
+        public HomeController(ILogger<HomeController> logger, ILoginRepositorio loginRepositorio)
         {
             _logger = logger;
             _loginRepositorio = loginRepositorio;
-            _loginUsuarios = loginUsuarios;
+
         }
 
         public IActionResult Index()
@@ -60,41 +59,6 @@ namespace RaptorStreet.Controllers
         {
             return View();
         }
-
-        //PÁGINA LOGIN (GET)
-        public IActionResult Login()
-        {
-
-            return View();
-        }
-
-        //PÁGINA LOGIN (POST)
-
-        [HttpPost]
-        public IActionResult Login(Cliente Login)
-        {
-            //CHAMANDO A MODEL LOGIN PASSANDO UM NOME PARA ELA  E RECEBER O METODO LOGIN DO REPOSOTORIO
-            Cliente loginDB = _loginRepositorio?.Login(Login.EmailCliente, Login.SenhaCliente);
-
-            //VERIFICA SE O USUARIO E SENHA ESTIVEREM VAZIAS
-            if (loginDB.EmailCliente != null && loginDB.SenhaCliente != null)
-            {
-                //CASO NÃO ESTEJAM VAZAIOS O LOGIN QUE VEM DO LIBRRIES VALIDA E
-                Cliente.Login(loginDB);
-                //CHAMA A PÁGINA PAINEL CLIENTE
-                return new RedirectResult(Url.Action(nameof(CrudAdm)));
-            }
-            //CASO OS CAMPOS ESTEJAM VAZIOS OU COM USUARIO E SENHA INVÁLIDOS 
-            else
-            {
-                //É PASSADO PARA A VIEWBAG UMA MENSAGEM DE ERROR
-                ViewData["msg"] = "Usuário inválido, verifique e-mail e senha";
-                //RETORNA A VIEW
-                return View();
-            }
-        }
-
-
 
         // Método para calcular a distância de Levenshtein
         public static int CalculateLevenshtein(string source, string target)

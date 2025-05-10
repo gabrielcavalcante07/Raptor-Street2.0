@@ -56,11 +56,12 @@ namespace RaptorStreet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdAdm,NomeAdm,EmailAdm,SenhaAdm")] Adm adm)
         {
-
+            if (ModelState.IsValid)
+            {
                 _context.Add(adm);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            
+            }
             return View(adm);
         }
 
@@ -92,6 +93,8 @@ namespace RaptorStreet.Controllers
                 return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(adm);
@@ -109,7 +112,7 @@ namespace RaptorStreet.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            
+            }
             return View(adm);
         }
 
