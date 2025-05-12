@@ -2,39 +2,33 @@
     ViewData["Title"] = "Tênis";
 }
 
+@model RaptorStreet.Models.Produto
+
+
 <body>
     <section style="padding-top: 100px;">
         <div class="product d-flex container img-fluid justify-content-around">
             <div class="image-container col-md-6 text-center">
-                <img src="~/assets/tenis/air-jordan4.png" class="img-fluid" id="jordan4" />
+                <img src="" class="product-image img-fluid" id="imagem" />
             </div>
-
             <div class="gap-5 text-white">
-                <h1>Jordan 4</h1>
-                <h2 class="text-danger">R$399,99</h2>
-                <p>10% de Desconto <br />Parcelamos em até 10x sem juros</p>
+                <h1 id="nome">@Model.NomeProduto</h1>
+                <h2 class="price" id="preco">@Model.PrecoProduto.ToString("C")</h2>
+                <p>10% de Desconto</p>
+                <p>Parcelamos em até 10x sem juros</p>
+                </p>
+                <select class="form-select" id="tamanhos"><option value="" disabled selected hidden>Escolha seu tamanho</option></select>
+                <select class="form-select mt-1" id="cores"><option value="" disabled selected hidden>Escolha a cor</option></select>
 
-                <select class="form-select select" aria-label="Default select example">
-                    <option value="value">Escolha seu tamanho</option>
-                    <option value="value">35</option>
-                    <option value="value">36</option>
-                    <option value="value">37</option>
-                    <option value="value">38</option>
-                    <option value="value">39</option>
-                    <option value="value">40</option>
-                    <option value="value">41</option>
-                    <option value="value">42</option>
-                </select>
 
-                <select class="form-select mt-1 select" aria-label="Default select example">
-                    <option value="value">Escolha a cor</option>
-                    <option value="value">Preto</option>
-                    <option value="value">Branco</option>
-                    <option value="value">Roxo</option>
-                    <option value="value">Azul</option>
-                </select>
-
-                <button type="button" class="btn btn-danger mt-2 container">Adicionar ao carrinho</button>
+                <a class="btn btn-danger mt-2 container">Adicionar ao carrinho</a>
+                @* <form method="post" asp-controller="Carrinhoes" asp-action="AdicionarItem">
+                    <input type="hidden" name="id" value="@produto.IdProdu" />
+                    <input type="hidden" name="quantidade" value="1" />
+                    <button type="submit" class="btn btn-primary">
+                        <img class="icons-prod" src="~/img/icon-shopping-prod.png" alt="">Adicionar ao Carrinho
+                    </button>
+                </form> *@
                 <h6 class="mt-4">Calcular Frete e Entrega</h6>
 
                 <div class="input-group mb-3">
@@ -46,15 +40,10 @@
 
         <div class="container my-5 text-white">
             <h3 class="text-center">Sobre o Produto</h3>
-            <p class="mt-4 text-justify">
-                Esta nova abordagem ao clássico Suede inspira-se na herança da PUMA no breakdance e na sua influência no streetwear moderno.
-                O Suede XL mantém o DNA icônico do Suede, mas dá um toque diferente com uma boca e língua acolchoadas exageradas,
-                além de uma sola mais robusta. Esta execução apresenta uma parte superior totalmente em camurça com uma Formstrip de couro.
+            <p class="product-description" id="descricao">
+                @Model.Descricao
             </p>
         </div>
-
-
-
 
         <!--Carrousel de cards-->
         <div class="product-carousel-wrapper">
@@ -62,82 +51,34 @@
 
             <div class="product-carousel-container">
                 <div class="product-carousel-track">
-                    <!-- CARD 1 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
-                            <button class="favorite-icon active">&#x2665;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Outro Modelo Nike</h5>
-                            <p class="product-price">R$ 549,50</p>
-                            <div class="rating">★★★★☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
+                    @foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
+                    {
+                        if (produto.IdProduto == Model.IdProduto)
+                        {
+                            continue; // Pula o produto que já está sendo exibido acima
+                        }
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                @* <img src="@produto.ImagemUrl" alt="@produto.Nome" class="product-image"> *@
+                                <img src="/assets/tenis/tenis-shadow.png">
 
-                    <!-- CARD 2 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
-                            <button class="favorite-icon">&#x2661;</button>
+                                <input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
+                                <label for="fav-@produto.IdProduto" class="fav-button">♥</label>
+                            </div>
+                            <div class="product-info">
+                                <h5 class="product-name">@produto.NomeProduto</h5>
+                                <p class="product-price">@produto.PrecoProduto.ToString("C")</p>
+                                <a class="btn btn-primary" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
+                            </div>
                         </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Mais um Nike Legal</h5>
-                            <p class="product-price">R$ 720,00</p>
-                            <div class="rating">★★★☆☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <!-- CARD 1 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
-                            <button class="favorite-icon active">&#x2665;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Outro Modelo Nike</h5>
-                            <p class="product-price">R$ 549,50</p>
-                            <div class="rating">★★★★☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <!-- CARD 1 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
-                            <button class="favorite-icon active">&#x2665;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Outro Modelo Nike</h5>
-                            <p class="product-price">R$ 549,50</p>
-                            <div class="rating">★★★★☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <!-- CARD 1 -->
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" class="card-img" id="jordan4" />
-                            <button class="favorite-icon active">&#x2665;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Outro Modelo Nike</h5>
-                            <p class="product-price">R$ 549,50</p>
-                            <div class="rating">★★★★☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
+                    }
 
                 </div>
             </div>
-
             <button class="product-carousel-button next">&#10095;</button>
         </div>
 
-        <script src="@Url.Content("~/js/site.js")"></script>
+
+
     </section>
 </body>

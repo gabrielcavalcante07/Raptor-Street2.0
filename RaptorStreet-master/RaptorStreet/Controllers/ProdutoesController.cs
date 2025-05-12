@@ -48,7 +48,7 @@ namespace RaptorStreet.Controllers
         // GET: Produtoes/Create
         public IActionResult Create()
         {
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca");
+            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "NomeMarca");
             return View();
         }
 
@@ -59,13 +59,10 @@ namespace RaptorStreet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdProduto,NomeProduto,PrecoProduto,Qtd,Descricao,Tipo,Desconto,Tamanho,Fk_IdMarca")] Produto produto)
         {
-            
-                _context.Add(produto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca", produto.Fk_IdMarca);
-            return View(produto);
+
+            _context.Add(produto);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Produtoes/Edit/5
@@ -81,7 +78,7 @@ namespace RaptorStreet.Controllers
             {
                 return NotFound();
             }
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca", produto.Fk_IdMarca);
+            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "NomeMarca", produto.Fk_IdMarca);
             return View(produto);
         }
 
@@ -97,27 +94,24 @@ namespace RaptorStreet.Controllers
                 return NotFound();
             }
 
-            
-                try
+
+            try
+            {
+                _context.Update(produto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProdutoExists(produto.IdProduto))
                 {
-                    _context.Update(produto);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ProdutoExists(produto.IdProduto))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
-            
-            ViewData["Fk_IdMarca"] = new SelectList(_context.MarcaProdutos, "IdMarca", "IdMarca", produto.Fk_IdMarca);
-            return View(produto);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Produtoes/Delete/5

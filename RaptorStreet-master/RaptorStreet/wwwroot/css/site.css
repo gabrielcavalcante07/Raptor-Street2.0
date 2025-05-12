@@ -140,8 +140,15 @@ header {
     width: 30px;
 }
 
-.carousel-control-prev-icon .carousel-control-next-icon {
-    /*background-color: red;*/
+.carousel-control-prev-icon {
+    background-color: black;
+    border-radius: 5px;
+}
+
+
+.carousel-control-next-icon {
+    background-color: black;
+    border-radius: 5px;
 }
 
 .text-justify {
@@ -193,7 +200,7 @@ header {
     align-items: center;
 }
 
-#jordan4 {
+#imagem {
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -228,15 +235,6 @@ header {
     transition: transform 0.5s ease;
 }
 
-.product-card {
-    flex: 0 0 auto;
-    width: 250px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 1rem;
-}
-
 .product-image-container {
     position: relative;
     width: 100%;
@@ -251,23 +249,8 @@ header {
         border-radius: 10px;
     }
 
-.favorite-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-    color: #888;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
 
-    .favorite-icon.active {
-        color: red;
-    }
+
 
 .product-info {
     margin-top: 0.5rem;
@@ -312,7 +295,7 @@ header {
     }
 
 
-/*Nike*/
+/*NIKE*/
 .page-title {
     color: black;
     text-align: center;
@@ -330,8 +313,8 @@ header {
     background-color: #D9D9D9;
     border: solid 1px #969696;
     border-radius: 8px;
-    padding-top: 16px;
-    margin-bottom: 20px;
+    padding: 16px;
+    margin: 20px;
 }
 
 .filter-content {
@@ -373,9 +356,12 @@ header {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 12px;
-    width: 400px;
+    width: 23vw;
     margin: 0 auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 0 0 auto;
+    background: #fff;
+    padding: 1rem;
 }
 
 .product-image-container {
@@ -392,17 +378,7 @@ header {
     display: block;
 }
 
-.favorite-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: transparent;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #888;
-}
-
+/**/
 .product-info {
     text-align: center;
 }
@@ -440,12 +416,48 @@ header {
     .btn-primary:hover {
         background-color: #0056b3;
     }
+/*botão favorito*/
+.fav-checkbox {
+    display: none;
+}
 
+.fav-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+}
+
+.fav-checkbox:checked + .fav-button {
+    color: red;
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/*banner*/
 .promotion-banner {
     /* Estilos para o banner de promoção */
 }
 
-/*Login*/
+/*LOGIN*/
 
 .login-container {
     display: flex;

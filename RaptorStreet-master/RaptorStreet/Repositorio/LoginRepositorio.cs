@@ -69,6 +69,44 @@ namespace RaptorStreet.Repositorio
                 return null;
             }
         }
+        //Cadastrar Cliente
+        public void Cadastrar(Cliente cliente)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
 
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand("insert into cliente (nome,telefone,email) values (@nome, @telefone, @email)", conexao); // @: PARAMETRO
+
+                cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = cliente.NomeCliente;
+                cmd.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = cliente.Telefone;
+                cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = cliente.EmailCliente;
+
+                cmd.ExecuteNonQuery();
+                conexao.Close();
+            }
+
+        }
+
+        public IEnumerable<Cliente> TodosClientes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Cliente ObterCliente(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Atualizar(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Excluir(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

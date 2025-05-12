@@ -46,120 +46,23 @@
             </div>
             <div class="col-md-9">
                 <div class="product-grid">
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" alt="Jordan 4 Retro" class="product-image">
-                            <button class="favorite-icon">&#x2661;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Jordan 4 Retro</h5>
-                            <p class="product-price">R$ 899,99</p>
-                            <div class="rating">★★★★★</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
+                    @foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
+                    {
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                @* <img src="@produto.ImagemUrl" alt="@produto.Nome" class="product-image"> *@
+                                <img src="/assets/tenis/tenis-shadow.png">
 
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/Adi2000.jpg" alt="Outro Modelo Nike" class="product-image">
-                            <button class="favorite-icon active">&#x2665;</button>
+                                <input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
+                                <label for="fav-@produto.IdProduto" class="fav-button">♥</label>
+                            </div>
+                            <div class="product-info">
+                                <h5 class="product-name">@produto.NomeProduto</h5>
+                                <p class="product-price">@produto.PrecoProduto.ToString("C")</p>
+                                <a class="btn btn-primary" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
+                            </div>
                         </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Outro Modelo Nike</h5>
-                            <p class="product-price">R$ 549,50</p>
-                            <div class="rating">★★★★☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" alt="Mais um Nike Legal" class="product-image">
-                            <button class="favorite-icon">&#x2661;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Mais um Nike Legal</h5>
-                            <p class="product-price">R$ 720,00</p>
-                            <div class="rating">★★★☆☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" alt="Jordan 4 Retro" class="product-image">
-                            <button class="favorite-icon">&#x2661;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Jordan 4 Retro</h5>
-                            <p class="product-price">R$ 899,99</p>
-                            <div class="rating">★★★★★</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/Adi2000.jpg" alt="Outro Modelo Nike" class="product-image">
-                            <button class="favorite-icon active">&#x2665;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Outro Modelo Nike</h5>
-                            <p class="product-price">R$ 549,50</p>
-                            <div class="rating">★★★★☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" alt="Mais um Nike Legal" class="product-image">
-                            <button class="favorite-icon">&#x2661;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Mais um Nike Legal</h5>
-                            <p class="product-price">R$ 720,00</p>
-                            <div class="rating">★★★☆☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" alt="Jordan 4 Retro" class="product-image">
-                            <button class="favorite-icon">&#x2661;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Jordan 4 Retro</h5>
-                            <p class="product-price">R$ 899,99</p>
-                            <div class="rating">★★★★★</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/Adi2000.jpg" alt="Outro Modelo Nike" class="product-image">
-                            <button class="favorite-icon active">&#x2665;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Outro Modelo Nike</h5>
-                            <p class="product-price">R$ 549,50</p>
-                            <div class="rating">★★★★☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="~/assets/tenis/air-jordan4.png" alt="Mais um Nike Legal" class="product-image">
-                            <button class="favorite-icon">&#x2661;</button>
-                        </div>
-                        <div class="product-info">
-                            <h5 class="product-name">Mais um Nike Legal</h5>
-                            <p class="product-price">R$ 720,00</p>
-                            <div class="rating">★★★☆☆</div>
-                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

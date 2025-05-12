@@ -17,7 +17,6 @@ namespace RaptorStreet.Data
         public DbSet<MarcaProduto> MarcaProdutos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<ClienteFav> ClienteFavs { get; set; }
-        public DbSet<Carrinho> Carrinhos { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<NotaFiscal> NotaFiscals { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
@@ -35,7 +34,6 @@ namespace RaptorStreet.Data
             modelBuilder.Entity<MarcaProduto>().ToTable("tbMarcaProduto");
             modelBuilder.Entity<Produto>().ToTable("tbProdutos");
             modelBuilder.Entity<ClienteFav>().ToTable("tbClienteFav"); 
-            modelBuilder.Entity<Carrinho>().ToTable("tbCarrinho");
             modelBuilder.Entity<Pagamento>().ToTable("tbPagamentos");
             modelBuilder.Entity<NotaFiscal>().ToTable("tbNotaFiscal");
             modelBuilder.Entity<Pedido>().ToTable("tbPedido");
@@ -50,7 +48,6 @@ namespace RaptorStreet.Data
             modelBuilder.Entity<MarcaProduto>().HasKey(mp => mp.IdMarca);
             modelBuilder.Entity<Produto>().HasKey(p => p.IdProduto);
             modelBuilder.Entity<ClienteFav>().HasKey(cf => cf.IdClienteFav);
-            modelBuilder.Entity<Carrinho>().HasKey(v => v.IdCarrinho);
             modelBuilder.Entity<Pagamento>().HasKey(pg => pg.IdPag);
             modelBuilder.Entity<NotaFiscal>().HasKey(nf => nf.IdNota);
             modelBuilder.Entity<Pedido>().HasKey(pe => pe.IdPedido);
@@ -90,13 +87,6 @@ namespace RaptorStreet.Data
            .HasOne(cf => cf.Produtos)
            .WithMany(p => p.ClienteFavs)
            .HasForeignKey(cf => cf.IdProduto)
-           .OnDelete(DeleteBehavior.Restrict);
-
-            // Relacionamento Venda -> Cliente (1:N)
-            modelBuilder.Entity<Carrinho>()
-           .HasOne(v => v.Clientes)
-           .WithMany(c => c.Carrinhos)
-           .HasForeignKey(v => v.Fk_IdCliente)
            .OnDelete(DeleteBehavior.Restrict);
 
             // Relacionamento Pedido -> Nota Fiscal (1:N)

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//  Configurar o Entity Framework Core para usar MySQL
 builder.Services.AddDbContext<RaptorDBContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DBRaptor"),
@@ -26,6 +25,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 // Acesso ao contexto HTTP
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<RaptorStreet.Cookie.Cookie>();
+builder.Services.AddScoped<RaptorStreet.CarrinhoCompra.CookieCarrinhoCompra>();
 
 // Sessão
 builder.Services.AddSession(options =>
@@ -57,9 +58,9 @@ app.UseRouting();
 
 
 
-app.UseAuthentication();   // Autenticação
-app.UseSession();          // Ativando a sessão
-app.UseAuthorization();    // Autorização
+app.UseAuthentication();   
+app.UseSession();          
+app.UseAuthorization();    
 
 app.MapControllerRoute(
     name: "default",
