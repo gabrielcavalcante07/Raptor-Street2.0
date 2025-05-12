@@ -13,6 +13,7 @@ wwwroot\assets\icons\light-mode.svg
 wwwroot\assets\img\dinossauro-beje.png
 wwwroot\assets\img\dinossauro-verde.png
 wwwroot\assets\img\logo.png
+wwwroot\assets\img\logo-combination.copy.png
 wwwroot\assets\img\logo-combination.png
 wwwroot\assets\img\perfil.png
 wwwroot\assets\img\shadow.png
