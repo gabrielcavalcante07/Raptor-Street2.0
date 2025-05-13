@@ -198,11 +198,12 @@ namespace RaptorStreet.Controllers
                 TempData["Login"] = "Bem-vindo, cliente!";
                 return RedirectToAction("Index", "Home");
             }
-            else if (login is Adm)
+            else if (login is Adm Adms)
             {
                 HttpContext.Session.SetString("EmailAdm", email);
+                HttpContext.Session.SetInt32("IdAdm", Adms.IdAdm);
                 TempData["Login"] = "Bem-vindo, Administrador!";
-                return RedirectToAction("Index", "Adms");
+                return RedirectToAction("Dashboard", "Adms");
             }
 
             TempData["Login"] = "E-mail ou senha inválidos.";

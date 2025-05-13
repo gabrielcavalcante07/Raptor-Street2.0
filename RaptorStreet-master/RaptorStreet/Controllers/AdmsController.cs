@@ -153,5 +153,18 @@ namespace RaptorStreet.Controllers
         {
             return _context.Adms.Any(e => e.IdAdm == id);
         }
+
+        public async Task<IActionResult> Dashboard()
+        {
+            var idAdm = HttpContext.Session.GetInt32("IdAdm");
+
+            if (idAdm == null)
+            {
+                TempData["Login"] = "É necessário estar logado para acessar o Dashboard.";
+                return RedirectToAction("Login", "Logins");
+            }
+
+            return View(await _context.Adms.ToListAsync());
+        }
     }
 }

@@ -1,0 +1,103 @@
+﻿<script src="~/js/grafico-demo.js"></script>
+
+<main class="tudo-dash">
+    <h1 class="dashboardT">Dashboard</h1>
+
+    <!-- Gráfico de Barras -->
+    <div class="dashboard">
+        <div class="card p-4 mb-4">
+            <h5 class="text-primary"> Vendas Mensais</h5>
+            <div class="chart-container">
+                <canvas id="graficoBarra"></canvas>
+            </div>
+        </div>
+
+        <!-- Gráfico de Pizza -->
+        <div class="card p-4">
+            <h5 class="text-success">Distribuição</h5>
+            <div class="chart-container">
+                <canvas id="graficoPizza"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Scripts dos gráficos -->
+    <script>
+        // Gráfico de Barras
+        const ctxBar = document.getElementById("graficoBarra").getContext("2d");
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Fev", "Mar", "Abr", "Mai"],
+                datasets: [{
+                    label: "Vendas",
+                    data: [120, 190, 300, 250, 220],
+                        backgroundColor: "#ffb3c6",  // rosa pastel
+                        borderColor: "#ff8fa3",     // rosa mais vibrante
+                        borderWidth: 1,
+                        borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Pizza
+        const ctxPie = document.getElementById("graficoPizza").getContext("2d");
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ["Maquiagem", "Skincare", "Perfume"],
+                datasets: [{
+                    data: [45, 35, 20],
+                        backgroundColor: [
+                            "#ffb3c6", // Maquiagem - rosa claro
+                            "#b7e3d0", // Skincare - verde menta
+                            "#a9cbe0"  // Perfume - azul claro
+                        ],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</main>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+
+<div class="container d-flex flex-column align-items-center">
+    <img src="~/assets/img/logo-combination.png" class="d-flex w-25 h-25 rounded mx-auto d-block" id="logocrud" alt="Alternate Text" />
+
+    <div class="gap-1 d-flex flex-column w-25">
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Create">Cadastrar Produto</a>
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Index">Listar Produto</a>
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Index">Alterar Produto</a>
+        <a class="btn btn-danger" asp-controller="produtoes" asp-action="Index">Excluir Produto</a>
+    </div>
+</div>

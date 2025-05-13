@@ -12,7 +12,7 @@ namespace RaptorStreet.Models
         public string NomeProduto { get; set; }
         public decimal PrecoProduto { get; set; }
         public string Descricao { get; set; }
-        public string Tipo { get; set; }
+        public string? Tipo { get; set; }
         public bool Desconto { get; set; }
         public int Tamanho { get; set; }
 
