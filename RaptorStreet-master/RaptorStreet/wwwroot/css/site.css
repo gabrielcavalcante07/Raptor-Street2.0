@@ -72,9 +72,9 @@ header {
     /* background-color: #1A1A1A; */
     /* border-radius: 50px; */
     background-color: currentColor;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 5px;
+    /*left: 50%;*/
+    /*transform: translateX(-50%);*/
+    /*margin-top: 5px;*/
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
 }
