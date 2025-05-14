@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using RaptorStreet.Repositorio;
 using RaptorStreet.Repositorio.Interface;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RaptorStreet.Controllers
 {
@@ -161,35 +162,45 @@ namespace RaptorStreet.Controllers
 
         public async Task<IActionResult> Cadastro(Cliente cliente)
         {
-            // COLOCAR ISSO NA CONTYROLLER DO ADMMM  cliente.datacad_User = DateTime.Now;
-            //Cliente cliente = await _context.Clientes.FirstOrDefault(c => c.idUser == usuario.idUser);
-            await _context.Clientes.AddAsync(cliente);
-            await _context.SaveChangesAsync();
-            // Criando a lista de claims
-            //Claims são um tipo de identificadores do usuario
-            var claims = new List<Claim> // guarda os dados dos usuarios
+            if (string.IsNullOrEmpty(cliente.EmailCliente))
+            {
+                ModelState.AddModelError("EmailCliente", "O email é obrigatório.");
+                return View(cliente);  // Retorna a view com erro de validação
+            }
+
+            if (_context.Clientes.Any(c => c.EmailCliente == cliente.EmailCliente))
+            {
+                ModelState.AddModelError("EmailCliente", "Este email já está registrado.");
+                return View(cliente);  // Retorna a view com erro de validação
+            }
+
+            try
+            {
+                await _context.Clientes.AddAsync(cliente);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return View(cliente);  // Retorna a view com erro
+            }
+
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, cliente.EmailCliente),
-                new Claim(ClaimTypes.SerialNumber, Convert.ToString(cliente.IdCliente)),
-                // Convert.ToInt32(User.FindFirst(ClaimTypes.SerialNumber)?.Value)
+                new Claim(ClaimTypes.SerialNumber, cliente.IdCliente.ToString()),
                 new Claim(ClaimTypes.Role, "Cliente")
             };
-            //[Authorize(Roles = "Usuario")] para tipos especificos
-            //[Authorize] logado
 
-            //Criando o Claim de identidade do usuario, juntamente de coockies
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            //Permite que o usuario continue logado mesmo se fechar o navegador
             var authProperties = new AuthenticationProperties
             {
-                IsPersistent = true // Mantém o cookie ao fechar o navegador
+                IsPersistent = true
             };
-            //Vai logar o usuario com o HTTP usando tanto os coockies quanto a identidade do usuario
+
             await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-            TempData["Login"] = "Cadastro efetuado com sucesso!";
+            TempData["Login"] = "Cadastro efetuado com sucesso!!!";
             return RedirectToAction("Index", "Home");
-
         }
 
         public async Task<IActionResult> Painel()

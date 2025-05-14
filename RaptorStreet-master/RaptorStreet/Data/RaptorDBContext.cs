@@ -66,7 +66,7 @@ namespace RaptorStreet.Data
             modelBuilder.Entity<ClienteEndereco>()
             .HasOne(ce => ce.Enderecos)
             .WithMany(e => e.ClienteEnderecos)
-            .HasForeignKey(ce => ce.IdEndCliente);
+            .HasForeignKey(ce => ce.IdEnd);
 
             // Relacionamento Produto -> MarcaProduto (1:N)
             modelBuilder.Entity<Produto>()

@@ -11,8 +11,8 @@ namespace RaptorStreet.Models
         public DateOnly DataNascimento { get; set; }
         public int CPF { get; set; }
         public int Telefone { get; set; }
-        public string SenhaCliente { get; set; }
-        public string EmailCliente { get; set; }
+        public string? SenhaCliente { get; set; }
+        public string? EmailCliente { get; set; }
 
         public ICollection<Login> Logins { get; set; }
         public ICollection<ClienteEndereco> ClienteEnderecos { get; set; }

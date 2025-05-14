@@ -1,0 +1,36 @@
+﻿@model RaptorStreet.Models.Cliente
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+@{
+    ViewBag.ExibirNavbar = false;
+}
+
+<body>
+    <main class="login-container">
+        <div class="login-central">
+            <div class="login-box">
+                <div class="login-image">
+                    <img src="~/assets/img/dinossauro-verde.png" class="img-raptor-logo" alt="Raptor">
+                </div>
+                <div class="login-form">
+                    <h2>Cadastrar</h2>
+                    <form asp-controller="Clientes" asp-action="Cadastro" method="post">
+                        <input type="text" name="NomeCliente" placeholder="Nome" required>
+                        <input type="text" name="CPF" placeholder="CPF" required>
+                        <input type="date" name="DataNascimento" required>
+                        <input type="email" name="EmailCliente" placeholder="email" required>
+                        <input type="password" name="SenhaCliente" placeholder="Senha" required>
+                        
+                        <button type="submit" value="Cadastre-se" class="btn btn-primary">Cadastro</button>
+                        <button class="btn btn-primary" onclick="location.href='/Logins/Login'">Voltar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+
+        
