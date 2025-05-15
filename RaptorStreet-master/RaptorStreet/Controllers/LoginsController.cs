@@ -207,7 +207,7 @@ namespace RaptorStreet.Controllers
             }
 
             TempData["Login"] = "E-mail ou senha inválidos.";
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Logins");
         }
 
 

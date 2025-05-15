@@ -179,10 +179,13 @@ namespace RaptorStreet.Controllers
                 await _context.Clientes.AddAsync(cliente);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return View(cliente);  // Retorna a view com erro
             }
+
+            // Armazenar o ID do cliente na sessão 
+            HttpContext.Session.SetInt32("IdCliente", cliente.IdCliente);
 
             var claims = new List<Claim>
             {
