@@ -10,9 +10,7 @@ namespace RaptorStreet.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly List<string> palavrasChave = new List<string>
-        { "carrinho", "adm", "crud", "home", "início", "produto", "tênis", "filtro" };
-
+    
         //DECLARANDO OS OBJETOS QUE SERÃO UTILIZADOS NO PROJETO
         private readonly ILogger<HomeController> _logger;
         private ILoginRepositorio? _loginRepositorio;
@@ -106,63 +104,30 @@ namespace RaptorStreet.Controllers
             return dp[n, m];
         }
 
-        [HttpGet]
         public IActionResult Pesquisar(string nome)
         {
             if (string.IsNullOrWhiteSpace(nome))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); // Volta para a página inicial se a pesquisa estiver vazia
             }
 
-            nome = nome.ToLower();
+            var todosProdutos = _context.Produtos.ToList();
 
-            // Calcula a distância de Levenshtein entre o nome pesquisado e as palavras-chave
-            var palavraCorreta = palavrasChave
-                .OrderBy(p => CalculateLevenshtein(nome, p)) // Ordena pelas menores distâncias
-                .FirstOrDefault();
+            // Filtra produtos com nomes que contenham o termo OU sejam similares (Levenshtein < 5)
+            var produtosRelevantes = todosProdutos
+                .Where(p =>
+                    p.NomeProduto.ToLower().Contains(nome.ToLower()) ||
+                    CalculateLevenshtein(p.NomeProduto.ToLower(), nome.ToLower()) < 5
+                )
+                .OrderBy(p => CalculateLevenshtein(p.NomeProduto.ToLower(), nome.ToLower())) // Ordena por similaridade
+                .ToList();
 
-            int distancia = CalculateLevenshtein(nome, palavraCorreta); // Calcular a distância real
-
-            // DEBUG - Verificar a palavra mais próxima e a distância
-            Console.WriteLine($"Palavra digitada: {nome}, Palavra mais próxima: {palavraCorreta}, Distância: {distancia}");
-
-            // Se a distância entre as palavras for pequena (<= 3 erros), faz o redirecionamento
-            if (palavraCorreta != null && distancia <= 3)
-            {
-                return RedirecionarParaPagina(palavraCorreta);
-            }
-
-            return RedirectToAction("Index");
+            ViewBag.TermoPesquisa = nome;
+            return View("ProdutosSimilares", produtosRelevantes); // Sempre retorna a View de resultados
         }
 
-        // Método de redirecionamento para as páginas específicas
-        private IActionResult RedirecionarParaPagina(string palavraCorreta)
-        {
-            switch (palavraCorreta)
-            {
-                case "home":
-                case "início":
-                    return RedirectToAction("Index");
-                case "filtro":
-                    return RedirectToAction("Filtro");
-                case "carrinho":
-                    return RedirectToAction("Carrinho");
-                case "adm":
-                case "crud":
-                case "administração":
-                    return RedirectToAction("CrudAdm");
-                case "produto":
-                case "tênis":
-                    return RedirectToAction("Produto");
-                default:
-                    return RedirectToAction("Index");
-            }
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
+
     }
 }

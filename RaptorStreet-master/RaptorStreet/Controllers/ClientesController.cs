@@ -221,7 +221,7 @@ namespace RaptorStreet.Controllers
                     .ThenInclude(ce => ce.Enderecos)
                 .FirstOrDefaultAsync(c => c.IdCliente == idCliente);
 
-            if (cliente == null)
+            if (cliente == null) 
             {
                 return NotFound();
             }
@@ -230,7 +230,7 @@ namespace RaptorStreet.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarCliente(int IdCliente, string Nome, string Email, int Telefone)
+        public async Task<IActionResult> EditarCliente(int IdCliente, string Nome, string Email, string Telefone)
         {
             var cliente = await _context.Clientes.FindAsync(IdCliente);
 

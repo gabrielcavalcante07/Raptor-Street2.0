@@ -12,7 +12,7 @@
         @TempData["Msg"]
     </div>
 }
-
+<div class="container">
 <div class="card mb-4">
     <div class="card-header">
         Dados do Cliente
@@ -57,7 +57,7 @@
                         <form asp-action="DeletarEndereco" method="post" class="ms-3">
                             <input type="hidden" name="idEndereco" value="@end.IdEndereco" />
                             <input type="hidden" name="idCliente" value="@Model.IdCliente" />
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este endereço?');">Excluir</button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="confirmRemove('@end.IdEndereco')">EXCLUIR</button>
                         </form>
                     </li>
                 }
@@ -118,3 +118,41 @@
         </form>
     </div>
 </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    function confirmRemove(id) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Deseja remover este Endereço?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, remover!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '@Url.Action("DeletarEndereco", "Clientes")',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            Swal.fire('Erro', 'Não foi possível remover o item.', 'error');
+                        }
+                    },
+                    error: function () {
+                        Swal.fire('Erro', 'Erro de comunicação com o servidor.', 'error');
+                    }
+                });
+            }
+        });
+    }
+</script>

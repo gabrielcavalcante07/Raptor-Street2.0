@@ -231,7 +231,7 @@ namespace RaptorStreet.Controllers
                     QuantidadeProd = 1 // Diminuindo a quantidade em 1
                 });
 
-                /*_cookieCarrinhoCompra.DiminuirProduto(item);*/
+                // _cookieCarrinhoCompra.DiminuirProduto(item);
 
                 return RedirectToAction("Carrinho");
             }

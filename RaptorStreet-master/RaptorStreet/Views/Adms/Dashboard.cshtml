@@ -17,7 +17,7 @@
             <a class="btn btn-outline-danger mb-2" asp-controller="produtoes" asp-action="Index">Listar Tênis</a>
             <a class="btn btn-outline-danger mb-2" asp-controller="produtoes" asp-action="Index">Alterar Tênis</a>
             <a class="btn btn-outline-danger mb-2" asp-controller="produtoes" asp-action="Index">Excluir Tênis</a>
-            <a class="btn btn-danger mt-4" asp-controller="Logins" asp-action="Logout">Logout</a>
+            <a class="btn btn-danger mt-4" asp-controller="Logins" asp-action="Logout">Sair</a>
         </div>
 
         <!-- Área de Gráficos -->
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <!-- Gráfico de Pizza -->
+            <!-- Pizza -->
             <div class="card bg-dark text-white p-4">
                 <h5 style="color: #ff4d4d;">Categorias de Produto</h5>
                 <div class="chart-container" style="height: 250px;">
@@ -67,7 +67,7 @@
             }
         });
 
-        // Gráfico de Pizza - Categorias de Tênis
+        // Gráfico de Pizza - Marcas mais vendidas de Tênis
         const ctxPie = document.getElementById("graficoPizza").getContext("2d");
         new Chart(ctxPie, {
             type: 'pie',

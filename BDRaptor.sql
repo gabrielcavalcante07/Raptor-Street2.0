@@ -43,9 +43,9 @@ foreign key (IdAdm) references tbAdm(IdAdm)
 -- Associação de Clientes com Endereços
 CREATE TABLE tbClienteEnderecos (
     IdEndCliente INT PRIMARY KEY AUTO_INCREMENT,
-    Fk_IdEndereco INT NOT NULL,
-    Fk_IdCliente INT NOT NULL,
-    FOREIGN KEY (Fk_IdEndereco) REFERENCES tbEnderecos(IdEndereco) ON DELETE CASCADE,
+    IdEnd INT,
+    FOREIGN KEY (IdEnd) REFERENCES tbEnderecos(IdEndereco) ON DELETE CASCADE,
+    Fk_IdCliente INT,
     FOREIGN KEY (Fk_IdCliente) REFERENCES tbClientes(IdCliente) ON DELETE CASCADE
 );
 

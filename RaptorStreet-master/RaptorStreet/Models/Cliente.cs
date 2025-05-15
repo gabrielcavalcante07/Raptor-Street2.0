@@ -9,8 +9,8 @@ namespace RaptorStreet.Models
         public int IdCliente { get; set; }
         public string NomeCliente { get; set; }
         public DateOnly DataNascimento { get; set; }
-        public int CPF { get; set; }
-        public int Telefone { get; set; }
+        public string CPF { get; set; }
+        public string Telefone { get; set; }
         public string? SenhaCliente { get; set; }
         public string? EmailCliente { get; set; }
 
