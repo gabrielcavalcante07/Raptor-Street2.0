@@ -24,7 +24,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td><img src="@item.ImagemProduto" alt="Imagem do Produto" width="100" height="100" style="object-fit: cover;" /></td>
+                    <td><img src="@item.ImagemProduto" alt="Imagem do Produto" class="card-img produto-index" /></td>
                     <td>@Html.DisplayFor(modelItem => item.NomeProduto)</td>
                     <td>@Html.DisplayFor(modelItem => item.PrecoProduto)</td>
                     <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
@@ -65,6 +65,6 @@
         </tbody>
     </table>
     <div>
-        <a class="btn btn-dark" asp-controller="home" asp-action="crudadm">Voltar</a>
+        <a class="btn btn-dark" asp-controller="adms" asp-action="dashboard">Voltar</a>
     </div>
 </div>

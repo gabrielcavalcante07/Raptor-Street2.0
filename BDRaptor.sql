@@ -20,6 +20,8 @@ NomeAdm varchar (100) not null,
 EmailAdm enum ('administradorn1@gmail.com','administradorn2@gmail.com'),
 SenhaAdm varchar (30) not null
 );
+INSERT INTO tbadm (`NomeAdm`, `EmailAdm`, `SenhaAdm`) VALUES ('Cavalcante', 'administradorn1@gmail.com', '2396');
+
 
 -- Tabela de Clientes
 CREATE TABLE tbClientes (
@@ -31,6 +33,7 @@ CREATE TABLE tbClientes (
     SenhaCliente VARCHAR(100) NOT NULL,
     EmailCliente VARCHAR(100) NOT NULL UNIQUE
 );
+INSERT INTO `dbraptor`.`tbClientes` (`NomeCliente`, `DataNascimento`, `CPF`, `Telefone`, `SenhaCliente`, `EmailCliente`) VALUES ('Gabriel', '20070814', '55779862818', '11941741429', '1447', 'gcsantos@gmail.com');
 
 CREATE TABLE tbLogin(
 IdLogin  int primary key auto_increment,
@@ -60,7 +63,6 @@ CREATE TABLE tbProdutos (
     IdProduto INT PRIMARY KEY AUTO_INCREMENT,
     NomeProduto VARCHAR(100) NOT NULL,
     PrecoProduto DECIMAL(10,2) NOT NULL,
-    Qtd INT UNSIGNED NOT NULL,
     Descricao VARCHAR(500) NOT NULL,
     Tipo VARCHAR(50) NOT NULL,
     Desconto BOOLEAN NOT NULL DEFAULT FALSE,
@@ -143,14 +145,54 @@ INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Puma');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Mizuno');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Vans');
 
-INSERT INTO tbProdutos (NomeProduto, PrecoProduto, Qtd, Descricao, Tipo, Desconto, Tamanho, Fk_IdMarca, QuantidadeProd) VALUES
-('Air Jordan 4 Retro', 899.99, 50, 'Tênis de alta performance com design clássico da Nike.', 'Tênis', FALSE, 42, 1, 100),
-('Adidas Ultraboost 22', 749.90, 30, 'Tênis confortável ideal para corridas de longa distância.', 'Tênis', TRUE, 41, 2, 100),
-('Puma RS-X', 599.90, 20, 'Tênis esportivo com tecnologia de amortecimento Puma.', 'Tênis', FALSE, 43, 3, 100),
-('Mizuno Wave Prophecy 11', 1099.99, 15, 'Tênis de alta resistência para treinos intensos.', 'Tênis', FALSE, 42, 4, 100),
-('Vans Old Skool', 399.90, 40, 'Tênis casual icônico da Vans, ótimo para o dia a dia.', 'Tênis', TRUE, 40, 5, 100),
-('Nike Air Force 1', 799.99, 60, 'Tênis clássico da Nike com visual atemporal.', 'Tênis', FALSE, 42, 1, 100),
-('Adidas Forum Low', 699.90, 25, 'Tênis retrô da Adidas com design moderno.', 'Tênis', FALSE, 41, 2, 100),
-('Puma Suede Classic', 349.99, 35, 'Tênis tradicional da Puma com acabamento em camurça.', 'Tênis', TRUE, 42, 3, 100),
-('Mizuno Wave Sky 5', 949.90, 18, 'Tênis super amortecido para corredores exigentes.', 'Tênis', FALSE, 43, 4, 100),
-('Vans Sk8-Hi', 449.90, 28, 'Tênis cano alto da Vans, estilo e conforto para o dia.', 'Tênis', TRUE, 41, 5, 100);
+INSERT INTO tbProdutos (ImagemProduto, NomeProduto, PrecoProduto, Descricao, Tipo, Desconto, Tamanho, Fk_IdMarca, QuantidadeProd) VALUES
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADI2000.jpeg', 
+'Adidas Adi2000', 499.99, 'Tênis retrô com estilo dos anos 2000.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADIFOM(2).webp', 
+'Adidas Adifom', 599.99, 'Tênis futurista com espuma moldada.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-CAMPUS00s.webp', 
+'Adidas Campus 00s', 549.99, 'Clássico retrabalhado com estética dos anos 2000.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-FORUM.webp', 
+'Adidas Forum', 599.99, 'Tênis robusto inspirado no basquete.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-JAPAN.webp', 
+'Adidas Japan', 499.99, 'Modelo inspirado nas Olimpíadas de Tóquio 1964.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-OG.webp', 
+'Adidas OG', 449.99, 'Versão original de um clássico da Adidas.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAOG.webp', 
+'Adidas Samba OG', 479.99, 'Ícone da moda urbana e esportiva.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAXLG.webp', 
+'Adidas Samba XLG', 499.99, 'Versão moderna com silhueta ampliada.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SUPERSTAR(2).webp', 
+'Adidas Superstar', 529.99, 'Famoso pelo bico de concha e estilo icônico.', 'Tênis', FALSE, 42, 2, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-CONTENDER.webp', 
+'Mizuno Contender', 459.99, 'Tênis retrô com conforto e estilo casual.', 'Tênis', FALSE, 42, 4, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MUJIN(1).webp', 
+'Mizuno Mujin', 699.99, 'Tênis robusto para trilhas e terrenos difíceis.', 'Tênis', FALSE, 42, 4, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MXR.webp', 
+'Mizuno MXR', 499.99, 'Versátil e confortável para diversas atividades.', 'Tênis', FALSE, 42, 4, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-PROPHECYLS(2).webp', 
+'Mizuno Prophecy', 899.99, 'Amortecimento com placas e design marcante.', 'Tênis', FALSE, 42, 4, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER.webp', 
+'Mizuno Wave Rider', 649.99, 'Ideal para corrida com amortecimento eficiente.', 'Tênis', FALSE, 42, 4, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER-YOKAI(2).webp', 
+'Mizuno Wave Rider Yokai', 679.99, 'Edição especial inspirada na mitologia japonesa.', 'Tênis', FALSE, 42, 4, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIR-ZOOM-SPIRIDON.webp', 
+'Nike Air Zoom Spiridon', 699.99, 'Tênis de corrida com amortecimento responsivo.', 'Tênis', FALSE, 42, 1, 10),
+
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIRFORCE1(2).webp', 
+'Nike Air Force 1', 599.99, 'Clássico versátil e atemporal da Nike.', 'Tênis', FALSE, 42, 1, 10);

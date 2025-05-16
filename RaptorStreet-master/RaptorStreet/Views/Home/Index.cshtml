@@ -69,10 +69,12 @@
         <div class="product-grid">
             @foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
             {
-                <div class="product-card">
+				<div class="product-card card h-100">
                     <div class="product-image-container">
-                        <img src="@produto.ImagemProduto" alt="@produto.NomeProduto" class="product-image">
-                        @* <img src="/assets/tenis/tenis-shadow.png"> *@
+						<img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
+							 alt="@produto.NomeProduto"
+							 class="product-image card-img-top" style="height: 200px; object-fit: cover;"
+							 onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
 
                         <input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
                         <label for="fav-@produto.IdProduto" class="fav-button">♥</label>
@@ -85,13 +87,8 @@
 							<input type="hidden" name="id" value="@produto.IdProduto" />
 							<input type="hidden" name="quantidade" value="1" />
 						} *@
-						<div class="d-flex gap-1">
+						<div>
 						<a class="btn btn-primary" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
-						<form method="post" asp-controller="Pedidoes" asp-action="AdicionarItem">
-							<input type="hidden" name="id" value="@produto.IdProduto" />
-							<input type="hidden" name="quantidade" value="1" />
-							<button type="submit" class="btn btn-success">Adicionar ao Carrinho</button>
-						</form>
 						</div>
                     </div>
                 </div>

@@ -343,29 +343,30 @@ header {
 .product-grid {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, minmax(240px, 1fr));
-    margin-top: 20px;
-    margin-right: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin: 20px;
 }
 
+/* Card de produto */
 .product-card {
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza horizontalmente */
-    justify-content: center; /* centraliza verticalmente se necessário */
-    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 12px;
-    width: 23vw;
-    margin: 0 auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    flex: 0 0 auto;
     background: #fff;
-    padding: 1rem;
+    transition: transform 0.2s ease;
 }
 
+    .product-card:hover {
+        transform: scale(1.02);
+    }
+
+/* Imagem */
 .product-image-container {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -374,8 +375,9 @@ header {
 
 .card-img {
     width: 150px;
-    height: auto;
-    display: block;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 /**/
@@ -716,3 +718,12 @@ h3, .h3 {
     margin: 1rem 0;
     border-top: 1px solid #eee;
 }
+
+.produto-index {
+    width: 100px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px; /* opcional, para cantos arredondados */
+    border: 1px solid #444; /* opcional, para borda */
+}
+

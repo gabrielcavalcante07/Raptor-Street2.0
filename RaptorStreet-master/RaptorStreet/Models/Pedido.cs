@@ -17,6 +17,6 @@ namespace RaptorStreet.Models
         public Pagamento Pagamentos { get; set; }
         public Cliente Clientes { get; set; }
         public ICollection<ItemPedido> ItemPedidos { get; set; }
-
     }
+
 }

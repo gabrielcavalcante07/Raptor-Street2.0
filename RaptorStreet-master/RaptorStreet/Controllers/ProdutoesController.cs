@@ -57,7 +57,7 @@ namespace RaptorStreet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ImagemProduto,IdProduto,NomeProduto,PrecoProduto,Qtd,Descricao,Tipo,Desconto,Tamanho,Fk_IdMarca")] Produto produto)
+        public async Task<IActionResult> Create([Bind("ImagemProduto,IdProduto,NomeProduto,PrecoProduto,Descricao,Tipo,Desconto,Fk_IdMarca")] Produto produto)
         {
 
             _context.Add(produto);

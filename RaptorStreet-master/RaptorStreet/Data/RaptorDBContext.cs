@@ -21,6 +21,8 @@ namespace RaptorStreet.Data
         public DbSet<NotaFiscal> NotaFiscals { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItemPedidos { get; set; }
+/*        public DbSet<Tamanho> Tamanhos{ get; set; }
+*/        
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,7 +40,8 @@ namespace RaptorStreet.Data
             modelBuilder.Entity<NotaFiscal>().ToTable("tbNotaFiscal");
             modelBuilder.Entity<Pedido>().ToTable("tbPedido");
             modelBuilder.Entity<ItemPedido>().ToTable("tbItemPedido");
-
+/*            modelBuilder.Entity<Tamanho>().ToTable("tbTamanhos");
+*/
 
             // Definição das chaves primárias
             modelBuilder.Entity<Endereco>().HasKey(e => e.IdEndereco);
@@ -52,7 +55,8 @@ namespace RaptorStreet.Data
             modelBuilder.Entity<NotaFiscal>().HasKey(nf => nf.IdNota);
             modelBuilder.Entity<Pedido>().HasKey(pe => pe.IdPedido);
             modelBuilder.Entity<ItemPedido>().HasKey(ip => ip.IdProdutoPedido);
-            // Definição de chaves primarias COMPOSTAS
+/*            modelBuilder.Entity<Tamanho>().HasKey(tm => tm.IdTam);
+*/            // Definição de chaves primarias COMPOSTAS
             modelBuilder.Entity<ClienteEndereco>()
            .HasKey(ce => new { ce.IdEndCliente, ce.IdEnd });
 
@@ -68,13 +72,19 @@ namespace RaptorStreet.Data
             .WithMany(e => e.ClienteEnderecos)
             .HasForeignKey(ce => ce.IdEnd);
 
-
             // Relacionamento Produto -> MarcaProduto (1:N)
             modelBuilder.Entity<Produto>()
            .HasOne(p => p.MarcaProdutos)
            .WithMany(mp => mp.Produtos)
            .HasForeignKey(p => p.Fk_IdMarca)
            .OnDelete(DeleteBehavior.Restrict);
+
+            // Relacionamento Tamanho -> Produto
+/*            modelBuilder.Entity<Produto>()
+           .HasOne(p => p.Tamanhos)
+           .WithMany(tm => tm.Produtos)
+           .HasForeignKey(p => p.Fk_IdTam)
+           .OnDelete(DeleteBehavior.Restrict);*/
 
             // Relacionamento ClienteFav -> Cliente (1:N)
             modelBuilder.Entity<ClienteFav>()
@@ -145,7 +155,6 @@ namespace RaptorStreet.Data
            .WithMany(ad => ad.Logins)
            .HasForeignKey(log => log.IdAdm)
            .OnDelete(DeleteBehavior.Restrict);
-
         }
     }
 }

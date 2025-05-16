@@ -75,10 +75,10 @@ namespace RaptorStreet.Controllers
 
         }
 
-        public IActionResult TelaCompra()
+        public IActionResult FinalizarCompra()
         {
-            List<Produto> produtosDoBanco = _context.Produtos.ToList();
-            ViewBag.ProdutosDoBanco = produtosDoBanco;
+            /*List<Produto> produtosDoBanco = _context.Produtos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;*/
             return View();
         }
 

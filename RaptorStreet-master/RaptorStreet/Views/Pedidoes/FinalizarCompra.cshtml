@@ -1,0 +1,22 @@
+﻿<div class="container">
+
+<form asp-action="FinalizarCompra" method="post">
+    <label>Endereço:</label>
+    <select name="idEndereco">
+        @foreach (var e in ViewBag.Enderecos as List<Endereco>)
+        {
+            <option value="@e.IdEndereco">@e.Logradouro, @e.NumeroEndereco</option>
+        }
+    </select>
+
+    <label>Pagamento:</label>
+    <select name="idPagamento">
+        @foreach (var p in ViewBag.Pagamentos as List<Pagamento>)
+        {
+            <option value="@p.IdPag">@p.MetodoPag</option>
+        }
+    </select>
+
+    <button type="submit">Finalizar Pedido</button>
+</form>
+</div>

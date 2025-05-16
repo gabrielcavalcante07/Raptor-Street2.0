@@ -10,6 +10,7 @@ wwwroot\assets\icons\icon-search.svg
 wwwroot\assets\icons\icon-search-dark.svg
 wwwroot\assets\icons\icon-security.svg
 wwwroot\assets\icons\light-mode.svg
+wwwroot\assets\img\default-image.png
 wwwroot\assets\img\dinossauro-beje.png
 wwwroot\assets\img\dinossauro-verde.png
 wwwroot\assets\img\logo.png
