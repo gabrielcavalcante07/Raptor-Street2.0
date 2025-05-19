@@ -1,0 +1,145 @@
+﻿@model IEnumerable<RaptorStreet.Models.Produto>
+
+@{
+	ViewData["Title"] = "Carrinho";
+	decimal total = 0;
+}
+
+<section style="padding-top: 15px;">
+	<div class="container mt-4">
+		<h1 class="mb-4 text-white">CARRINHO</h1>
+
+		@if (Model == null || !Model.Any())
+		{
+			<div class="empty-cart text-center my-5">
+				<h3>🛒 Carrinho está vazio!</h3>
+				<a class="btn btn-primary mt-3" asp-controller="Home" asp-action="Index">Voltar para loja</a>
+			</div>
+		}
+		else
+		{
+			<div class="row">
+				@foreach (var item in Model)
+				{
+					var quantidade = item.QuantidadeProd > 0 ? item.QuantidadeProd : 1;
+					var preco = item.PrecoProduto > 0 ? item.PrecoProduto : 0m;
+
+					var subTotal = quantidade * preco;
+					total += subTotal;
+
+					<div>
+						<div class="card mb-4">
+							<div class="card-body">
+								<h2 class="h5 mb-3">PRODUTO</h2>
+								<div class="row">
+									<div class="col-3">
+										<img src="@item.ImagemProduto" alt="@item.NomeProduto" class="product-image" style="width: 150px; height: 100px; object-fit: cover;">
+									</div>
+									<div class="col-6">
+										<p class="fw-bold mb-1">@item.NomeProduto</p>
+										<p class="text-muted mb-1">@item.Descricao</p>
+										<p class="text-muted mb-1">Tamanho: @item.Tamanho</p>
+									</div>
+									<div class="col-3 text-end">
+										<button class="btn btn-sm btn-outline-danger" onclick="confirmRemove('@item.IdProduto')">EXCLUIR</button>
+									</div>
+									<div class="card mb-4">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-md-4">
+													<h6>QUANTIDADE</h6>
+													<div class="d-flex align-items-center">
+														<form asp-action="DiminuirItem" asp-controller="Pedidoes" method="post" class="d-inline">
+															<input type="hidden" name="id" value="@item.IdProduto" />
+															<button type="submit" class="btn btn-outline-secondary btn-sm">-</button>
+														</form>
+														<div class="px-3 mx-2 border">@item.QuantidadeProd</div>
+														<form asp-action="AdicionarItem" asp-controller="Pedidoes" method="post" class="d-inline">
+															<input type="hidden" name="id" value="@item.IdProduto" />
+															<button type="submit" class="btn btn-outline-secondary btn-sm">+</button>
+														</form>
+													</div>
+												</div>
+
+												<div class="col-md-4">
+													<h6>VALOR UNITÁRIO</h6>
+													<p class="mb-0">@preco.ToString("C")</p>
+												</div>
+
+												<div class="col-md-4">
+													<h6>SUBTOTAL</h6>
+													<p class="mb-0 fw-bold">@subTotal.ToString("C")</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				}
+
+
+				<!-- Resumo da Compra -->
+				<div>
+					<div class="card mb-3">
+						<div class="card-body">
+							<h5 class="mb-3">RESUMO DA COMPRA</h5>
+							<div class="d-flex justify-content-between mb-2">
+								<span>Valor dos produtos</span>
+								<span>@total.ToString("C")</span>
+							</div>
+							<hr>
+							<div class="d-flex justify-content-between fw-bold">
+								<span>Total</span>
+								<span class="text-success">@total.ToString("C")</span>
+							</div>
+						</div>
+					</div>
+
+					<a class="btn btn-dark w-100 py-2 mb-2" asp-controller="Pedidoes" asp-action="FinalizarCompra">Finalizar Compra</a>
+
+				</div>
+			</div>
+		}
+	</div>
+</section>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+	function confirmRemove(id) {
+		Swal.fire({
+			title: 'Tem certeza?',
+			text: "Deseja remover este item do carrinho?",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sim, remover!',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: '@Url.Action("RemoverItem", "Pedidoes")',  // ou "Carrinho" se seu controller for Carrinho
+					type: 'POST',
+					data: { id: id },
+					success: function (response) {
+						if (response.success) {
+							location.reload();
+						} else {
+							Swal.fire('Erro', 'Não foi possível remover o item.', 'error');
+						}
+					},
+					error: function () {
+						Swal.fire('Erro', 'Erro de comunicação com o servidor.', 'error');
+					}
+				});
+			}
+		});
+	}
+</script>

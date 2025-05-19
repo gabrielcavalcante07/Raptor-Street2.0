@@ -1,0 +1,153 @@
+﻿@model RaptorStreet.Models.Cliente
+@{
+    ViewData["Title"] = "Painel do Cliente";
+    var enderecos = ViewBag.Enderecos as List<RaptorStreet.Models.Endereco>;
+}
+
+<link rel="stylesheet" href="~/css/painel-cliente.css" />
+
+<div class="painel-container" style="padding-top:100px;">
+    <aside class="sidebar">
+        <img src="~/assets/img/dinossauro-beje.png" alt="Logo" class="sidebar-logo" />
+        <h2 class="sidebar-title">Área do Usuário</h2>
+        <ul class="sidebar-menu">
+            <li>Conta</li>
+            <li>Status dos Pedidos</li>
+            <li>Favoritos</li>
+            <li>Histórico de compras</li>
+            <li>Ajuda</li>
+        </ul>
+        <button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
+    </aside>
+
+    <main class="painel-conteudo">
+        <h2 class="titulo-bemvindo">Bem vindo, @Model.NomeCliente!</h2>
+
+        @if (TempData["Msg"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Msg"]
+            </div>
+        }
+
+        <!-- Seção de edição dos dados -->
+        <div class="painel-card">
+            <h3>Editar Dados do Cliente</h3>
+            <form asp-action="EditarCliente" method="post" class="painel-form">
+                <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+
+                <div class="form-grid">
+                    <div>
+                        <label>Nome</label>
+                        <input name="Nome" value="@Model.NomeCliente" />
+                    </div>
+                    <div>
+                        <label>Senha</label>
+                        <input type="password" name="SenhaCliente" value="@Model.SenhaCliente" />
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input name="Email" value="@Model.EmailCliente" />
+                    </div>
+                    <div>
+                        <label>Data de nascimento</label>
+                        <input type="date" name="DataNascimento" value="@Model.DataNascimento.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div>
+                        <label>CPF</label>
+                        <input name="CPF" value="@Model.CPF"/>
+                    </div>
+                    <div>
+                        <label>Telefone</label>
+                        <input name="Telefone" value="@Model.Telefone" />
+                    </div>
+                </div>
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+            </form>
+        </div>
+
+        <!-- Endereços -->
+        <div class="painel-card">
+            <h3>Endereços Cadastrados</h3>
+            @if (Model.ClienteEnderecos != null && Model.ClienteEnderecos.Any())
+            {
+                <ul class="lista-enderecos">
+                    @foreach (var ce in Model.ClienteEnderecos)
+                    {
+                        var end = ce.Enderecos;
+                        <li>
+                            <div>
+                                <strong>@end.Logradouro, @end.NumeroEndereco</strong><br />
+                                @end.Bairro - @end.Cidade/@end.Estado<br />
+                                CEP: @end.CEP
+                            </div>
+                            <form asp-action="DeletarEndereco" method="post">
+                                <input type="hidden" name="idEndereco" value="@end.IdEndereco" />
+                                <input type="hidden" name="idCliente" value="@Model.IdCliente" />
+                            </form>
+                            <div class="col-3 text-end">
+                                <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmRemove(@end.IdEndereco, @Model.IdCliente)">EXCLUIR</button>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Nenhum endereço cadastrado.</p>
+            }
+        </div>
+
+        <!-- Adicionar Endereço -->
+        <div class="painel-card">
+            <h3>Adicionar Novo Endereço</h3>
+            <form asp-action="AdicionarEndereco" method="post" class="painel-form">
+                <input type="hidden" name="idCliente" value="@Model.IdCliente" />
+
+                <div class="form-grid">
+                    <input type="text" name="CEP" placeholder="CEP" required />
+                    <input type="text" name="Logradouro" placeholder="Logradouro" required />
+                    <input type="number" name="NumeroEndereco" placeholder="Número" required />
+                    <input type="text" name="Complemento" placeholder="Complemento" />
+                    <input type="text" name="Bairro" placeholder="Bairro" required />
+                    <input type="text" name="Cidade" placeholder="Cidade" required />
+                    <input type="text" name="Estado" placeholder="Estado" required />
+                </div>
+                <button type="submit" class="btn-adicionar">Adicionar Endereço</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    function confirmRemove(idEndereco, idCliente) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Deseja remover este Endereço?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, remover!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '@Url.Action("DeletarEndereco", "Clientes")',
+                    type: 'POST',
+                    data: { idEndereco: idEndereco, idCliente: idCliente },
+                    success: function (response) {
+                        location.reload();
+                    },
+                    error: function () {
+                        Swal.fire('Erro', 'Erro ao remover o endereço.', 'error');
+                    }
+                });
+            }
+        });
+    }
+</script>

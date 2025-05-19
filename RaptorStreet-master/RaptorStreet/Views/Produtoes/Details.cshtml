@@ -1,0 +1,71 @@
+﻿@model RaptorStreet.Models.Produto
+
+@{
+	ViewData["Title"] = "Details";
+	ViewBag.ExibirNavbar = false;
+
+}
+<div class="container text-white">
+
+	<h1>Details</h1>
+
+	<div>
+		<h4>Produto</h4>
+		<hr />
+		<dl class="row text-white">
+			<dt><img src="@Model.ImagemProduto" alt="Imagem do Produto" width="300" height="300" style="object-fit: cover;" /></dt>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.NomeProduto)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.NomeProduto)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.PrecoProduto)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.PrecoProduto)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.QuantidadeProd)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.QuantidadeProd)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Descricao)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Descricao)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Tipo)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Tipo)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Desconto)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Desconto)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Tamanho)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Tamanho)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.MarcaProdutos)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.MarcaProdutos.NomeMarca)
+			</dd>
+		</dl>
+	</div>
+	<div>
+		<a class="btn btn-dark" asp-controller="adms" asp-action="dashboard">Voltar</a>
+		<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.IdProduto">Editar</a>
+	</div>
+</div>

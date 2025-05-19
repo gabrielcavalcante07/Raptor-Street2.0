@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Tênis";
+}
+
+@model RaptorStreet.Models.Produto
+
+
+<body>
+    <section style="padding-top: 100px;">
+        <div class="product d-flex container img-fluid justify-content-around">
+            <div class="image-container col-md-6 text-center">
+                <img src="@Model.ImagemProduto" class="product-image img-fluid" id="imagem" />
+            </div>
+            <div class="gap-1 text-white">
+                <h1 id="nome">@Model.NomeProduto</h1>
+                <h2 class="price" id="preco">@Model.PrecoProduto.ToString("C")</h2>
+                <p>10% de Desconto</p>
+                <p>Parcelamos em até 10x sem juros</p>
+                <select class="form-select" id="tamanhos"><option value="" disabled selected hidden>Escolha seu tamanho</option></select>
+                @* <select class="form-select mt-1" id="cores"><option value="" disabled selected hidden>Escolha a cor</option></select> *@
+
+                <form method="post" asp-controller="Pedidoes" asp-action="AdicionarItem">
+                    <input type="hidden" name="id" value="@Model.IdProduto" />
+                    <input type="hidden" name="quantidade" value="1" />
+                    <button type="submit" class="btn btn-danger mt-2 container">Adicionar ao Carrinho</button>
+                </form>
+                <h6 class="mt-4">Calcular Frete e Entrega</h6>
+
+                <div class="input-group mb-3">
+                    <input type="tel" class="form-control" name="CEP" value="" id="calcular" placeholder="Insira seu CEP" maxlength="8" />
+                    <button class="btn btn-dark" type="button">Calcular</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5 text-white">
+            <h3 class="text-center">Sobre o Produto</h3>
+            <p class="product-description" id="descricao">
+                @Model.Descricao
+            </p>
+        </div>
+
+        <!--Carrousel de cards-->
+        <div class="product-carousel-wrapper">
+            <button class="product-carousel-button prev">&#10094;</button>
+
+            <div class="product-carousel-container">
+                <div class="product-carousel-track">
+                    @foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
+                    {
+                        if (produto.IdProduto == Model.IdProduto)
+                        {
+                            continue; // Pula o produto que já está sendo exibido acima
+                        }
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
+                                     alt="@produto.NomeProduto"
+                                     class="product-image"
+                                     onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
+
+                                <input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
+                                <label for="fav-@produto.IdProduto" class="fav-button">♥</label>
+                            </div>
+                            <div class="product-info">
+                                <h5 class="product-name">@produto.NomeProduto</h5>
+                                <p class="product-price">@produto.PrecoProduto.ToString("C")</p>
+                                <form method="post" asp-controller="Pedidoes" asp-action="AdicionarItem">
+                                    <input type="hidden" name="id" value="@produto.IdProduto" />
+                                    <input type="hidden" name="quantidade" value="1" />
+                                    <button type="submit" class="btn btn-danger">Adicionar ao Carrinho</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <button class="product-carousel-button next">&#10095;</button>
+        </div>
+
+
+
+    </section>
+</body>

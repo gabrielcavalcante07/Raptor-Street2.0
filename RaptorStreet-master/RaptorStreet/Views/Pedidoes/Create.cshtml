@@ -1,0 +1,54 @@
+﻿@model RaptorStreet.Models.Pedido
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pedido</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fk_IdNota" class="control-label"></label>
+                <select asp-for="Fk_IdNota" class ="form-control" asp-items="ViewBag.Fk_IdNota"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fk_IdEndereco" class="control-label"></label>
+                <select asp-for="Fk_IdEndereco" class ="form-control" asp-items="ViewBag.Fk_IdEndereco"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fk_IdPag" class="control-label"></label>
+                <select asp-for="Fk_IdPag" class ="form-control" asp-items="ViewBag.Fk_IdPag"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fk_IdCliente" class="control-label"></label>
+                <select asp-for="Fk_IdCliente" class ="form-control" asp-items="ViewBag.Fk_IdCliente"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataPed" class="control-label"></label>
+                <input asp-for="dataPed" class="form-control" />
+                <span asp-validation-for="dataPed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="totalPedido" class="control-label"></label>
+                <input asp-for="totalPedido" class="form-control" />
+                <span asp-validation-for="totalPedido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

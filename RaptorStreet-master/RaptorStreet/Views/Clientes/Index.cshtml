@@ -1,0 +1,90 @@
+﻿@model IEnumerable<RaptorStreet.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.ExibirNavbar = false;
+}
+
+
+<div class="container text-white"> 
+    <h1>Lista de Clientes</h1>
+    <table class="table table-dark">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenhaCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailCliente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenhaCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailCliente)
+            </td>
+            <td>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdCliente">Editar</a>
+                            <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.IdCliente">Detalhes</a>
+                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.IdCliente">Excluir</a>
+                        </div>
+                        <!-- Modal específico para cada produto -->
+                        <div class="modal fade" id="exampleModal-@item.IdCliente" tabindex="-1" aria-labelledby="exampleModalLabel-@item.IdCliente" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content bg-dark text-white">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel-@item.IdCliente">Excluir Produto?</h1>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Você realmente deseja excluir o produto @item.NomeCliente?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form asp-action="Delete" asp-route-id="@item.IdCliente" method="post">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <input type="submit" value="Excluir" class="btn btn-danger" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    <div>
+        <a class="btn btn-dark" asp-controller="Adms" asp-action="Dashboard">Voltar</a>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿<script src="~/js/grafico-demo.js"></script>
+@{
+    ViewBag.ExibirNavbar = false;
+}
+<main class="container-fluid" style="background-color: #1a1a1a; color: #fff; min-height: 100vh; padding: 2rem;">
+    <h1 class="text-center mb-4" style="color: #ff4d4d; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;">
+        Dashboard - Raptor Street
+    </h1>
+
+
+    <div class="d-flex">
+        <!-- Menu Lateral  -->
+        <div class="d-flex flex-column me-4" style="width: 380px; min-height: 100%;">
+            <img src="~/assets/img/logo-combination.png" class="w-100 mb-4 rounded" alt="Logo Loja de Tênis" />
+
+            <a class="btn btn-outline-danger mb-2" asp-controller="produtoes" asp-action="Create">Cadastrar Tênis</a>
+            <a class="btn btn-outline-danger mb-2" asp-controller="produtoes" asp-action="Index">Alterar Tênis</a>
+            <a class="btn btn-outline-danger mb-2" asp-controller="Clientes" asp-action="Create">Cadastrar Cliente</a>
+            <a class="btn btn-outline-danger mb-2" asp-controller="Clientes" asp-action="Index">Alterar Cliente</a>
+            <a class="btn btn-danger mt-4" asp-controller="Logins" asp-action="Logout">Sair</a>
+        </div>
+
+        <!-- Área de Gráficos -->
+        <div style="flex-grow: 1; max-width: calc(100% - 300px);">
+            <!-- Gráfico de Barras -->
+            <div class="card bg-dark text-white p-4 mb-4">
+                <h5 style="color: #ff4d4d;">Vendas Mensais</h5>
+                <div class="chart-container" style="height: 250px;">
+                    <canvas id="graficoBarra"></canvas>
+                </div>
+            </div>
+
+            <!-- Pizza -->
+            <div class="card bg-dark text-white p-4">
+                <h5 style="color: #ff4d4d;">Categorias de Produto</h5>
+                <div class="chart-container" style="height: 250px;">
+                    <canvas id="graficoPizza"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Gráfico de Barras - Vendas Mensais
+        const ctxBar = document.getElementById("graficoBarra").getContext("2d");
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Fev", "Mar", "Abr", "Mai"],
+                datasets: [{
+                    label: "Vendas",
+                    data: [120, 350, 290, 250, 300],
+                    backgroundColor: "#ff4d4d",
+                    borderColor: "#b30000",
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Gráfico de Pizza - Marcas mais vendidas de Tênis
+        const ctxPie = document.getElementById("graficoPizza").getContext("2d");
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ["Nike", "Puma", "Adidas","Vans"],
+                datasets: [{
+                    data: [40, 35, 25, 20],
+                    backgroundColor: ["#b81414", "#dc705c", "#f4b7aa", "#ffffff"]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</main>
