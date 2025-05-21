@@ -88,6 +88,28 @@ namespace RaptorStreet.Controllers
         }
 
 
+
+        public static int CalculateLevenshtein(string source, string target)
+        {
+            int n = source.Length;
+            int m = target.Length;
+            var dp = new int[n + 1, m + 1];
+
+            for (int i = 0; i <= n; dp[i, 0] = i++) ;
+            for (int j = 0; j <= m; dp[0, j] = j++) ;
+
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= m; j++)
+                {
+                    int cost = (source[i - 1] == target[j - 1]) ? 0 : 1;
+                    dp[i, j] = Math.Min(Math.Min(dp[i - 1, j] + 1, dp[i, j - 1] + 1), dp[i - 1, j - 1] + cost);
+                }
+            }
+
+            return dp[n, m];
+        }
+
         public IActionResult Pesquisar(string nome)
         {
             if (string.IsNullOrWhiteSpace(nome))
@@ -97,12 +119,17 @@ namespace RaptorStreet.Controllers
 
             var todosProdutos = _context.Produtos.ToList();
 
+            // Filtra produtos com nomes que contenham o termo OU sejam similares (Levenshtein < 5)
+            var produtosRelevantes = todosProdutos
+                .Where(p =>
+                    p.NomeProduto.ToLower().Contains(nome.ToLower()) ||
+                    CalculateLevenshtein(p.NomeProduto.ToLower(), nome.ToLower()) < 5
+                )
+                .OrderBy(p => CalculateLevenshtein(p.NomeProduto.ToLower(), nome.ToLower())) // Ordena por similaridade
+                .ToList();
+
             ViewBag.TermoPesquisa = nome;
-            return View("ProdutosSimilares", todosProdutos); // Sempre retorna a View de resultados
+            return View("ProdutosSimilares", produtosRelevantes); // Sempre retorna a View de resultados
         }
-
-
-
-
     }
 }

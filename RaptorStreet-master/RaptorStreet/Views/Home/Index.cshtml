@@ -12,7 +12,8 @@
 			// Exibe a mensagem na view
 			<div class="alert alert-info">@mensagem</div>
 		}
-		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="hover">
+		<div classs="carrousel">
+			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="hover">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<img src="~/assets/banners/banner-parcelas.png" class="d-block w-100 alt="..." onclick="location.href='/home/Produto/1'" />
@@ -41,6 +42,7 @@
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
+	</div>
 
 		<div class="banner-frete d-flex justify-content-center justify-content-evenly align-items-center">
 			<div class="d-flex align-items-center gap-2 img-fluid">
@@ -93,7 +95,7 @@
 							<input type="hidden" name="quantidade" value="1" />
 						} *@
 						<div>
-							<a class="btn btn-primary" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
+							<a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
 						</div>
 					</div>
 				</div>

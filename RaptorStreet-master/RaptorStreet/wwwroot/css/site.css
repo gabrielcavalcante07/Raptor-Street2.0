@@ -79,6 +79,23 @@ header {
     backdrop-filter: blur(5px);
 }
 
+.nav-marcas-icons {
+    width: 30vw;
+    height: auto;
+    background-color: red;
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 10vh;
+    right: 0;
+    left: 25%;
+    z-index: 1030;
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 20px;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -114,6 +131,10 @@ header {
     height: auto;
 }
 
+
+.carrousel{
+    margin-top: 11vh;
+}
 .carousel-inner {
     margin-top: 11vh;
 }
@@ -412,13 +433,14 @@ header {
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
+/*    transition: background-color 0.3s ease;
+*/    text-decoration: none;
 }
 
-    .btn-primary:hover {
+/*    .btn-primary:hover {
         background-color: #0056b3;
-    }
+    }*/
+
 /*botão favorito*/
 .fav-checkbox {
     display: none;

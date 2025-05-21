@@ -182,26 +182,38 @@ namespace RaptorStreet.Controllers
         [HttpPost]
         public IActionResult AdicionarItem(int id, int qtd)
         {
-            Produto produto = _context.Produtos.Find(id);
+            var idCliente = HttpContext.Session.GetInt32("IdCliente");
 
-            if (produto == null)
+            if (idCliente == null)
             {
-                return View("NaoExisteItem");
+                TempData["Login"] = "É necessário estar logado para adicionar ao Carrinho";
+                return RedirectToAction("Index", "Home");
+
             }
+
             else
             {
-                var item = new Produto()
+                Produto produto = _context.Produtos.Find(id);
+
+                if (produto == null)
                 {
-                    IdProduto = id,
-                    QuantidadeProd = produto.QuantidadeProd,
-                    ImagemProduto = produto.ImagemProduto,
-                    NomeProduto = produto.NomeProduto,
-                    PrecoProduto = produto.PrecoProduto,
-                };
+                    return View("NaoExisteItem");
+                }
+                else
+                {
+                    var item = new Produto()
+                    {
+                        IdProduto = id,
+                        QuantidadeProd = produto.QuantidadeProd,
+                        ImagemProduto = produto.ImagemProduto,
+                        NomeProduto = produto.NomeProduto,
+                        PrecoProduto = produto.PrecoProduto,
+                    };
 
-                _cookieCarrinhoCompra.Cadastrar(item);
+                    _cookieCarrinhoCompra.Cadastrar(item);
 
-                return RedirectToAction("Carrinho");
+                    return RedirectToAction("Carrinho");
+                }
             }
         }
         //PAGINA DIMINUIR ITEM

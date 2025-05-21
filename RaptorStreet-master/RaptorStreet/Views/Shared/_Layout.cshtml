@@ -18,7 +18,8 @@
 	<header>
 		@if (ViewBag.ExibirNavbar != false)
 		{
-			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
+			<nav>
+			<div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
 				<div class="container-fluid justify-content-between mx-4">
 					<div class="logo">
 						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo-combination.copy.png" /></a>
@@ -58,6 +59,18 @@
 						<a asp-area="" asp-controller="Pedidoes" asp-action="Carrinho"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
 
 					</div>
+
+
+					<container class="nav-marcas">
+						<div class="nav-marcas-icons">
+							@*icon navbar marcas*@
+							<a asp-controller="Home" asp-action="TelaVans"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+							<a asp-controller="Home" asp-action="TelaAdidas"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+							<a asp-controller="Home" asp-action="TelaMizuno"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+							<a asp-controller="Home" asp-action="Filtro"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+							<a asp-controller="Home" asp-action="TelaPuma"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+						</div>
+					</container>
 
 
 					@*menu-hamburguer*@
