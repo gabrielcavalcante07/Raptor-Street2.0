@@ -7,109 +7,144 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RaptorStreet.Data;
 using RaptorStreet.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using RaptorStreet.Repositorio;
+using RaptorStreet.Repositorio.Interface;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RaptorStreet.Controllers
 {
-    public class ClienteFavsController : Controller
+    public class ClienteFavoritoesController : Controller
     {
         private readonly RaptorDBContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ClienteFavsController(RaptorDBContext context)
+        public ClienteFavoritoesController(RaptorDBContext context, IHttpContextAccessor httpcontextacessor, ILoginRepositorio loginRepositorio)
         {
             _context = context;
+            _httpContextAccessor = httpcontextacessor;
         }
 
-        // GET: ClienteFavs
+        // GET: ClienteFavoritoes
         public async Task<IActionResult> Index()
         {
-            var raptorDBContext = _context.ClienteFavs.Include(c => c.Clientes).Include(c => c.Produtos);
-            return View(await raptorDBContext.ToListAsync());
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
+
+            var idCliente = HttpContext.Session.GetInt32("IdCliente");
+            if (idCliente == null)
+            {
+                return RedirectToAction("Logins", "Login");
+            }
+
+            var favoritos = await _context.ClienteFavs
+                .Include(cl => cl.Produtos)
+                .Where(cl => cl.IdCliente == idCliente && cl.ativado)
+                .ToListAsync();
+
+            return View(favoritos);
         }
 
-        // GET: ClienteFavs/Details/5
+
+
+        // GET: ClienteFavoritoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
             if (id == null)
             {
                 return NotFound();
             }
 
-            var clienteFav = await _context.ClienteFavs
+            var clienteFavorito = await _context.ClienteFavs
                 .Include(c => c.Clientes)
                 .Include(c => c.Produtos)
                 .FirstOrDefaultAsync(m => m.IdClienteFav == id);
-            if (clienteFav == null)
+            if (clienteFavorito == null)
             {
                 return NotFound();
             }
 
-            return View(clienteFav);
+            return View(clienteFavorito);
         }
 
-        // GET: ClienteFavs/Create
+        // GET: ClienteFavoritoes/Create
         public IActionResult Create()
         {
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto");
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "idCliente", "idCliente");
+            ViewData["IdProd"] = new SelectList(_context.Produtos, "idProd", "idProd");
             return View();
         }
 
-        // POST: ClienteFavs/Create
+        // POST: ClienteFavoritoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdClienteFav,IdCliente,IdProduto,ativado")] ClienteFav clienteFav)
+        public async Task<IActionResult> Create([Bind("IdClienteFav,IdCliente,IdProd,Ativo")] ClienteFav clienteFavorito)
         {
-         
-                _context.Add(clienteFav);
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
+            if (ModelState.IsValid)
+            {
+                _context.Add(clienteFavorito);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", clienteFav.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", clienteFav.IdProduto);
-            return View(clienteFav);
+            }
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "idCliente", "idCliente", clienteFavorito.IdCliente);
+            ViewData["IdProd"] = new SelectList(_context.Produtos, "idProd", "idProd", clienteFavorito.IdProduto);
+            return View(clienteFavorito);
         }
 
-        // GET: ClienteFavs/Edit/5
+        // GET: ClienteFavoritoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
             if (id == null)
             {
                 return NotFound();
             }
 
-            var clienteFav = await _context.ClienteFavs.FindAsync(id);
-            if (clienteFav == null)
+            var clienteFavorito = await _context.ClienteFavs.FindAsync(id);
+            if (clienteFavorito == null)
             {
                 return NotFound();
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", clienteFav.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", clienteFav.IdProduto);
-            return View(clienteFav);
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "idCliente", "idCliente", clienteFavorito.IdCliente);
+            ViewData["IdProd"] = new SelectList(_context.Produtos, "idProd", "idProd", clienteFavorito.IdProduto);
+            return View(clienteFavorito);
         }
 
-        // POST: ClienteFavs/Edit/5
+        // POST: ClienteFavoritoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdClienteFav,IdCliente,IdProduto,ativado")] ClienteFav clienteFav)
+        public async Task<IActionResult> Edit(int id, [Bind("IdClienteFav,IdCliente,IdProd,Ativo")] ClienteFav clienteFavorito)
         {
-            if (id != clienteFav.IdClienteFav)
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
+            if (id != clienteFavorito.IdClienteFav)
             {
                 return NotFound();
             }
 
-        
+            if (ModelState.IsValid)
+            {
                 try
                 {
-                    _context.Update(clienteFav);
+                    _context.Update(clienteFavorito);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteFavExists(clienteFav.IdClienteFav))
+                    if (!ClienteFavoritoExists(clienteFavorito.IdClienteFav))
                     {
                         return NotFound();
                     }
@@ -119,50 +154,86 @@ namespace RaptorStreet.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", clienteFav.IdCliente);
-            ViewData["IdProduto"] = new SelectList(_context.Produtos, "IdProduto", "IdProduto", clienteFav.IdProduto);
-            return View(clienteFav);
+            }
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "idCliente", "idCliente", clienteFavorito.IdCliente);
+            ViewData["IdProd"] = new SelectList(_context.Produtos, "idProd", "idProd", clienteFavorito.IdProduto);
+            return View(clienteFavorito);
         }
 
-        // GET: ClienteFavs/Delete/5
+        // GET: ClienteFavoritoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
             if (id == null)
             {
                 return NotFound();
             }
 
-            var clienteFav = await _context.ClienteFavs
+            var clienteFavorito = await _context.ClienteFavs
                 .Include(c => c.Clientes)
                 .Include(c => c.Produtos)
                 .FirstOrDefaultAsync(m => m.IdClienteFav == id);
-            if (clienteFav == null)
+            if (clienteFavorito == null)
             {
                 return NotFound();
             }
 
-            return View(clienteFav);
+            return View(clienteFavorito);
         }
 
-        // POST: ClienteFavs/Delete/5
+        // POST: ClienteFavoritoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clienteFav = await _context.ClienteFavs.FindAsync(id);
-            if (clienteFav != null)
+            var clienteFavoritos = _context.ClienteFavs.Include(cl => cl.Produtos).ToList();
+            ViewBag.ClienteFavoritos = clienteFavoritos;
+            var clienteFavorito = await _context.ClienteFavs.FindAsync(id);
+            if (clienteFavorito != null)
             {
-                _context.ClienteFavs.Remove(clienteFav);
+                _context.ClienteFavs.Remove(clienteFavorito);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteFavExists(int id)
+        private bool ClienteFavoritoExists(int id)
         {
             return _context.ClienteFavs.Any(e => e.IdClienteFav == id);
         }
+
+
+        //FAVORITOS
+
+        [HttpGet]
+        public IActionResult Favoritar()
+        {
+            var idCliente = HttpContext.Session.GetInt32("idCliente");
+
+            if (idCliente == null)
+            {
+                TempData["Login"] = "Primeiro faça o login";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var clienteFavoritos = _context.ClienteFavs
+       .Include(cf => cf.Produtos)
+       .Where(cf => cf.IdCliente == idCliente.Value)
+       .ToList();
+
+            ViewBag.ClienteFavoritos = clienteFavoritos;
+
+
+
+
+            // Recuperar idCliente da sessão
+
+            return View();
+
+        }
+
     }
+
 }

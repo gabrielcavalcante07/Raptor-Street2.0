@@ -102,6 +102,82 @@ namespace RaptorStreet.Controllers
         }
 
 
+        
+        [HttpPost]
+        public IActionResult Favoritar(int idProd)
+        {
+            // Recuperar idCliente da sessão corretamente
+            int? idCliente = HttpContext.Session.GetInt32("idCliente");
+
+            if (!idCliente.HasValue)
+            {
+                TempData["Login"] = "Primeiro faça o login";
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Verifica se já existe esse produto nos favoritos do cliente
+            var favoritoExistente = _context.ClienteFavs
+                .FirstOrDefault(f => f.IdCliente == idCliente.Value && f.IdCliente == idProd);
+
+            if (favoritoExistente != null)
+            {
+                   // Se já estiver favoritado, remove
+                    _context.ClienteFavs.Remove(favoritoExistente);
+                _context.SaveChanges();
+                
+
+            }
+            else
+{
+    // Caso contrário, adiciona aos favoritos
+    var novoFavorito = new ClienteFav
+    {
+        IdCliente = idCliente.Value,
+        IdClienteFav = idCliente.Value
+    };
+    _context.ClienteFavs.Add(novoFavorito);
+
+
+}
+
+_context.SaveChanges();
+
+
+
+return RedirectToAction("Index", "Home");
+
+
+        }
+        [HttpPost]
+public IActionResult Desfavoritar(int idProd)
+{
+
+    // Recuperar idCliente da sessão corretamente
+    int? idCliente = HttpContext.Session.GetInt32("idCliente");
+
+    if (!idCliente.HasValue)
+    {
+        TempData["Login"] = "Primeiro faça o login";
+        return RedirectToAction("Index", "Home");
+    }
+
+
+    // Verifica se já existe esse produto nos favoritos do cliente
+    var favoritoExistente = _context.ClienteFavs
+        .FirstOrDefault(f => f.IdCliente == idCliente.Value && f.IdCliente == idProd);
+
+
+    if (favoritoExistente != null)
+    {
+        // Se já estiver favoritado, remove
+        _context.ClienteFavs.Remove(favoritoExistente);
+        _context.SaveChanges();
+    }
+
+    return RedirectToAction("Favoritar", "ClienteFavoritoes");
+
+}
+
 
 
     }
