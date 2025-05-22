@@ -26,7 +26,7 @@ namespace RaptorStreet.Controllers
         // GET: Pedidoes
         public async Task<IActionResult> Index()
         {
-            var raptorDBContext = _context.Pedidos.Include(p => p.Clientes).Include(p => p.Enderecos).Include(p => p.NotaFiscals).Include(p => p.Pagamentos);
+            var raptorDBContext = _context.Pedidos.Include(p => p.Clientes).Include(p => p.Enderecos).Include(p => p.Pagamentos);
             return View(await raptorDBContext.ToListAsync());
         }
 
@@ -41,7 +41,6 @@ namespace RaptorStreet.Controllers
             var pedido = await _context.Pedidos
                 .Include(p => p.Clientes)
                 .Include(p => p.Enderecos)
-                .Include(p => p.NotaFiscals)
                 .Include(p => p.Pagamentos)
                 .FirstOrDefaultAsync(m => m.IdPedido == id);
             if (pedido == null)
@@ -57,7 +56,6 @@ namespace RaptorStreet.Controllers
         {
             ViewData["Fk_IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
             ViewData["Fk_IdEndereco"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco");
-            ViewData["Fk_IdNota"] = new SelectList(_context.NotaFiscals, "IdNota", "IdNota");
             ViewData["Fk_IdPag"] = new SelectList(_context.Pagamentos, "IdPag", "IdPag");
             return View();
         }
@@ -67,7 +65,7 @@ namespace RaptorStreet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPedido,Fk_IdNota,Fk_IdEndereco,Fk_IdPag,Fk_IdCliente,dataPed,totalPedido")] Pedido pedido)
+        public async Task<IActionResult> Create([Bind("IdPedido,Fk_IdEndereco,Fk_IdPag,Fk_IdCliente,dataPed,totalPedido")] Pedido pedido)
         {
 
             _context.Add(pedido);
@@ -90,7 +88,6 @@ namespace RaptorStreet.Controllers
             }
             ViewData["Fk_IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", pedido.Fk_IdCliente);
             ViewData["Fk_IdEndereco"] = new SelectList(_context.Enderecos, "IdEndereco", "IdEndereco", pedido.Fk_IdEndereco);
-            ViewData["Fk_IdNota"] = new SelectList(_context.NotaFiscals, "IdNota", "IdNota", pedido.Fk_IdNota);
             ViewData["Fk_IdPag"] = new SelectList(_context.Pagamentos, "IdPag", "IdPag", pedido.Fk_IdPag);
             return View(pedido);
         }
@@ -100,7 +97,7 @@ namespace RaptorStreet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPedido,Fk_IdNota,Fk_IdEndereco,Fk_IdPag,Fk_IdCliente,dataPed,totalPedido")] Pedido pedido)
+        public async Task<IActionResult> Edit(int id, [Bind("IdPedido,Fk_IdEndereco,Fk_IdPag,Fk_IdCliente,dataPed,totalPedido")] Pedido pedido)
         {
             if (id != pedido.IdPedido)
             {
@@ -137,7 +134,6 @@ namespace RaptorStreet.Controllers
             var pedido = await _context.Pedidos
                 .Include(p => p.Clientes)
                 .Include(p => p.Enderecos)
-                .Include(p => p.NotaFiscals)
                 .Include(p => p.Pagamentos)
                 .FirstOrDefaultAsync(m => m.IdPedido == id);
             if (pedido == null)

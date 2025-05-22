@@ -12,7 +12,6 @@ namespace RaptorStreet.Models
         public int Fk_IdCliente { get; set; }
         public DateTime dataPed { get; set; }
         public decimal totalPedido {get; set;}
-        public NotaFiscal NotaFiscals { get; set; }
         public Endereco Enderecos { get; set; }
         public Pagamento Pagamentos { get; set; }
         public Cliente Clientes { get; set; }

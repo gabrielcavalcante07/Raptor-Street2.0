@@ -164,5 +164,7 @@ namespace RaptorStreet.Controllers
         {
             return _context.ClienteFavs.Any(e => e.IdClienteFav == id);
         }
+
+
     }
 }

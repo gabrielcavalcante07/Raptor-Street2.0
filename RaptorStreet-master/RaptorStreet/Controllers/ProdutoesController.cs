@@ -57,11 +57,10 @@ namespace RaptorStreet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ImagemProduto,IdProduto,NomeProduto,PrecoProduto,Qtd,Descricao,Tipo,Desconto,Tamanho,Fk_IdMarca")] Produto produto)
+        public async Task<IActionResult> Create([Bind("IdProduto,NomeProduto,PrecoProduto,Descricao,QuantidadeProd,ImagemProduto,Fk_IdMarca")] Produto produto)
         {
-
-            _context.Add(produto);
-            await _context.SaveChangesAsync();
+                _context.Add(produto);
+                await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -87,31 +86,30 @@ namespace RaptorStreet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ImagemProduto,IdProduto,NomeProduto,PrecoProduto,Qtd,Descricao,Tipo,Desconto,Tamanho,Fk_IdMarca")] Produto produto)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProduto,NomeProduto,PrecoProduto,Descricao,QuantidadeProd,ImagemProduto,Fk_IdMarca")] Produto produto)
         {
             if (id != produto.IdProduto)
             {
                 return NotFound();
             }
 
-
-            try
-            {
-                _context.Update(produto);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProdutoExists(produto.IdProduto))
+                try
                 {
-                    return NotFound();
+                    _context.Update(produto);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!ProdutoExists(produto.IdProduto))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-            }
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
         }
 
         // GET: Produtoes/Delete/5

@@ -18,9 +18,6 @@ namespace RaptorStreet.Models
 
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
-        public string? Tipo { get; set; }
-        public bool Desconto { get; set; }
-        public int Tamanho { get; set; }
 
         /*[Required(ErrorMessage = "A quantidade em estoque é obrigatória")]
         [DisplayName("Quantidade em estoque")]*/
