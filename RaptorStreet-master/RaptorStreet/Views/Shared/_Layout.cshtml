@@ -59,27 +59,22 @@
 						<a asp-area="" asp-controller="Pedidoes" asp-action="Carrinho"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
 
 					</div>
+				</div>
 
-
-					<container class="nav-marcas">
-						<div class="nav-marcas-icons">
-							@*icon navbar marcas*@
-							<a asp-controller="Home" asp-action="TelaVans"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
-							<a asp-controller="Home" asp-action="TelaAdidas"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
-							<a asp-controller="Home" asp-action="TelaMizuno"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
-							<a asp-controller="Home" asp-action="Filtro"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
-							<a asp-controller="Home" asp-action="TelaPuma"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
-						</div>
-					</container>
-
+					@*navbar marcas*@
+					<div class="nav-marcas">
+						<a asp-controller="Home" asp-action="TelaVans"><img src="~/assets/img/vans.png" id="Vans" class="nav-marcas-icons" /></a>
+						<a asp-controller="Home" asp-action="TelaAdidas"><img src="~/assets/img/adidas.png" id="Adidas" class="nav-marcas-icons" /></a>
+						<a asp-controller="Home" asp-action="TelaMizuno"><img src="~/assets/img/mizuno.png" id="Mizuno" class="nav-marcas-icons" /></a>
+						<a asp-controller="Home" asp-action="Filtro"><img src="~/assets/img/nike.png" id="Nike" class="nav-marcas-icons" /></a>
+						<a asp-controller="Home" asp-action="TelaPuma"><img src="~/assets/img/puma.png" id="Puma" class="nav-marcas-icons" /></a>
+					</div>
 
 					@*menu-hamburguer*@
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 							aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
-				</div>
 			</nav>
 		}
 	</header>

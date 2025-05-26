@@ -15,6 +15,9 @@ html {
     border: none;
 }
 
+body{
+    margin-top: 6vh;
+}
 .modal-content {
     border: none !important;
 }
@@ -68,32 +71,30 @@ header {
 .navbar {
     display: flex;
     width: 100%;
-    height: 10vh;
-    /* background-color: #1A1A1A; */
-    /* border-radius: 50px; */
-    background-color: currentColor;
-    /*left: 50%;*/
-    /*transform: translateX(-50%);*/
-    /*margin-top: 5px;*/
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
+    height: 12vh;
+    background-color: black;
 }
 
-.nav-marcas-icons {
+.nav-marcas {
+    display: flex;
     width: 30vw;
     height: auto;
-    background-color: red;
+    border-radius: 50px;
+    left: 51%;
+    transform: translateX(-50%);
+    background-color: rgb(220 53 69);
     backdrop-filter: blur(5px);
     position: fixed;
     top: 10vh;
-    right: 0;
-    left: 25%;
-    z-index: 1030;
-    display: flex;
-    flex-wrap: inherit;
-    align-items: center;
+    padding: 1vh;
     justify-content: space-evenly;
-    border-radius: 20px;
+}
+
+
+.nav-marcas img {
+    display: flex;
+    width: 30px;
+    height: 30px;
 }
 
 .logo {
@@ -143,12 +144,12 @@ header {
     height: calc(100vh - 10vh); /*Subtrai a altura da navbar*/
 }
 
-    .carousel-item img {
-        object-fit: cover; /* Faz a imagem cobrir toda a área sem distorcer */
-        height: 100vh;
-        width: 100vw;
-        border-radius: 2%;
-    }
+.carousel-item img {
+    object-fit: cover; /* Faz a imagem cobrir toda a área sem distorcer */
+    height: 100vh;
+    width: 100vw;
+       
+}
 
 .carousel-indicators button {
     background-color: var(--vermelho); /* Cor dos botões inativos */
@@ -189,7 +190,7 @@ header {
 }
 
 .banner-frete {
-    margin-top: 20px;
+    margin-top: 5vh;
     color: red;
     width: 100vw;
     height: 10vh;
@@ -263,15 +264,12 @@ header {
     border-radius: 10px;
 }
 
-    .product-image-container img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 10px;
-    }
-
-
-
+.product-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
 
 .product-info {
     margin-top: 0.5rem;
@@ -351,15 +349,15 @@ header {
     margin-bottom: 15px;
 }
 
-    .filter-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-size: 0.9rem;
-    }
+.filter-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
 
-    .filter-group input[type="checkbox"] {
-        margin-right: 5px;
-    }
+.filter-group input[type="checkbox"] {
+    margin-right: 5px;
+}
 
 .product-grid {
     display: grid;
@@ -484,14 +482,14 @@ header {
 
 /*LOGIN*/
 
-.login-container {
+.userauth-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 100px;
 }
 
-.login-central {
+.userauth-central {
     height: 750px;
     display: flex;
     background-color: white;
@@ -502,7 +500,7 @@ header {
     width: 100%;
 }
 
-.login-box {
+.userauth-box {
     padding: 100px 0px;
     display: flex;
     overflow: hidden;
@@ -511,8 +509,8 @@ header {
     margin-left: 45px;
 }
 
-.login-image {
-    background-color: #9b5de5;
+.userauth-image-container {
+  
     padding: 40px;
     display: flex;
     border-radius: 8px;
@@ -521,24 +519,31 @@ header {
     flex: 1;
 }
 
-    .login-image img {
-        width: 300px;
-        height: auto;
-    }
+#login-container {
+    background-color: #9b5de5;
+}
+#cad-container{
+    background-color: #2a3f99;
+}
 
-.login-form {
+.userauth-image-container img {
+    width: 300px;
+    height: auto;
+}
+
+.userauth-form {
     flex: 1;
     padding: 50px 40px;
 }
 
-    .login-form h2 {
+    .userauth-form h2 {
         color: #c62828;
         font-size: 28px;
         margin-bottom: 30px;
     }
 
-    .login-form input[type="email"],
-    .login-form input[type="password"] {
+    .userauth-form input[type="email"],
+    .userauth-form input[type="password"] {
         width: 100%;
         padding: 12px;
         margin-bottom: 15px;

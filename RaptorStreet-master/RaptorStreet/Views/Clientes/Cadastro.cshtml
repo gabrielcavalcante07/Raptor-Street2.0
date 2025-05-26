@@ -5,33 +5,42 @@
     ViewBag.ExibirNavbar = false;
 }
 
-<main class="cadastro-container text-white" style="background-color: var(--body);">
-    <div class="cadastro-box">
-        <div class="cadastro-left">
-            <img src="~/assets/img/dinossauro-beje.png" alt="Raptor" class="img-raptor-logo" />
-        </div>
-        <div class="cadastro-right">
-            <h2 class="cadastro-titulo">Cadastro</h2>
-            <form asp-controller="Clientes" asp-action="Cadastro" method="post" class="cadastro-form">
-                <div class="form-row">
-                    <input type="text" name="NomeCliente" placeholder="Nome Completo" required />
-                    <input type="text" name="CPF" placeholder="CPF" required />
-                </div>
-                <div class="form-row">
-                    <input type="date" name="DataNascimento" placeholder="Data de Nascimento" required />
-                    <input type="text" name="Telefone" placeholder="Telefone" required />
-                </div>
-                <div class="form-row">
-                    <input type="email" name="EmailCliente" placeholder="E-mail" required />
-                    <input type="password" name="SenhaCliente" placeholder="Senha" required />
-                </div>
-                <div class="form-row">
-                    <button type="submit" class="btn-cadastrar">Cadastrar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<main class="userauth-container">
+	<div class="userauth-central">
+		<div class="userauth-box">
+			<div class="userauth-image-container" id="cad-container">
+			<img src="~/assets/img/dinossauro-beje.png" alt="Raptor" class="img-raptor-logo" />
+			</div>
+			<div class="userauth-form">
+				<h2 class="cadastro-titulo">Cadastro</h2>
+				<form asp-controller="Clientes" asp-action="Cadastro" method="post" class="cadastro-form">
+  					<div class="form-row">
+       						<input type="text" name="NomeCliente" placeholder="Nome Completo" required />
+        				 	<input type="text" name="CPF" placeholder="CPF" required />
+    					</div>
+   					<div class="form-row">
+        					<input type="date" name="DataNascimento" placeholder="Data de Nascimento" required />
+       						<input type="text" name="Telefone" placeholder="Telefone" required />
+   					</div>
+   					 <div class="form-row">
+       						<input type="email" name="EmailCliente" placeholder="E-mail" required />
+        					<input type="password" name="SenhaCliente" placeholder="Senha" required />
+   				 	</div>
+   	 				<div class="form-row">
+       						<button type="submit" class="btn-cadastrar">Cadastrar</button>
+    					</div>
+
+			
+					<div class="d-flex mt-1	">
+						<a>Já tem uma conta?</a>
+						<a class="text-danger fw-bold" style="margin-left:5px; cursor:pointer; text-decoration:none" onclick="location.href='/Logins/Login'">Clique aqui</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </main>
+
 
 
 
