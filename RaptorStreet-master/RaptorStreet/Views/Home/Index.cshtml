@@ -71,6 +71,13 @@
 	*@
 
 	<section class="col-md-9 container">
+		@{
+			var favoritos = ViewBag.ClienteFavoritos as List<ClienteFav>;
+			var favoritosIds = favoritos?.Select(f => f.IdProduto).ToList() ?? new List<int>();
+		}
+
+		@Html.AntiForgeryToken()
+
 		<div class="product-grid">
 			@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
 			{
@@ -78,22 +85,26 @@
 					<div class="product-image-container">
 						<img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
 							 alt="@produto.NomeProduto"
-							 class="product-image card-img-top" style="height: 200px; object-fit: cover;"
+							 class="product-image card-img-top"
+							 style="height: 200px; object-fit: cover;"
 							 onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
 
-						<input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
+						<input type="checkbox"
+							   id="fav-@produto.IdProduto"
+							   class="fav-checkbox"
+							   data-id="@produto.IdProduto"
+						@(favoritosIds.Contains(produto.IdProduto) ? "checked" : "") />
+
 						<label for="fav-@produto.IdProduto" class="fav-button">♥</label>
 					</div>
 					<div class="product-info">
 						<h5 class="product-name">@produto.NomeProduto</h5>
 						<p class="product-price">@produto.PrecoProduto.ToString("C")</p>
-						@* @using (Html.BeginForm("Carrinho", "Home", FormMethod.Post))
-						{
-							<input type="hidden" name="id" value="@produto.IdProduto" />
-							<input type="hidden" name="quantidade" value="1" />
-						} *@
 						<div>
-							<a class="btn btn-primary" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
+							<a class="btn btn-primary"
+							   asp-controller="Home"
+							   asp-action="Produto"
+							   asp-route-id="@produto.IdProduto">Ver mais</a>
 						</div>
 					</div>
 				</div>

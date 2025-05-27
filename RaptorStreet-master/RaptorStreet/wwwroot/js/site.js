@@ -123,3 +123,29 @@ function carregarProduto() {
 }
 
 carregarProduto();
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.fav-checkbox').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            const idProduto = this.dataset.id;
+
+            fetch('/Favoritos/ToggleFavorito', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': document.querySelector('[name="__RequestVerificationToken"]').value
+                },
+                body: JSON.stringify(idProduto)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sucesso) {
+                        console.log("Favorito atualizado com sucesso.");
+                    } else {
+                        console.error("Erro:", data.mensagem);
+                    }
+                });
+        });
+    });
+});

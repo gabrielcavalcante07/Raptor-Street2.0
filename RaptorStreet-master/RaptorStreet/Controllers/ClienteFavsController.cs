@@ -207,33 +207,40 @@ namespace RaptorStreet.Controllers
 
         //FAVORITOS
 
-        [HttpGet]
-        public IActionResult Favoritar()
+        [HttpPost]
+        public IActionResult ToggleFavorito([FromBody] int idProduto)
         {
             var idCliente = HttpContext.Session.GetInt32("idCliente");
 
             if (idCliente == null)
             {
-                TempData["Login"] = "Primeiro faça o login";
-                return RedirectToAction("Index", "Home");
+                return Json(new { sucesso = false, mensagem = "Usuário não autenticado." });
             }
 
-            var clienteFavoritos = _context.ClienteFavs
-       .Include(cf => cf.Produtos)
-       .Where(cf => cf.IdCliente == idCliente.Value)
-       .ToList();
+            var favoritoExistente = _context.ClienteFavs
+                .FirstOrDefault(f => f.IdCliente == idCliente && f.IdProduto == idProduto);
 
-            ViewBag.ClienteFavoritos = clienteFavoritos;
+            if (favoritoExistente != null)
+            {
+                _context.ClienteFavs.Remove(favoritoExistente);
+            }
+            else
+            {
+                var novoFav = new ClienteFav
+                {
+                    IdCliente = idCliente.Value,
+                    IdProduto = idProduto,
+                    ativado = true
+                };
+                _context.ClienteFavs.Add(novoFav);
+            }
 
+            _context.SaveChanges();
 
-
-
-            // Recuperar idCliente da sessão
-
-            return View();
-
+            return Json(new { sucesso = true });
         }
 
-    }
+
+}
 
 }
