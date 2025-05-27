@@ -23,6 +23,7 @@
 				<div class="container-fluid justify-content-between mx-4">
 					<div class="logo">
 						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo-combination.copy.png" /></a>
+							<a class="" asp-area="" asp-controller="Home" asp-action="Filtro">Produtos</a>
 					</div>
 
 					@*input search*@
@@ -63,11 +64,11 @@
 
 					@*navbar marcas*@
 					<div class="nav-marcas">
-						<a asp-controller="Home" asp-action="TelaVans"><img src="~/assets/img/vans.png" id="Vans" class="nav-marcas-icons" /></a>
-						<a asp-controller="Home" asp-action="TelaAdidas"><img src="~/assets/img/adidas.png" id="Adidas" class="nav-marcas-icons" /></a>
-						<a asp-controller="Home" asp-action="TelaMizuno"><img src="~/assets/img/mizuno.png" id="Mizuno" class="nav-marcas-icons" /></a>
-						<a asp-controller="Home" asp-action="Filtro"><img src="~/assets/img/nike.png" id="Nike" class="nav-marcas-icons" /></a>
-						<a asp-controller="Home" asp-action="TelaPuma"><img src="~/assets/img/puma.png" id="Puma" class="nav-marcas-icons" /></a>
+						<a asp-controller="Produtoes" asp-action="Vans"><img src="~/assets/img/vans.png" id="Vans" class="nav-marcas-icons" /></a>
+						<a asp-controller="Produtoes" asp-action="Adidas"><img src="~/assets/img/adidas.png" id="Adidas" class="nav-marcas-icons" /></a>
+						<a asp-controller="Produtoes" asp-action="Mizuno"><img src="~/assets/img/mizuno.png" id="Mizuno" class="nav-marcas-icons" /></a>
+						<a asp-controller="Produtoes" asp-action="Nike"><img src="~/assets/img/nike.png" id="Nike" class="nav-marcas-icons" /></a>
+						<a asp-controller="Produtoes" asp-action="Puma"><img src="~/assets/img/puma.png" id="Puma" class="nav-marcas-icons" /></a>
 					</div>
 
 					@*menu-hamburguer*@

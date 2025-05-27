@@ -59,8 +59,8 @@ namespace RaptorStreet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdProduto,NomeProduto,PrecoProduto,Descricao,QuantidadeProd,ImagemProduto,Fk_IdMarca")] Produto produto)
         {
-                _context.Add(produto);
-                await _context.SaveChangesAsync();
+            _context.Add(produto);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -93,23 +93,23 @@ namespace RaptorStreet.Controllers
                 return NotFound();
             }
 
-                try
+            try
+            {
+                _context.Update(produto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProdutoExists(produto.IdProduto))
                 {
-                    _context.Update(produto);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ProdutoExists(produto.IdProduto))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Produtoes/Delete/5
@@ -150,5 +150,39 @@ namespace RaptorStreet.Controllers
         {
             return _context.Produtos.Any(e => e.IdProduto == id);
         }
+    
+
+
+       public IActionResult Adidas()
+        {
+            List<Produto> produtosDoBanco = _context.Produtos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
+            return View();
+        }
+        public IActionResult Mizuno()
+        {
+            List<Produto> produtosDoBanco = _context.Produtos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
+            return View();
+        }
+        public IActionResult Nike()
+        {
+            List<Produto> produtosDoBanco = _context.Produtos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
+            return View();
+        }
+        public IActionResult Puma()
+        {
+            List<Produto> produtosDoBanco = _context.Produtos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
+            return View();
+        }
+        public IActionResult Vans()
+        {
+            List<Produto> produtosDoBanco = _context.Produtos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
+            return View();
+        }
     }
 }
+

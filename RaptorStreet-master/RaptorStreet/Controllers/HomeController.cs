@@ -52,6 +52,13 @@ namespace RaptorStreet.Controllers
             return View();
         }
 
+        public IActionResult Mizuno()
+        {
+            List<Produto> produtosDoBanco = _context.Produtos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
+            return View();
+        }
+
 
         public IActionResult Carrinho()
         {

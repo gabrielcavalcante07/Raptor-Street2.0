@@ -1,0 +1,56 @@
+﻿@{
+	ViewData["Title"] = "Produtos";
+}
+
+
+<body>
+	<section style="padding-top: 100px;">
+		<h1 class="text-white text-center mt-3">Puma</h1>
+		<section class="col-md-9 container">
+			<div class="product-grid">
+				@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
+				{
+					<div class="product-card card h-100">
+						<div class="product-image-container">
+							<img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
+								 alt="@produto.NomeProduto"
+								 class="product-image card-img-top" style="height: 200px; object-fit: cover;"
+								 onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
+
+							<input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
+							<label for="fav-@produto.IdProduto" class="fav-button">♥</label>
+						</div>
+						<div class="product-info">
+							<h5 class="product-name">@produto.NomeProduto</h5>
+							<p class="product-price">@produto.PrecoProduto.ToString("C")</p>
+							@* @using (Html.BeginForm("Carrinho", "Home", FormMethod.Post))
+						{
+							<input type="hidden" name="id" value="@produto.IdProduto" />
+							<input type="hidden" name="quantidade" value="1" />
+						} *@
+							<div>
+								<a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</section>
+		</div>
+		</div>
+
+
+		<div class="promotion-banner mt-4">
+			<div class="row align-items-center bg-light rounded p-3">
+				<div class="col-md-6">
+					<h3>Parcelamos Suas Compras!</h3>
+					<p>Aproveite nossas condições especiais de parcelamento.</p>
+					<a href="#" class="btn btn-success">Saiba Mais</a>
+				</div>
+				<div class="col-md-6 text-end">
+					<img src="~/assets/img/banner_promo.jpg" alt="Banner de Promoção" class="img-fluid rounded">
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
