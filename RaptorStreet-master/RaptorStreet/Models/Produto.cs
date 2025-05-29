@@ -31,8 +31,6 @@ namespace RaptorStreet.Models
 
         [DisplayName("Marca")]
         public int Fk_IdMarca { get; set; }
-
-        [DisplayName("Marca")]
         public MarcaProduto MarcaProdutos { get; set; }
         public ICollection<ClienteFav> ClienteFavs { get; set; }
         public ICollection<ItemPedido> ItemPedidos { get; set; }

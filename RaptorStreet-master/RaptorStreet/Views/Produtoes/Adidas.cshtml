@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
 	ViewData["Title"] = "Produtos";
 }
 
@@ -8,7 +8,7 @@
 		<h1 class="text-white text-center mt-3">Adidas</h1>
 		<section class="col-md-9 container">
 			<div class="product-grid">
-				@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
+			@	@foreach (var produto in ProdutosDoBanco as List<ItemPedido>)
 				{
 					<div class="product-card card h-100">
 						<div class="product-image-container">
@@ -17,24 +17,24 @@
 								 class="product-image card-img-top" style="height: 200px; object-fit: cover;"
 								 onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
 
-							<input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
-							<label for="fav-@produto.IdProduto" class="fav-button">♥</label>
+							<input type="checkbox" id="fav-@produto.Fk_IdProduto" class="fav-checkbox">
+							<label for="fav-@produto.Fk_IdProduto" class="fav-button">♥</label>
 						</div>
 						<div class="product-info">
 							<h5 class="product-name">@produto.NomeProduto</h5>
-							<p class="product-price">@produto.PrecoProduto.ToString("C")</p>
+							<p class="product-price">@produto.PrecoUnitario.ToString("C")</p>
 							@* @using (Html.BeginForm("Carrinho", "Home", FormMethod.Post))
 						{
 							<input type="hidden" name="id" value="@produto.IdProduto" />
 							<input type="hidden" name="quantidade" value="1" />
-						} *@
+						} 
 							<div>
-								<a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
-							</div>
+								<a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.Fk_IdProduto">Ver mais</a>
+						<!---->	</div>
 						</div>
 					</div>
-				}
-			</div>
+				}*@
+		<!--</div>
 		</section>
 		</div>
 		</div>
@@ -53,4 +53,4 @@
 			</div>
 		</div>
 	</section>
-</body>
+</body> -->

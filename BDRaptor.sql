@@ -64,7 +64,6 @@ CREATE TABLE tbProdutos (
     NomeProduto VARCHAR(100) NOT NULL,
     PrecoProduto DECIMAL(10,2) NOT NULL,
     Descricao VARCHAR(500) NOT NULL,
-    Desconto BOOLEAN NOT NULL DEFAULT FALSE,
     Fk_IdMarca INT NOT NULL,
     QuantidadeProd int,
     ImagemProduto Varchar(300),
@@ -91,16 +90,15 @@ CREATE TABLE tbPagamentos (
 
 -- Tabela de Pedidos
 CREATE TABLE tbPedido (
+	IdPedido INT PRIMARY KEY AUTO_INCREMENT,
 	NomeProduto VARCHAR(100) NOT NULL,
     PrecoProduto DECIMAL(10,2) NOT NULL,
-    IdPedido INT PRIMARY KEY AUTO_INCREMENT,
     ImagemProduto Varchar(300),
     dataPed DATETIME NOT NULL,
-    totalPedido DECIMAL(10,2) NOT NULL,
     Fk_IdEndereco INT NOT NULL,
+    totalPedido DECIMAL(10,2) NOT NULL,
     Fk_IdPag INT NOT NULL,
     Fk_IdCliente INT NOT NULL,
-    Fk_IdMarca INT NOT NULL,
     QuantidadeProd int,
     FOREIGN KEY (Fk_IdEndereco) REFERENCES tbEnderecos(IdEndereco),
     FOREIGN KEY (Fk_IdPag) REFERENCES tbPagamentos(IdPag),
@@ -110,10 +108,11 @@ CREATE TABLE tbPedido (
 -- Itens do Pedido
 CREATE TABLE tbItemPedido (
     IdProdutoPedido INT PRIMARY KEY AUTO_INCREMENT,
+    PrecoUnitario DECIMAL(10,2) NOT NULL,
+	TamanhoItem INT,
+	QuantidadeItem INT,
     Fk_IdPedido INT NOT NULL,
     Fk_IdProduto INT NOT NULL,
-    PrecoUnitario DECIMAL(10,2) NOT NULL,
-    Quantidade INT UNSIGNED NOT NULL,
     FOREIGN KEY (Fk_IdPedido) REFERENCES tbPedido(IdPedido) ON DELETE CASCADE,
     FOREIGN KEY (Fk_IdProduto) REFERENCES tbProdutos(IdProduto) ON DELETE CASCADE
 );
@@ -135,54 +134,54 @@ INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Puma');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Mizuno');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Vans');
 
-INSERT INTO tbProdutos (ImagemProduto, NomeProduto, PrecoProduto, Descricao, Desconto, Fk_IdMarca, QuantidadeProd) VALUES
+INSERT INTO tbProdutos (ImagemProduto, NomeProduto, PrecoProduto, Descricao, Fk_IdMarca, QuantidadeProd) VALUES
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADI2000.jpeg', 
-'Adidas Adi2000', 499.99, 'Tênis retrô com estilo dos anos 2000.', FALSE, 2, 10),
+'Adidas Adi2000', 499.99, 'Tênis retrô com estilo dos anos 2000.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADIFOM(2).webp', 
-'Adidas Adifom', 599.99, 'Tênis futurista com espuma moldada.', FALSE, 2, 10),
+'Adidas Adifom', 599.99, 'Tênis futurista com espuma moldada.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-CAMPUS00s.webp', 
-'Adidas Campus 00s', 549.99, 'Clássico retrabalhado com estética dos anos 2000.', FALSE, 2, 10),
+'Adidas Campus 00s', 549.99, 'Clássico retrabalhado com estética dos anos 2000.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-FORUM.webp', 
-'Adidas Forum', 599.99, 'Tênis robusto inspirado no basquete.', FALSE, 2, 10),
+'Adidas Forum', 599.99, 'Tênis robusto inspirado no basquete.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-JAPAN.webp', 
-'Adidas Japan', 499.99, 'Modelo inspirado nas Olimpíadas de Tóquio 1964.', FALSE, 2, 10),
+'Adidas Japan', 499.99, 'Modelo inspirado nas Olimpíadas de Tóquio 1964.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-OG.webp', 
-'Adidas OG', 449.99, 'Versão original de um clássico da Adidas.', FALSE, 2, 10),
+'Adidas OG', 449.99, 'Versão original de um clássico da Adidas.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAOG.webp', 
-'Adidas Samba OG', 479.99, 'Ícone da moda urbana e esportiva.', FALSE, 2, 10),
+'Adidas Samba OG', 479.99, 'Ícone da moda urbana e esportiva.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAXLG.webp', 
-'Adidas Samba XLG', 499.99, 'Versão moderna com silhueta ampliada.', FALSE, 2, 10),
+'Adidas Samba XLG', 499.99, 'Versão moderna com silhueta ampliada.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SUPERSTAR(2).webp', 
-'Adidas Superstar', 529.99, 'Famoso pelo bico de concha e estilo icônico.', FALSE, 2, 10),
+'Adidas Superstar', 529.99, 'Famoso pelo bico de concha e estilo icônico.', 2, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-CONTENDER.webp', 
-'Mizuno Contender', 459.99, 'Tênis retrô com conforto e estilo casual.', FALSE, 4, 10),
+'Mizuno Contender', 459.99, 'Tênis retrô com conforto e estilo casual.', 4, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MUJIN(1).webp', 
-'Mizuno Mujin', 699.99, 'Tênis robusto para trilhas e terrenos difíceis.', FALSE, 4, 10),
+'Mizuno Mujin', 699.99, 'Tênis robusto para trilhas e terrenos difíceis.', 4, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MXR.webp', 
-'Mizuno MXR', 499.99, 'Versátil e confortável para diversas atividades.', FALSE, 4, 10),
+'Mizuno MXR', 499.99, 'Versátil e confortável para diversas atividades.', 4, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-PROPHECYLS(2).webp', 
-'Mizuno Prophecy', 899.99, 'Amortecimento com placas e design marcante.', FALSE, 4, 10),
+'Mizuno Prophecy', 899.99, 'Amortecimento com placas e design marcante.', 4, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER.webp', 
-'Mizuno Wave Rider', 649.99, 'Ideal para corrida com amortecimento eficiente.', FALSE, 4, 10),
+'Mizuno Wave Rider', 649.99, 'Ideal para corrida com amortecimento eficiente.', 4, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER-YOKAI(2).webp', 
-'Mizuno Wave Rider Yokai', 679.99, 'Edição especial inspirada na mitologia japonesa.', FALSE, 4, 10),
+'Mizuno Wave Rider Yokai', 679.99, 'Edição especial inspirada na mitologia japonesa.', 4, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIR-ZOOM-SPIRIDON.webp', 
-'Nike Air Zoom Spiridon', 699.99, 'Tênis de corrida com amortecimento responsivo.', FALSE, 1, 10),
+'Nike Air Zoom Spiridon', 699.99, 'Tênis de corrida com amortecimento responsivo.', 1, 10),
 
 ('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIRFORCE1(2).webp', 
-'Nike Air Force 1', 599.99, 'Clássico versátil e atemporal da Nike.', FALSE, 1, 10);
+'Nike Air Force 1', 599.99, 'Clássico versátil e atemporal da Nike.', 1, 10);

@@ -171,13 +171,17 @@ namespace RaptorStreet.Controllers
         [HttpGet]
         public IActionResult Carrinho()
         {
+            List<ItemPedido> produtosDoBanco = _context.ItemPedidos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
             return View(_cookieCarrinhoCompra.Consultar());
         }
 
         //PAGINA ADICIONAR ITEM
         [HttpPost]
-        public IActionResult AdicionarItem(int id, int qtd)
+        public IActionResult AdicionarItem(int id, int qtd, int tamanho)
         {
+            List<ItemPedido> produtosDoBanco = _context.ItemPedidos.ToList();
+            ViewBag.ProdutosDoBanco = produtosDoBanco;
             var idCliente = HttpContext.Session.GetInt32("IdCliente");
 
             if (idCliente == null)
@@ -189,9 +193,9 @@ namespace RaptorStreet.Controllers
 
             else
             {
-                Produto produto = _context.Produtos.Find(id);
+                ItemPedido itemPedido = _context.ItemPedidos.Find(id);
 
-                if (produto == null)
+                if (itemPedido == null)
                 {
                     return View("NaoExisteItem");
                 }
@@ -200,10 +204,10 @@ namespace RaptorStreet.Controllers
                     var item = new Produto()
                     {
                         IdProduto = id,
-                        QuantidadeProd = produto.QuantidadeProd,
-                        ImagemProduto = produto.ImagemProduto,
-                        NomeProduto = produto.NomeProduto,
-                        PrecoProduto = produto.PrecoProduto,
+                        QuantidadeProd = itemPedido.Quantidade,
+                        ImagemProduto = itemPedido.ImagemProduto,
+                        NomeProduto = itemPedido.NomeProduto,
+                        PrecoProduto = itemPedido.PrecoUnitario,
                     };
 
                     _cookieCarrinhoCompra.Cadastrar(item);
@@ -224,14 +228,6 @@ namespace RaptorStreet.Controllers
             }
             else
             {
-                /*var item = new Produto()
-                {
-                    IdProduto = id,
-                    QuantidadeProd = produto.QuantidadeProd,
-                    NomeProduto = produto.NomeProduto,
-                    PrecoProduto = produto.PrecoProduto,
-                };*/
-
                 // Passa o ID e a quantidade reduzida diretamente
                 _cookieCarrinhoCompra.DiminuirProduto(new Produto()
                 {
