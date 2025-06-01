@@ -196,14 +196,14 @@ namespace RaptorStreet.Controllers
             {
                 HttpContext.Session.SetString("EmailCliente", email);
                 HttpContext.Session.SetInt32("IdCliente", Clientes.IdCliente);
-                TempData["Login"] = "Bem-vindo, cliente!";
+                TempData["Login"] = "Bem-vindo, " + Clientes.NomeCliente +"!";
                 return RedirectToAction("Index", "Home");
             }
             else if (login is Adm Adms)
             {
                 HttpContext.Session.SetString("EmailAdm", email);
                 HttpContext.Session.SetInt32("IdAdm", Adms.IdAdm);
-                TempData["Login"] = "Bem-vindo, Administrador!";
+                TempData["Login"] = "Bem-vindo," + Adms.NomeAdm +"!";
                 return RedirectToAction("Dashboard", "Adms");
             }
 

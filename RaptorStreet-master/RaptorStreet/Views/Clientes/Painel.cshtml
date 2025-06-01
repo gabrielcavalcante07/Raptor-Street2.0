@@ -1,6 +1,5 @@
 ﻿@model RaptorStreet.Models.Cliente
 @{
-    ViewData["Title"] = "Painel do Cliente";
     var enderecos = ViewBag.Enderecos as List<RaptorStreet.Models.Endereco>;
 }
 
@@ -14,7 +13,7 @@
             <li>Conta</li>
             <li>Status dos Pedidos</li>
             <li>Favoritos</li>
-            <li>Histórico de compras</li>
+            <a asp-controller="pedidoes" asp-action="index" >Histórico de compras</a>
             <li>Ajuda</li>
         </ul>
         <button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>

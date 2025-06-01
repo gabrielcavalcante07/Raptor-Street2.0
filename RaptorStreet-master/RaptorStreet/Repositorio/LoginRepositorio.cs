@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using MySql.Data.MySqlClient;
 using K4os.Compression.LZ4.Internal;
+using Humanizer;
 
 namespace RaptorStreet.Repositorio
 {
@@ -103,8 +104,12 @@ namespace RaptorStreet.Repositorio
 
         public Cliente ObterCliente(int id)
         {
-            throw new NotImplementedException();
+            return _context.Clientes
+                .Include(c => c.ClienteEnderecos)
+                .ThenInclude(ce => ce.Enderecos)
+                .FirstOrDefault(c => c.IdCliente == id);
         }
+
 
         public void Atualizar(Cliente cliente)
         {

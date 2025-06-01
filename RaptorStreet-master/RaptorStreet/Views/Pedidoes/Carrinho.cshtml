@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<RaptorStreet.Models.Produto>
 
 @{
-	ViewData["Title"] = "Carrinho";
 	decimal total = 0;
 }
 
@@ -37,11 +36,11 @@
 									</div>
 									<div class="col-6">
 										<p class="fw-bold mb-1">@item.NomeProduto</p>
-										<p class="text-muted mb-1">@item.Descricao</p>
-@* 										<p class="text-muted mb-1">Tamanho: @item.Tamanho</p>
- *@									</div>
+										@* <p class="text-muted mb-1">@item.Descricao</p> *@
+ 										<p class="text-muted mb-1">Tamanho: @item.Tamanho</p>
+									</div>
 									<div class="col-3 text-end">
-										<button class="btn btn-sm btn-outline-danger" onclick="confirmRemove('@item.IdProduto')">EXCLUIR</button>
+										<button class="btn btn-sm btn-outline-danger" onclick="confirmRemove(@item.IdProduto, @item.Tamanho)">EXCLUIR</button>
 									</div>
 									<div class="card mb-4">
 										<div class="card-body">
@@ -51,11 +50,13 @@
 													<div class="d-flex align-items-center">
 														<form asp-action="DiminuirItem" asp-controller="Pedidoes" method="post" class="d-inline">
 															<input type="hidden" name="id" value="@item.IdProduto" />
+															<input type="hidden" name="tamanho" value="@item.Tamanho" />
 															<button type="submit" class="btn btn-outline-secondary btn-sm">-</button>
 														</form>
 														<div class="px-3 mx-2 border">@item.QuantidadeProd</div>
 														<form asp-action="AdicionarItem" asp-controller="Pedidoes" method="post" class="d-inline">
 															<input type="hidden" name="id" value="@item.IdProduto" />
+															<input type="hidden" name="tamanho" value="@item.Tamanho" />
 															<button type="submit" class="btn btn-outline-secondary btn-sm">+</button>
 														</form>
 													</div>
@@ -98,9 +99,9 @@
 							</div>
 						</div>
 					</div>
-
+					<div class="d-flex gap-1">
 					<a class="btn btn-dark w-100 py-2 mb-2" asp-controller="Pedidoes" asp-action="FinalizarCompra">Finalizar Compra</a>
-
+					</div>
 				</div>
 			</div>
 		}
@@ -112,7 +113,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-	function confirmRemove(id) {
+	function confirmRemove(id, tamanho) {
 		Swal.fire({
 			title: 'Tem certeza?',
 			text: "Deseja remover este item do carrinho?",
@@ -125,9 +126,9 @@
 		}).then((result) => {
 			if (result.isConfirmed) {
 				$.ajax({
-					url: '@Url.Action("RemoverItem", "Pedidoes")',  // ou "Carrinho" se seu controller for Carrinho
+					url: '@Url.Action("RemoverItem", "Pedidoes")',
 					type: 'POST',
-					data: { id: id },
+					data: { id: id, tamanho: tamanho },
 					success: function (response) {
 						if (response.success) {
 							location.reload();

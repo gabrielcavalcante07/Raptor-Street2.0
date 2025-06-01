@@ -36,7 +36,7 @@ namespace RaptorStreet.CarrinhoCompra
         {
             List<Produto> lista = _cookie.Existe(Key) ? Consultar() : new List<Produto>();
 
-            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto);
+            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto && a.Tamanho == item.Tamanho);
 
             if (itemLocalizado == null)
             {
@@ -54,7 +54,7 @@ namespace RaptorStreet.CarrinhoCompra
         public void Atualizar(Produto item)
         {
             var lista = Consultar();
-            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto);
+            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto && a.Tamanho == item.Tamanho);
 
             if (itemLocalizado != null)
             {
@@ -66,7 +66,7 @@ namespace RaptorStreet.CarrinhoCompra
         public void Remover(Produto item)
         {
             var lista = Consultar();
-            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto);
+            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto && a.Tamanho == item.Tamanho);
 
             if (itemLocalizado != null)
             {
@@ -78,7 +78,7 @@ namespace RaptorStreet.CarrinhoCompra
         public void DiminuirProduto(Produto item)
         {
             var lista = Consultar();
-            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto);
+            var itemLocalizado = lista.SingleOrDefault(a => a.IdProduto == item.IdProduto && a.Tamanho == item.Tamanho);
 
             if (itemLocalizado != null)
             {

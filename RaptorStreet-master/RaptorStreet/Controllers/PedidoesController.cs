@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreGeneratedDocument;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RaptorStreet.CarrinhoCompra;
 using RaptorStreet.Data;
 using RaptorStreet.Models;
+using RaptorStreet.Repositorio;
+using RaptorStreet.Repositorio.Interface;
 
 namespace RaptorStreet.Controllers
 {
@@ -16,17 +19,24 @@ namespace RaptorStreet.Controllers
     {
         private readonly RaptorDBContext _context;
         private CookieCarrinhoCompra _cookieCarrinhoCompra;
+        private readonly ILoginRepositorio _loginRepositorio;
 
-        public PedidoesController(RaptorDBContext context, CookieCarrinhoCompra cookieCarrinhoCompra)
+
+        public PedidoesController(RaptorDBContext context, CookieCarrinhoCompra cookieCarrinhoCompra, ILoginRepositorio loginRepositorio)
         {
             _context = context;
             _cookieCarrinhoCompra = cookieCarrinhoCompra;
+            _loginRepositorio = loginRepositorio;
         }
 
         // GET: Pedidoes
         public async Task<IActionResult> Index()
         {
-            var raptorDBContext = _context.Pedidos.Include(p => p.Clientes).Include(p => p.Enderecos).Include(p => p.Pagamentos);
+            var raptorDBContext = _context.Pedidos
+                .Include(p => p.Clientes)
+                .Include(p => p.Enderecos)
+                .Include(p => p.Pagamentos)
+                .Include(p => p.ItemPedidos);
             return View(await raptorDBContext.ToListAsync());
         }
 
@@ -165,14 +175,12 @@ namespace RaptorStreet.Controllers
         }
 
 
+        // ---------------------------- CARRINHO -------------------------------
 
-
-        //PAGINA CARRINHO
+        //PAGINA ADICIONAR ITEM
         [HttpGet]
         public IActionResult Carrinho()
         {
-            List<ItemPedido> produtosDoBanco = _context.ItemPedidos.ToList();
-            ViewBag.ProdutosDoBanco = produtosDoBanco;
             return View(_cookieCarrinhoCompra.Consultar());
         }
 
@@ -180,45 +188,38 @@ namespace RaptorStreet.Controllers
         [HttpPost]
         public IActionResult AdicionarItem(int id, int qtd, int tamanho)
         {
-            List<ItemPedido> produtosDoBanco = _context.ItemPedidos.ToList();
-            ViewBag.ProdutosDoBanco = produtosDoBanco;
-            var idCliente = HttpContext.Session.GetInt32("IdCliente");
+            Produto produto = _context.Produtos.Find(id);
 
-            if (idCliente == null)
+            if (tamanho <= 0)
             {
-                TempData["Login"] = "É necessário estar logado para adicionar ao Carrinho";
-                return RedirectToAction("Index", "Home");
-
+                TempData["Error"] = "Selecione um tamanho.";
+                return RedirectToAction("Produto", new { id });
             }
 
+            if (produto == null)
+            {
+                return View("NaoExisteItem");
+            }
             else
             {
-                ItemPedido itemPedido = _context.ItemPedidos.Find(id);
-
-                if (itemPedido == null)
+                var item = new Produto()
                 {
-                    return View("NaoExisteItem");
-                }
-                else
-                {
-                    var item = new Produto()
-                    {
-                        IdProduto = id,
-                        QuantidadeProd = itemPedido.Quantidade,
-                        ImagemProduto = itemPedido.ImagemProduto,
-                        NomeProduto = itemPedido.NomeProduto,
-                        PrecoProduto = itemPedido.PrecoUnitario,
-                    };
+                    IdProduto = id,
+                    QuantidadeProd = produto.QuantidadeProd,
+                    ImagemProduto = produto.ImagemProduto,
+                    NomeProduto = produto.NomeProduto,
+                    PrecoProduto = produto.PrecoProduto,
+                    Tamanho = tamanho,
+                };
 
-                    _cookieCarrinhoCompra.Cadastrar(item);
+                _cookieCarrinhoCompra.Cadastrar(item);
 
-                    return RedirectToAction("Carrinho");
-                }
+                return RedirectToAction("Carrinho");
             }
         }
         //PAGINA DIMINUIR ITEM
         [HttpPost]
-        public IActionResult DiminuirItem(int id)
+        public IActionResult DiminuirItem(int id, int tamanho)
         {
             Produto produto = _context.Produtos.Find(id);
 
@@ -232,6 +233,7 @@ namespace RaptorStreet.Controllers
                 _cookieCarrinhoCompra.DiminuirProduto(new Produto()
                 {
                     IdProduto = id,
+                    Tamanho = tamanho,
                     QuantidadeProd = 1 // Diminuindo a quantidade em 1
                 });
 
@@ -243,9 +245,9 @@ namespace RaptorStreet.Controllers
 
         //PAGINA REMOVER ITEM
         [HttpPost]
-        public IActionResult RemoverItem(int id)
+        public IActionResult RemoverItem(int id, int tamanho)
         {
-            _cookieCarrinhoCompra.Remover(new Produto() { IdProduto = id });
+            _cookieCarrinhoCompra.Remover(new Produto() { IdProduto = id, Tamanho = tamanho });
             return Json(new { success = true });
         }
 
@@ -253,6 +255,105 @@ namespace RaptorStreet.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        // ---------------------------- FINALIZAR COMPRA -------------------------------
+        [HttpGet]
+        public IActionResult FinalizarCompra()
+        {
+            //pega os dados do carrinho via cookie
+            var carrinho = _cookieCarrinhoCompra.Consultar();
+
+            //se o carrinho estiver vazio
+            if (!carrinho.Any())
+            {
+                TempData["Error"] = "O carrinho está vazio";
+                return RedirectToAction("Carrinho");
+            }
+
+            //consulta os dados do cliente
+            int? idCliente = HttpContext.Session.GetInt32("IdCliente");
+
+            if (idCliente == null)
+            {
+                TempData["Error"] = "Você precisa estar logado";
+                return RedirectToAction("Login", "Logins");
+            }
+
+            var cliente = _loginRepositorio.ObterCliente(idCliente.Value);
+
+            //prepara a view
+            var viewModel = new ResumoPedido
+            {
+                Cliente = cliente,
+                Produtos = carrinho,
+                Total = carrinho.Sum(p => p.PrecoProduto * p.QuantidadeProd)
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmarPedido(int FK_IdPag)
+        {
+            int? idCliente = HttpContext.Session.GetInt32("IdCliente");
+            if (idCliente == null)
+            {
+                TempData["Error"] = "Você precisa estar logado";
+                return RedirectToAction("Login", "Logins");
+            }
+
+            var produtosCarrinho = _cookieCarrinhoCompra.Consultar();
+            if (!produtosCarrinho.Any())
+            {
+                TempData["Error"] = "O carrinho está vazio";
+                return RedirectToAction("Carrinho");
+            }
+
+            //pegando os dados do endereco, pagamento e marca
+            var enderecoId = _context.ClienteEnderecos
+            .Where(e => e.Fk_IdCliente == idCliente.Value)
+            .Select(e => e.IdEnd)
+            .FirstOrDefault();
+            
+/*            var MarcaId = _context.ItemPedidos
+            .Include(ip => ip.Produtos)
+            .ThenInclude(p => p.MarcaProdutos)
+            .Where(ip => ip.IdProdutoPedido == idCliente.Value)
+            .Select(ip => ip.Produtos.MarcaProdutos.NomeMarca)
+            .FirstOrDefault();*/
+
+            var pagamentoId = 1; // exemplo fixo ou obtido via form
+
+            var pedido = new Pedido
+            {
+                Fk_IdCliente = idCliente.Value,
+                Fk_IdEndereco = enderecoId,
+                Fk_IdPag = pagamentoId,
+                dataPed = DateTime.Now,
+                totalPedido = produtosCarrinho.Sum(p => p.PrecoProduto * p.QuantidadeProd),
+                ItemPedidos = new List<ItemPedido>()
+            };
+
+            foreach (var item in produtosCarrinho)
+            {
+                pedido.ItemPedidos.Add(new ItemPedido
+                {
+                    NomeProduto = item.NomeProduto,
+                    PrecoUnitario = item.PrecoProduto,
+                    QuantidadeItem = item.QuantidadeProd,
+                    TamanhoItem = item.Tamanho,
+                    ImagemProduto = item.ImagemProduto,
+                    Fk_IdProduto = item.IdProduto,
+                });
+            }
+
+            _context.Pedidos.Add(pedido);
+            _context.SaveChanges();
+
+            _cookieCarrinhoCompra.RemoverTodos(); // limpa o carrinho
+
+            return RedirectToAction("Pedidoes");
         }
 
     }

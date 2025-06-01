@@ -7,7 +7,8 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Raptor Street</title>
+	<title>Raptor Street</title>
+	<link rel="shortcut icon" href="~/assets/img/logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/RaptorStreet.styles.css" asp-append-version="true" />
@@ -18,8 +19,7 @@
 	<header>
 		@if (ViewBag.ExibirNavbar != false)
 		{
-			<nav>
-			<div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
+			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
 				<div class="container-fluid justify-content-between mx-4">
 					<div class="logo">
 						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo-combination.copy.png" /></a>

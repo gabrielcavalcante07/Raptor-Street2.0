@@ -6,9 +6,6 @@ namespace RaptorStreet.Models
     public class Pedido
     {
         public int IdPedido { get; set; }
-        public string NomeProduto { get; set; }
-        public string PrecoProduto { get; set; }
-        public string ImagemProduto { get; set; }
         public DateTime dataPed { get; set; }
         public decimal totalPedido {get; set;}
         public int Fk_IdEndereco { get; set; }

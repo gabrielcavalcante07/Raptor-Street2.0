@@ -29,6 +29,8 @@ namespace RaptorStreet.Models
         [DisplayName("Imagem do produto")]
         public string? ImagemProduto { get; set; }
 
+        public int? Tamanho { get; set; }
+
         [DisplayName("Marca")]
         public int Fk_IdMarca { get; set; }
         public MarcaProduto MarcaProdutos { get; set; }

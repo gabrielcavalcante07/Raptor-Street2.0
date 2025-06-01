@@ -1,59 +1,60 @@
 ﻿@model IEnumerable<RaptorStreet.Models.Pedido>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="container text-white">
 
-<h1>Index</h1>
+	<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.dataPed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.totalPedido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Enderecos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pagamentos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Clientes)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.dataPed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.totalPedido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Enderecos.IdEndereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pagamentos.IdPag)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Clientes.IdCliente)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPedido">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPedido">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPedido">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+	<table class="table table-dark">
+		<thead>
+			<tr>
+				<th>Cliente</th>
+				<th>Pedido</th>
+				<th>Endereço</th>
+				<th>Forma de Pagamento</th>
+				<th>Total</th>
+				<th>Data do Pedido</th>
+				<th>Ações</th>
+			<tr />
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr class="bg-white text-center">
+					<td>
+						@item.Clientes.NomeCliente
+					</td>
+
+					<td>
+						@foreach (var produto in item.ItemPedidos)
+						{
+							<div>
+								<strong>@produto.NomeProduto</strong>
+							</div>
+						}
+					</td>
+
+
+					<td>
+						@item.Enderecos.Logradouro, Nº @item.Enderecos.NumeroEndereco, @item.Enderecos.Bairro - @item.Enderecos.Cidade/@item.Enderecos.Estado
+					</td>
+
+					<td>
+					@item.Pagamentos.MetodoPag
+					</td>
+
+					<td>
+						@item.dataPed
+					</td>
+
+					<td>
+					@item.totalPedido
+					</td>
+
+					<td>
+						<a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.IdPedido">Details</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

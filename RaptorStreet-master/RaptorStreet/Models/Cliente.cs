@@ -13,7 +13,7 @@ namespace RaptorStreet.Models
         public string NomeCliente { get; set; }
 
         [DisplayName("Data de Nascimento")]
-        public DateOnly DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         [DisplayName("CPF")]
         public string CPF { get; set; }
