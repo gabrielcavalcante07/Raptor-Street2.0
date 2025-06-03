@@ -7,6 +7,7 @@ using AspNetCoreGeneratedDocument;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using RaptorStreet.CarrinhoCompra;
 using RaptorStreet.Data;
 using RaptorStreet.Models;
@@ -32,12 +33,20 @@ namespace RaptorStreet.Controllers
         // GET: Pedidoes
         public async Task<IActionResult> Index()
         {
-            var raptorDBContext = _context.Pedidos
+            int? idClienteLogado = HttpContext.Session.GetInt32("IdCliente");
+
+            if (idClienteLogado == null)
+                return RedirectToAction("Login", "Conta"); // ou outro tratamento
+
+            var pedidosDoUsuario = _context.Pedidos
                 .Include(p => p.Clientes)
+                .Include(p => p.ItemPedidos)
                 .Include(p => p.Enderecos)
                 .Include(p => p.Pagamentos)
-                .Include(p => p.ItemPedidos);
-            return View(await raptorDBContext.ToListAsync());
+                .Where(p => p.Clientes.IdCliente == idClienteLogado)
+                .ToList();
+
+            return View(pedidosDoUsuario);
         }
 
         // GET: Pedidoes/Details/5
@@ -323,13 +332,13 @@ namespace RaptorStreet.Controllers
             .Select(ip => ip.Produtos.MarcaProdutos.NomeMarca)
             .FirstOrDefault();*/
 
-            var pagamentoId = 1; // exemplo fixo ou obtido via form
+            var Fk_IdPag = FK_IdPag; // exemplo fixo ou obtido via form
 
             var pedido = new Pedido
             {
                 Fk_IdCliente = idCliente.Value,
                 Fk_IdEndereco = enderecoId,
-                Fk_IdPag = pagamentoId,
+                Fk_IdPag = FK_IdPag,
                 dataPed = DateTime.Now,
                 totalPedido = produtosCarrinho.Sum(p => p.PrecoProduto * p.QuantidadeProd),
                 ItemPedidos = new List<ItemPedido>()
@@ -344,6 +353,7 @@ namespace RaptorStreet.Controllers
                     QuantidadeItem = item.QuantidadeProd,
                     TamanhoItem = item.Tamanho,
                     ImagemProduto = item.ImagemProduto,
+/*                  MarcaProduto = item.MarcaProdutos,*/
                     Fk_IdProduto = item.IdProduto,
                 });
             }
@@ -353,8 +363,68 @@ namespace RaptorStreet.Controllers
 
             _cookieCarrinhoCompra.RemoverTodos(); // limpa o carrinho
 
-            return RedirectToAction("Pedidoes");
+            return RedirectToAction("Index", "Pedidoes");
         }
 
+
+        // ---------------------------- Add Endereço -------------------------------
+        [HttpPost]
+        public async Task<IActionResult> AdicionarEndereco(int idCliente, string CEP, int NumeroEndereco, string Logradouro, string Complemento, string Bairro, string Cidade, string Estado)
+        {
+            // Cria o novo endereço
+            var novoEndereco = new Endereco
+            {
+                CEP = CEP,
+                NumeroEndereco = NumeroEndereco,
+                Logradouro = Logradouro,
+                Complemento = Complemento,
+                Bairro = Bairro,
+                Cidade = Cidade,
+                Estado = Estado
+            };
+
+            // Adiciona o novo endereço ao banco de dados
+            _context.Enderecos.Add(novoEndereco);
+            await _context.SaveChangesAsync();
+
+            // Cria a ligação entre Cliente e Endereço (tabela ClienteEndereco)
+            var clienteEndereco = new ClienteEndereco
+            {
+                IdEnd = novoEndereco.IdEndereco, // Chave primária do Endereço
+                Fk_IdCliente = idCliente // ID do cliente logado
+            };
+
+            // Adiciona a relação Cliente-Endereco
+            _context.ClienteEnderecos.Add(clienteEndereco);
+            await _context.SaveChangesAsync();
+
+            TempData["Msg"] = "Endereço adicionado com sucesso!";
+            return RedirectToAction("FinalizarCompra");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletarEndereco(int idEndereco, int idCliente)
+        {
+            // Remove a relação ClienteEndereco primeiro
+            var clienteEndereco = await _context.ClienteEnderecos
+                .FirstOrDefaultAsync(ce => ce.IdEnd == idEndereco && ce.Fk_IdCliente == idCliente);
+
+            if (clienteEndereco != null)
+            {
+                _context.ClienteEnderecos.Remove(clienteEndereco);
+            }
+
+            // Agora remove o endereço
+            var endereco = await _context.Enderecos.FindAsync(idEndereco);
+            if (endereco != null)
+            {
+                _context.Enderecos.Remove(endereco);
+            }
+
+            await _context.SaveChangesAsync();
+
+            TempData["Msg"] = "Endereço removido com sucesso!";
+            return RedirectToAction("Painel");
+        }
     }
 }

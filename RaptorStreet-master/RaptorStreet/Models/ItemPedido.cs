@@ -11,6 +11,7 @@ namespace RaptorStreet.Models
         public int QuantidadeItem { get; set; }
         public int? TamanhoItem { get; set; }
         public string? ImagemProduto { get; set; }
+        public string MarcaProduto { get; set; }
         public int Fk_IdPedido { get; set; }
         public int Fk_IdProduto { get; set; }
         public Pedido Pedidos { get; set;  }

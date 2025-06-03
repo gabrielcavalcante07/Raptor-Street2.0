@@ -66,6 +66,7 @@ CREATE TABLE tbProdutos (
     Descricao VARCHAR(500) NOT NULL,
     Fk_IdMarca INT NOT NULL,
     QuantidadeProd int,
+    Tamanho int,
     ImagemProduto Varchar(300),
     FOREIGN KEY (Fk_IdMarca) REFERENCES tbMarcaProduto(IdMarca) ON DELETE CASCADE
 );
@@ -87,12 +88,13 @@ CREATE TABLE tbPagamentos (
     StatusPag ENUM('Pendente','Pago','Não Realizado') NOT NULL,
     MetodoPag VARCHAR(50) NOT NULL
 );
+INSERT INTO `dbraptor`.`tbpagamentos` (`MetodoPag`) VALUES ('Cartão');
+INSERT INTO `dbraptor`.`tbpagamentos` (`MetodoPag`) VALUES ('Pix');
+INSERT INTO `dbraptor`.`tbpagamentos` (`MetodoPag`) VALUES ('Boleto');
 
 -- Tabela de Pedidos
 CREATE TABLE tbPedido (
 	IdPedido INT PRIMARY KEY AUTO_INCREMENT,
-	NomeProduto VARCHAR(100) NOT NULL,
-    PrecoProduto DECIMAL(10,2) NOT NULL,
     ImagemProduto Varchar(300),
     dataPed DATETIME NOT NULL,
     Fk_IdEndereco INT NOT NULL,
@@ -108,9 +110,12 @@ CREATE TABLE tbPedido (
 -- Itens do Pedido
 CREATE TABLE tbItemPedido (
     IdProdutoPedido INT PRIMARY KEY AUTO_INCREMENT,
+	ImagemProduto Varchar(300), 
+    NomeProduto VARCHAR(100) NOT NULL,
     PrecoUnitario DECIMAL(10,2) NOT NULL,
 	TamanhoItem INT,
 	QuantidadeItem INT,
+    MarcaProduto varchar(10),
     Fk_IdPedido INT NOT NULL,
     Fk_IdProduto INT NOT NULL,
     FOREIGN KEY (Fk_IdPedido) REFERENCES tbPedido(IdPedido) ON DELETE CASCADE,

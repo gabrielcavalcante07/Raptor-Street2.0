@@ -7,11 +7,33 @@
     <h4>Dados do Cliente</h4>
     <p><strong>Nome:</strong> @Model.Cliente.NomeCliente</p>
     <p><strong>Email:</strong> @Model.Cliente.EmailCliente</p>
+    <div class="painel-card">
+        <h3>Adicionar Novo Endereço</h3>
+
+
+
+        <form asp-action="AdicionarEndereco" method="post" class="painel-form">
+            <input type="hidden" name="idCliente" value="@Model.Cliente.IdCliente" />
+
+            <div class="form-grid">
+                <input type="text" name="CEP" placeholder="CEP" required />
+                <input type="text" name="Logradouro" placeholder="Logradouro" required />
+                <input type="number" name="NumeroEndereco" placeholder="Número" required />
+                <input type="text" name="Complemento" placeholder="Complemento" />
+                <input type="text" name="Bairro" placeholder="Bairro" required />
+                <input type="text" name="Cidade" placeholder="Cidade" required />
+                <input type="text" name="Estado" placeholder="Estado" required />
+            </div>
+            <button type="submit" class="btn-adicionar">Adicionar Endereço</button>
+        </form>
+    </div>
+
     <p><strong>Endereço:</strong></p>
-    <ul>
+    <select class="form-select" required>
         @foreach (var enderecoCliente in Model.Cliente.ClienteEnderecos)
         {
-            <li>
+            <option disabled selected hidden value="">@enderecoCliente.Enderecos.Logradouro</option>
+            <option value="@enderecoCliente.IdEnd">
                 @enderecoCliente.Enderecos.Logradouro, nº @enderecoCliente.Enderecos.NumeroEndereco,
                 Bairro: @enderecoCliente.Enderecos.Bairro,
                 @enderecoCliente.Enderecos.Cidade - @enderecoCliente.Enderecos.Estado, CEP: @enderecoCliente.Enderecos.CEP
@@ -19,9 +41,9 @@
                 {
                     <text>, Complemento: @enderecoCliente.Enderecos.Complemento</text>
                 }
-            </li>
+            </option>
         }
-    </ul>
+     </select>
 
 
     <h4>Produtos no Carrinho</h4>
@@ -46,7 +68,7 @@
                     <td>@item.QuantidadeProd</td>
                     <td>@item.PrecoProduto.ToString("C")</td>
                     @* <td>@(item.PrecoProduto * item.QuantidadeProd).ToString("C")</td> *@            
-                </tr>
+                        </tr>
             }
         </tbody>
     </table>
@@ -55,11 +77,11 @@
     <div class="d-flealign-content-xl-around justify-content-start">
         <form method="post" asp-action="ConfirmarPedido" class="d-flex flex-column w-25 gap-2">
             <select name="Fk_IdPag" class="form-select" required>
-                    <option disabled selected hidden value="">Escolha a forma de pagamento</option>
-                    <option value="1">Cartão</option>
-                    <option value="2">Pix</option>
-                    <option value="3">Boleto</option>
-                </select>
+                <option disabled selected hidden value="">Escolha a forma de pagamento</option>
+                <option value="1">Cartão</option>
+                <option value="2">Pix</option>
+                <option value="3">Boleto</option>
+            </select>
 
             <button type="submit" class="btn btn-success w-100">Confirmar Pedido</button>
         </form>
