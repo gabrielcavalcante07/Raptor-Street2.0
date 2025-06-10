@@ -133,60 +133,73 @@ UPDATE `dbraptor`.`tbprodutos` SET `QuantidadeProd` = '300' WHERE (`IdProduto` =
 UPDATE `dbraptor`.`tbprodutos` SET `QuantidadeProd` = '300' WHERE (`IdProduto` = '9');
 UPDATE `dbraptor`.`tbprodutos` SET `QuantidadeProd` = '300' WHERE (`IdProduto` = '10');
 
+-- Marcas
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Nike');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Adidas');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Puma');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Mizuno');
 INSERT INTO `tbmarcaproduto` (`NomeMarca`) VALUES ('Vans');
 
+-- Produtos
 INSERT INTO tbProdutos (ImagemProduto, NomeProduto, PrecoProduto, Descricao, Fk_IdMarca, QuantidadeProd) VALUES
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADI2000.jpeg', 
-'Adidas Adi2000', 499.99, 'Tênis retrô com estilo dos anos 2000.', 2, 10),
+-- Adidas
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADI2000.png', 'Adidas ADI2000', 649.90, 'Tênis com design retrô e visual robusto, ideal para quem busca estilo e conforto no dia a dia.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADIFOM.png', 'Adidas Adifom', 719.90, 'Modelo futurista da Adidas com cabedal em espuma moldada, oferecendo leveza e impacto visual único.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-CAMPUS-00s-PV.png', 'Adidas Campus 00s PV', 579.90, 'Edição especial do clássico Campus com detalhes modernos e materiais premium.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-CAMPUS00s.png', 'Adidas Campus 00s', 549.90, 'Releitura dos anos 2000 com design robusto e solado reforçado, mantendo o conforto clássico da linha.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-FORUM.png', 'Adidas Forum', 599.90, 'Tênis icônico da Adidas, mistura perfeita entre herança do basquete e estilo urbano.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-JAPAN.png', 'Adidas Japan', 499.90, 'Silhueta inspirada no estilo japonês, com linhas limpas e acabamento refinado.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-OG.png', 'Adidas OG', 519.90, 'Modelo clássico original com toques modernos e materiais duráveis.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAOG.png', 'Adidas Samba OG', 449.90, 'Tênis atemporal da Adidas com visual esportivo retrô e conforto excepcional.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAXLG.png', 'Adidas Samba XLG', 479.90, 'Versão modernizada do Samba com entressola elevada e toque urbano.', 2, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SUPERSTAR.png', 'Adidas Superstar', 599.90, 'Ícone global com biqueira shell-toe e visual inconfundível, ideal para todos os estilos.', 2, 20),
 
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-ADIFOM(2).webp', 
-'Adidas Adifom', 599.99, 'Tênis futurista com espuma moldada.', 2, 10),
+-- Mizuno
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-CONTENDER-AZL.png', 'Mizuno Contender Azul', 489.90, 'Modelo leve e versátil com visual retrô running, ideal para uso casual.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-CONTENDER.png', 'Mizuno Contender', 459.90, 'Tênis casual com inspiração nos modelos clássicos de corrida da Mizuno.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MUJIN.png', 'Mizuno Mujin', 749.90, 'Tênis robusto de trilha, com tração reforçada e amortecimento para aventuras extremas.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MXR.png', 'Mizuno MXR', 699.90, 'Design esportivo com tecnologias de amortecimento avançadas para o máximo desempenho.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-PROPHECY-DOU.png', 'Mizuno Prophecy Dourado', 1199.90, 'Edição sofisticada do Prophecy com visual marcante e sistema Infinity Wave.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-PROPHECYLS-CNZ.png', 'Mizuno Prophecy LS Cinza', 1149.90, 'Tênis premium com design moderno e construção resistente para longos treinos.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-PROPHECYLS-VRD.png', 'Mizuno Prophecy LS Verde', 1149.90, 'Visual arrojado com cabedal respirável e amortecimento de alto nível.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-PROPHECYLS.png', 'Mizuno Prophecy LS', 1129.90, 'Modelo de alta performance com tecnologia Wave para máximo conforto e estabilidade.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER-YOKAI.png', 'Mizuno Wave Rider Yokai', 899.90, 'Edição especial inspirada em lendas japonesas, combinando leveza e velocidade.', 4, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER.png', 'Mizuno Wave Rider', 869.90, 'Tênis versátil para corrida com ótimo suporte e responsividade.', 4, 20),
 
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-CAMPUS00s.webp', 
-'Adidas Campus 00s', 549.99, 'Clássico retrabalhado com estética dos anos 2000.', 2, 10),
+-- Nike
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIR-ZOOM-SPIRIDON.png', 'Nike Air Zoom Spiridon', 749.90, 'Design inovador com amortecimento responsivo e estilo esportivo.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIRFORCE1.png', 'Nike Air Force 1', 699.90, 'Ícone do streetwear com silhueta clássica e durabilidade incomparável.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-DN-RS.png', 'Nike Downshifter RS', 499.90, 'Tênis com foco em leveza e suporte, ideal para corridas leves e treinos.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-DN-VRD.png', 'Nike Downshifter Verde', 499.90, 'Modelo casual com toque esportivo e cores vibrantes.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-DN.png', 'Nike Downshifter', 489.90, 'Tênis versátil com cabedal respirável e ótimo custo-benefício.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-DN8.png', 'Nike Downshifter 8', 519.90, 'Atualização do modelo clássico com amortecimento melhorado.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-SHOX4.png', 'Nike Shox 4', 899.90, 'Tênis com tecnologia Shox de molas que oferece impulso e estilo futurista.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-TN.png', 'Nike TN', 1149.90, 'Silhueta ousada e marcante, com amortecimento Tuned Air.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-UPTEMPO.png', 'Nike Uptempo', 1129.90, 'Tênis imponente com visual anos 90 e máximo conforto.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-VOMERO.png', 'Nike Vomero', 999.90, 'Modelo de alta performance com foco em amortecimento para corridas longas.', 1, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/Nike-Air-Max-Tailwind-IV.png', 'Nike Air Max Tailwind IV', 949.90, 'Modelo com cápsulas de ar visíveis e estética agressiva dos anos 2000.', 1, 20),
 
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-FORUM.webp', 
-'Adidas Forum', 599.99, 'Tênis robusto inspirado no basquete.', 2, 10),
+-- Puma
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA EXTOS.png', 'Puma Extos', 499.90, 'Tênis de visual urbano com construção leve e acabamento moderno.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA-180.png', 'Puma 180', 489.90, 'Design robusto com influência dos anos 90 e toque contemporâneo.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA-INHALE.png', 'Puma Inhale', 599.90, 'Modelo com linhas futuristas e ótima respirabilidade para uso diário.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA-LAFRANCE.png', 'Puma La France', 639.90, 'Tênis com estilo europeu e detalhes refinados no acabamento.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA-RSX.png', 'Puma RS-X', 679.90, 'Silhueta chunky com entressola confortável e visual marcante.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA-SPEEDCAT.png', 'Puma Speedcat', 469.90, 'Modelo inspirado nas pistas de corrida com perfil baixo e ajuste preciso.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA-SUEDE.png', 'Puma Suede', 449.90, 'Clássico da marca com cabedal de camurça e visual atemporal.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA-VERITANA.png', 'Puma Veritana', 519.90, 'Tênis moderno com design clean e solado robusto para o dia a dia.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA2.png', 'Puma Modelo 2', 489.90, 'Design casual com cabedal flexível e ótimo conforto.', 3, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/PUMA3LD.png', 'Puma 3LD', 499.90, 'Tênis estiloso com mix de materiais e detalhes exclusivos.', 3, 20),
 
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-JAPAN.webp', 
-'Adidas Japan', 499.99, 'Modelo inspirado nas Olimpíadas de Tóquio 1964.', 2, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-OG.webp', 
-'Adidas OG', 449.99, 'Versão original de um clássico da Adidas.', 2, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAOG.webp', 
-'Adidas Samba OG', 479.99, 'Ícone da moda urbana e esportiva.', 2, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SAMBAXLG.webp', 
-'Adidas Samba XLG', 499.99, 'Versão moderna com silhueta ampliada.', 2, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/ADIDAS-SUPERSTAR(2).webp', 
-'Adidas Superstar', 529.99, 'Famoso pelo bico de concha e estilo icônico.', 2, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-CONTENDER.webp', 
-'Mizuno Contender', 459.99, 'Tênis retrô com conforto e estilo casual.', 4, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MUJIN(1).webp', 
-'Mizuno Mujin', 699.99, 'Tênis robusto para trilhas e terrenos difíceis.', 4, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-MXR.webp', 
-'Mizuno MXR', 499.99, 'Versátil e confortável para diversas atividades.', 4, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-PROPHECYLS(2).webp', 
-'Mizuno Prophecy', 899.99, 'Amortecimento com placas e design marcante.', 4, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER.webp', 
-'Mizuno Wave Rider', 649.99, 'Ideal para corrida com amortecimento eficiente.', 4, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/MIZUNO-WAVERIDER-YOKAI(2).webp', 
-'Mizuno Wave Rider Yokai', 679.99, 'Edição especial inspirada na mitologia japonesa.', 4, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIR-ZOOM-SPIRIDON.webp', 
-'Nike Air Zoom Spiridon', 699.99, 'Tênis de corrida com amortecimento responsivo.', 1, 10),
-
-('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/NIKE-AIRFORCE1(2).webp', 
-'Nike Air Force 1', 599.99, 'Clássico versátil e atemporal da Nike.', 1, 10);
+-- Vans
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-HYLANE.png', 'Vans Hylane', 469.90, 'Tênis de skate com solado vulcanizado e design minimalista.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-KNU.png', 'Vans Knu', 499.90, 'Modelo robusto com detalhes retrô e identidade forte.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-MID.png', 'Vans Mid', 459.90, 'Versão cano médio do clássico Vans, oferecendo suporte e estilo.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-OLD.png', 'Vans Old Skool', 429.90, 'Tênis clássico da Vans com listra lateral icônica e sola waffle.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-PLATFORM.png', 'Vans Platform', 479.90, 'Silhueta elevada com base reforçada e visual moderno.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-SK8.png', 'Vans Sk8-Hi', 499.90, 'Tênis de cano alto ideal para skate e estilo urbano.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-SKOOL.png', 'Vans Skool', 429.90, 'Versão casual com design inspirado no Old Skool e conforto garantido.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-ULTRARANGE.png', 'Vans UltraRange', 519.90, 'Tênis leve e resistente para aventuras urbanas e caminhadas leves.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANS-Ua.png', 'Vans UA', 449.90, 'Modelo versátil da Vans com design moderno e ótimo ajuste.', 5, 20),
+('https://raw.githubusercontent.com/gabrielcavalcante07/tenisRaptor/refs/heads/main/VANSLD.png', 'Vans LD', 439.90, 'Tênis casual com visual limpo e solado vulcanizado.', 5, 20);
+	
