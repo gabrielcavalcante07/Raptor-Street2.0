@@ -165,6 +165,68 @@ namespace RaptorStreet.Controllers
             return _context.ClienteFavs.Any(e => e.IdClienteFav == id);
         }
 
+        [HttpPost("Favoritar")]
+        public IActionResult Favoritar(int idProd)
+        {
+            int? idCliente = HttpContext.Session.GetInt32("IdCliente");
+
+            if (!idCliente.HasValue)
+            {
+                return Json(new { success = false, message = "Usuário não autenticado." });
+            }
+
+            var favorito = _context.ClienteFavs
+                .FirstOrDefault(f => f.IdCliente == idCliente.Value && f.IdProduto == idProd);
+
+            bool estaFavoritado;
+
+            if (favorito != null)
+            {
+                // Alterna entre ativado e desativado
+                favorito.ativado = !favorito.ativado;
+                estaFavoritado = favorito.ativado;
+                _context.ClienteFavs.Update(favorito);
+            }
+            else
+            {
+                var novoFavorito = new ClienteFav
+                {
+                    IdCliente = idCliente.Value,
+                    IdProduto = idProd,
+                    ativado = true
+                };
+
+                _context.ClienteFavs.Add(novoFavorito);
+                estaFavoritado = true;
+            }
+
+            _context.SaveChanges();
+
+            return Json(new { success = true, estaFavoritado });
+        }
+
+
+        [HttpGet("Favoritar")]
+        public IActionResult Favoritar()
+        {
+            var idCliente = HttpContext.Session.GetInt32("IdCliente");
+
+            if (idCliente == null)
+            {
+                TempData["Login"] = "Primeiro faça o login";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var clienteFavoritos = _context.ClienteFavs
+                .Include(cf => cf.Produtos)
+                .Where(cf => cf.IdCliente == idCliente.Value && cf.ativado == true)
+                .ToList();
+
+            ViewBag.ClienteFavoritos = clienteFavoritos;
+
+            return View(clienteFavoritos);
+        }
+
 
     }
 }

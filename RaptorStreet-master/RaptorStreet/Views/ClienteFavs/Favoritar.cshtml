@@ -1,0 +1,48 @@
+﻿@model List<ClienteFav>
+@{
+    ViewData["Title"] = "Favoritos";
+    var favoritos = ViewBag.ClienteFavs as List<ClienteFav>;
+}
+<div class="container">
+
+<h2>Meus Produtos Favoritos</h2>
+
+<div class="produtos-favoritos">
+    @foreach (var fav in Model)
+    {
+        <div class="card-produto">
+            <img src="@fav.Produtos.ImagemProduto" alt="Imagem do Produto" class="imagem-produto" />
+            <div class="detalhes-produto">
+                <strong>@fav.Produtos.NomeProduto</strong>
+                <p>R$ @fav.Produtos.PrecoProduto.ToString("N2")</p>
+                <form method="post" asp-controller="ClienteFavs" asp-action="Favoritar">
+                    <input type="hidden" name="idProd" value="@fav.IdProduto" />
+                    <button type="submit" class="btn-remover">Desfavoritar</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+</div>
+
+<script>
+    document.querySelectorAll('.btn-desfavoritar').forEach(button => {
+        button.addEventListener('click', function () {
+            const idProd = this.getAttribute('data-id');
+
+            fetch('/ClienteFavs/Favoritar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProd: parseInt(idProd) })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>

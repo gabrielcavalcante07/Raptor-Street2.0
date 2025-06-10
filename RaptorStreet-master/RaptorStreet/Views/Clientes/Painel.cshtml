@@ -1,9 +1,10 @@
 ﻿@model RaptorStreet.Models.Cliente
 @{
+    ViewData["Title"] = "Painel do Cliente";
     var enderecos = ViewBag.Enderecos as List<RaptorStreet.Models.Endereco>;
 }
 
-<link rel="stylesheet" href="~/css/painel-cliente.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <div class="painel-container" style="padding-top:100px;">
     <aside class="sidebar">
@@ -13,7 +14,7 @@
             <li>Conta</li>
             <li>Status dos Pedidos</li>
             <li>Favoritos</li>
-            <a asp-controller="pedidoes" asp-action="index" >Histórico de compras</a>
+            <li>Histórico de compras</li>
             <li>Ajuda</li>
         </ul>
         <button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
@@ -32,7 +33,7 @@
         <!-- Seção de edição dos dados -->
         <div class="painel-card">
             <h3>Editar Dados do Cliente</h3>
-            <form asp-action="EditarCliente" method="post" class="painel-form">
+            <form asp-action="EditarCliente" method="post" class="painel-form" onsubmit="limparFormatacao()">
                 <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
 
                 <div class="form-grid">
@@ -42,7 +43,12 @@
                     </div>
                     <div>
                         <label>Senha</label>
-                        <input type="password" name="SenhaCliente" value="@Model.SenhaCliente" />
+                        <div class="input-senha-wrapper">
+                            <input type="password" name="SenhaCliente" id="editSenhaInput" value="@Model.SenhaCliente" />
+                            <button type="button" id="senhaToggleEdit" class="senha-toggle-btn" onclick="toggleSenha('editSenhaInput', 'senhaToggleIconEdit')">
+                                <i id="senhaToggleIconEdit" class="fa-solid fa-eye-slash"></i>
+                            </button>
+                        </div>
                     </div>
                     <div>
                         <label>Email</label>
@@ -54,11 +60,11 @@
                     </div>
                     <div>
                         <label>CPF</label>
-                        <input name="CPF" value="@Model.CPF"/>
+                        <input name="CPF" value="@Model.CPF" oninput="formatarCPF(this)" maxlength="14" />
                     </div>
                     <div>
                         <label>Telefone</label>
-                        <input name="Telefone" value="@Model.Telefone" />
+                        <input name="Telefone" value="@Model.Telefone" oninput="formatarTelefone(this)" maxlength="15" />
                     </div>
                 </div>
                 <button type="submit" class="btn-salvar">Salvar Alterações</button>
@@ -104,7 +110,7 @@
                 <input type="hidden" name="idCliente" value="@Model.IdCliente" />
 
                 <div class="form-grid">
-                    <input type="text" name="CEP" placeholder="CEP" required />
+                    <input type="text" name="CEP" placeholder="CEP" required maxlength="9" oninput="formatarCEP(this)" />
                     <input type="text" name="Logradouro" placeholder="Logradouro" required />
                     <input type="number" name="NumeroEndereco" placeholder="Número" required />
                     <input type="text" name="Complemento" placeholder="Complemento" />

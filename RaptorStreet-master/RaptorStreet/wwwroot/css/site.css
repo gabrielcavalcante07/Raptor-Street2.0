@@ -966,3 +966,80 @@ input {
     .btn-voltar:hover {
         background-color: #a30000;
     }
+
+
+
+.senha-toggle-btn {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}
+
+    .senha-toggle-btn:hover {
+        background-color: #f0f0f0;
+    }
+
+    .senha-toggle-btn i {
+        font-size: 1rem;
+    }
+
+/*mensagem flutuante*/
+.temp-message {
+    position: absolute;
+    top: 155px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(220 53 69);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/*favoritos*/
+.produtos-favoritos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card-produto {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    width: 280px;
+}
+
+.imagem-produto {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.detalhes-produto {
+    margin-top: 10px;
+}
+
+.btn-remover {
+    margin-top: 10px;
+    background-color: crimson;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+}

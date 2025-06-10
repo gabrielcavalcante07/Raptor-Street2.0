@@ -1,47 +1,50 @@
 ﻿@{
+	ViewData["Title"] = "Home Page";
 	var mensagem = TempData["Login"] as string;
 }
 
-@model IEnumerable<RaptorStreet.Models.ItemPedido>
+@model IEnumerable<RaptorStreet.Models.Produto>
 
 <body>
 	<section style="margin-top: 12vh;">
 		@if (!string.IsNullOrEmpty(mensagem))
 		{
 			// Exibe a mensagem na view
-			<div class="alert alert-info">@mensagem</div>
+			<div id="loginMessage" class="temp-message">
+				@mensagem
+			</div>
 		}
 		<div class="carrousel">
 			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="hover">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="~/assets/banners/banner-parcelas.png" class="d-block w-100 alt="..." onclick="location.href='/home/Produto/1'" />
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="~/assets/banners/banner-parcelas.png" class="d-block w-100 alt="..." onclick="location.href='/home/Produto/1'" />
+					</div>
+					<div class="carousel-item">
+						<img src="~/assets/banners/banner-jordan5.png" class="d-block w-100" alt="..." />
+					</div>
+					<div class="carousel-item">
+						<img src="~/assets/tenis/tenis-shadow.png" class="d-block w-100" alt="..." />
+					</div>
 				</div>
-				<div class="carousel-item">
-					<img src="~/assets/banners/banner-jordan5.png" class="d-block w-100" alt="..." />
-				</div>
-				<div class="carousel-item">
-					<img src="~/assets/tenis/tenis-shadow.png" class="d-block w-100" alt="..." />
-				</div>
-			</div>
 
-			<!-- Indicadores de navegação -->
-			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="2" aria-label="Slide 3"></button>
-			</div>
+				<!-- Indicadores de navegação -->
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="1" aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				</div>
 
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
 		</div>
-	</div>
 
 		<div class="banner-frete d-flex justify-content-center justify-content-evenly align-items-center">
 			<div class="d-flex align-items-center gap-2 img-fluid">
@@ -65,40 +68,83 @@
 		</div>
 	</section>
 
-	@*
-	<h2>
-		<a asp-controller="Home" asp-action="TelaVans">VANS</a>
-	</h2>
-	*@
-
 	<section class="col-md-9 container">
 		<div class="product-grid">
 			@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
 			{
-				<div class="product-card card h-100">
+				<div class="product-card card h-100" data-id="@produto.IdProduto">
 					<div class="product-image-container">
 						<img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
 							 alt="@produto.NomeProduto"
 							 class="product-image card-img-top" style="height: 200px; object-fit: cover;"
 							 onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
+						@{
+							var favoritosIds = ViewBag.FavoritosIds as List<int> ?? new List<int>();
+							bool estaFavoritado = favoritosIds.Contains(produto.IdProduto);
+							string cor = estaFavoritado ? "red" : "black";
+							string estado = estaFavoritado ? "true" : "false";
+						}
+						<label class="fav-button"
+							   style="cursor:pointer; color:@cor;"
+							   data-id="@produto.IdProduto"
+							   data-favorited="@estado"
+							   data-url="@Url.Action("Favoritar", "ClienteFavs")"
+							   onclick="alternarFavorito(this)">
+							♥
+						</label>
 
-						<input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
-						<label for="fav-@produto.IdProduto" class="fav-button">♥</label>
+
+
+
+
 					</div>
 					<div class="product-info">
 						<h5 class="product-name">@produto.NomeProduto</h5>
 						<p class="product-price">@produto.PrecoProduto.ToString("C")</p>
-						@* @using (Html.BeginForm("Carrinho", "Home", FormMethod.Post))
-						{
-							<input type="hidden" name="id" value="@produto.IdProduto" />
-							<input type="hidden" name="quantidade" value="1" />
-						} *@
 						<div>
 							<a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
 						</div>
 					</div>
 				</div>
+
 			}
+
 		</div>
 	</section>
+
+	<script>
+		function alternarFavorito(botao) {
+			const idProd = botao.getAttribute("data-id");
+			const urlFavoritar = botao.getAttribute("data-url");
+
+			console.log("Tentando favoritar produto ID:", idProd);
+			console.log("Enviando para:", urlFavoritar);
+
+			fetch(urlFavoritar, {
+				method: "POST",
+				headers: { "Content-Type": "application/x-www-form-urlencoded" },
+				credentials: "same-origin",
+				body: `idProd=${encodeURIComponent(idProd)}`
+			})
+			.then(response => {
+				console.log("Resposta HTTP:", response.status);
+				if (!response.ok) throw new Error(`Erro na requisição: ${response.status}`);
+				return response.json();
+			})
+			.then(data => {
+				console.log("Resposta JSON:", data);
+				if (data.success) {
+					botao.style.color = data.estaFavoritado ? "red" : "black";
+				} else {
+					alert(data.message || "Erro ao atualizar favorito.");
+				}
+			})
+			.catch(error => {
+				console.error("Erro no fetch:", error);
+				alert("Erro ao processar a requisição.");
+			});
+		}
+
+	</script>
+
 </body>

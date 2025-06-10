@@ -123,3 +123,85 @@ function carregarProduto() {
 }
 
 carregarProduto();
+
+// mascara de CPF
+function formatarCPF(campo) {
+    let cpf = campo.value.replace(/\D/g, '');
+    if (cpf.length > 11) cpf = cpf.slice(0, 11);
+
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+    campo.value = cpf;
+}
+
+// mascara telefone
+function formatarTelefone(campo) {
+    let tel = campo.value.replace(/\D/g, '');
+    if (tel.length > 11) tel = tel.slice(0, 11);
+
+    tel = tel.replace(/^(\d{2})(\d)/, '($1) $2');
+    tel = tel.replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+
+    campo.value = tel;
+}
+
+//mascara cep
+function formatarCEP(campo) {
+    let cep = campo.value.replace(/\D/g, '').slice(0, 8);
+    if (cep.length >= 6) {
+        cep = cep.replace(/(\d{5})(\d)/, '$1-$2');
+    }
+    campo.value = cep;
+}
+
+// mudar visibilidade da senha
+function toggleSenha(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+
+// qnd carregar a pagina, mostrar os dados formatados ;)
+document.addEventListener('DOMContentLoaded', function () {
+    const cpfInput = document.querySelector('[name="CPF"]');
+    const telInput = document.querySelector('[name="Telefone"]');
+    const cepInput = document.querySelector('[name="CEP"]');
+
+    if (cpfInput) formatarCPF(cpfInput);
+    if (telInput) formatarTelefone(telInput);
+    if (cepInput) formatarCEP(cepInput);
+});
+
+// limpar a formataçao css
+function limparFormatacao() {
+    const cpf = document.querySelector('[name="CPF"]');
+    const tel = document.querySelector('[name="Telefone"]');
+    const cep = document.querySelector('[name="CEP"]');
+
+    if (cpf) cpf.value = cpf.value.replace(/\D/g, '');
+    if (tel) tel.value = tel.value.replace(/\D/g, '');
+    if (cep) cep.value = cep.value.replace(/\D/g, '');
+}
+
+// mensagem flutuante
+
+window.onload = function () {
+    const msg = document.getElementById("loginMessage");
+    if (msg) {
+        setTimeout(() => {
+            msg.style.opacity = '0';
+            setTimeout(() => msg.remove(), 500);
+        }, 4000);
+    }
+};

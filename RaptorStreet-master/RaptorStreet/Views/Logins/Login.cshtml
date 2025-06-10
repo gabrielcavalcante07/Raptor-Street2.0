@@ -1,34 +1,52 @@
 ﻿@model RaptorStreet.Models.Login
 
 @{
+	ViewData["Title"] = "Login";
 	ViewBag.ExibirNavbar = false;
+	var mensagem = TempData["Login"] as string;
 }
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
 <main class="userauth-container">
+	@if (!string.IsNullOrEmpty(mensagem))
+	{
+		// Exibe a mensagem na view
+		<div id="loginMessage" class="temp-message">
+			@mensagem
+		</div>
+	}
 	<div class="userauth-central">
 		<div class="userauth-box">
-				<div class="userauth-image-container" id="login-container">
-					<img src="~/assets/img/dinossauro-verde.png" class="img-raptor-logo" alt="Raptor">
-				</div>
+			<div class="userauth-image-container" id="login-container">
+				<img src="~/assets/img/dinossauro-verde.png" class="img-raptor-logo" alt="Raptor">
+			</div>
 			<div class="userauth-form">
-					<h2>Entrar</h2>
-					<form asp-action="Login" method="post">
-						<input type="email" name="email" placeholder="E-mail" required>
-						<input type="password" name="senha" placeholder="Senha" required>
-
-						<div class="options">
-							<label>
-								<input type="checkbox">
-								<span>Lembrar de mim</span>
-							</label>
-							<a href="#">esqueceu a senha?</a>
-						</div>
-						<button type="submit" class="btn btn-danger container">Login</button>
-						<div class="d-flex mt-1	">
+				<h2>Entrar</h2>
+				<form asp-action="Login" method="post">
+					<input type="email" name="email" placeholder="E-mail" required>
+					<div class="input-senha-wrapper">
+						<input type="password" name="senha" placeholder="Senha"
+							   id="senhaInput" required />
+						<button type="button" id="senhaToggle" class="senha-toggle-btn" onclick="toggleSenha('senhaInput', 'senhaToggleIcon')">
+							<i id="senhaToggleIcon" class="fa-solid fa-eye-slash"></i>
+						</button>
+					</div>
+					<div class="options">
+						<label>
+							<input type="checkbox">
+							<span>Lembrar de mim</span>
+						</label>
+						<a href="#">esqueceu a senha?</a>
+					</div>
+					<button type="submit" class="btn btn-danger container">Login</button>
+					<div class="d-flex mt-1	">
 						<a>Ainda não tem uma conta?</a>
 						<a class="text-danger fw-bold" style="margin-left:5px; cursor:pointer; text-decoration:none" onclick="location.href='/Clientes/Cadastro'">Clique aqui</a>
-						</div>
-						</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
-	</main>
+	</div>
+</main>

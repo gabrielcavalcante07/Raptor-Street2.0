@@ -1,47 +1,63 @@
 ﻿@model RaptorStreet.Models.Cliente
 
+
 @{
+    ViewData["Title"] = "Cadastro";
     ViewBag.ExibirNavbar = false;
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <main class="userauth-container">
-	<div class="userauth-central">
-		<div class="userauth-box">
-			<div class="userauth-image-container" id="cad-container">
-			<img src="~/assets/img/dinossauro-beje.png" alt="Raptor" class="img-raptor-logo" />
-			</div>
-			<div class="userauth-form">
-				<h2 class="cadastro-titulo">Cadastro</h2>
-				<form asp-controller="Clientes" asp-action="Cadastro" method="post" class="cadastro-form">
-  					<div class="form-row">
-       						<input type="text" name="NomeCliente" placeholder="Nome Completo" required />
-        				 	<input type="text" name="CPF" placeholder="CPF" required />
-    					</div>
-   					<div class="form-row">
-        					<input type="date" name="DataNascimento" placeholder="Data de Nascimento" required />
-       						<input type="text" name="Telefone" placeholder="Telefone" required />
-   					</div>
-   					 <div class="form-row">
-       						<input type="email" name="EmailCliente" placeholder="E-mail" required />
-        					<input type="password" name="SenhaCliente" placeholder="Senha" required />
-   				 	</div>
-   	 				<div class="form-row">
-       						<button type="submit" class="btn-cadastrar">Cadastrar</button>
-    					</div>
+    <div class="userauth-central">
+        <div class="userauth-box">
+            <div class="userauth-image-container" id="cad-container">
+                <img src="~/assets/img/dinossauro-beje.png" alt="Raptor" class="img-raptor-logo" />
+            </div>
+            <div class="userauth-form">
+                <h2 class="cadastro-titulo">Cadastro</h2>
+                <form asp-controller="Clientes" asp-action="Cadastro" method="post" class="cadastro-form" onsubmit="limparFormatacao()">
 
-			
-					<div class="d-flex mt-1	">
-						<a>Já tem uma conta?</a>
-						<a class="text-danger fw-bold" style="margin-left:5px; cursor:pointer; text-decoration:none" onclick="location.href='/Logins/Login'">Clique aqui</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+                    <div class="form-row">
+                        <input type="text" name="NomeCliente" placeholder="Nome Completo" required />
+                        <input type="text" name="CPF" placeholder="CPF" maxlength="14" oninput="formatarCPF(this)" required />
+                    </div>
+
+                    <div class="form-row">
+                        <input type="date" name="DataNascimento" placeholder="Data de Nascimento" required />
+                        <input type="text" name="Telefone" placeholder="Telefone"
+                               maxlength="15" oninput="formatarTelefone(this)" required />
+                    </div>
+
+                    <div class="form-row full-width">
+                        <input type="email" name="EmailCliente" placeholder="E-mail" required />
+                    </div>
+
+                    <div class="form-row full-width">
+                        <div class="input-senha-wrapper">
+                            <input type="password" name="SenhaCliente" placeholder="Senha"
+                                   id="senhaInput" required />
+                            <button type="button" id="senhaToggle" class="senha-toggle-btn" onclick="toggleSenha('senhaInput', 'senhaToggleIcon')">
+                                <i id="senhaToggleIcon" class="fa-solid fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-row full-width">
+                        <button type="submit" class="btn-cadastrar">Cadastrar</button>
+                    </div>
+
+                    <div class="d-flex mt-1">
+                        <a>Já tem uma conta?</a>
+                        <a class="text-danger fw-bold" style="margin-left:5px; cursor:pointer; text-decoration:none"
+                           onclick="location.href='/Logins/Login'">Clique aqui</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
 
 
 
 
 
-        

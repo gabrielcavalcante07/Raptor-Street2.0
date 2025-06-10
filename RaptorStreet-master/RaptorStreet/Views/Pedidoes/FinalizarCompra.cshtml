@@ -16,7 +16,7 @@
             <input type="hidden" name="idCliente" value="@Model.Cliente.IdCliente" />
 
             <div class="form-grid">
-                <input type="text" name="CEP" placeholder="CEP" required />
+                <input type="text" name="CEP" placeholder="CEP" required maxlength="9" oninput="formatarCEP(this)" />
                 <input type="text" name="Logradouro" placeholder="Logradouro" required />
                 <input type="number" name="NumeroEndereco" placeholder="Número" required />
                 <input type="text" name="Complemento" placeholder="Complemento" />

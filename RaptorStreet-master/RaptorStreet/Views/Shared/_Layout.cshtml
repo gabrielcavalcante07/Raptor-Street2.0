@@ -34,17 +34,17 @@
 					</div>
 
 
-					<div class="d-flex gap-3 justify-content-center align-items-center">
+					<div class="d-flex justify-content-center align-items-center">
 						@* Se cliente está logado *@
 						@if (!string.IsNullOrEmpty(emailCliente))
 						{
 							<div class="nav-item dropdown">
 								<a class="nav-link" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-									<img src="~/assets/img/perfil.png" id="perfil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+									<img src="~/assets/icons/icon-perfil.svg" id="perfil" class="rounded-circle" object-fit: cover;" />
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="perfilDropdown">
 									<li><a class="dropdown-item" asp-controller="Clientes" asp-action="Painel">Painel do Cliente</a></li>
-									<li><a class="dropdown-item" asp-controller="Clientes" asp-action="Favoritos">Favoritos</a></li>
+									<li><a class="dropdown-item" asp-controller="ClienteFavs" asp-action="Favoritar">Favoritos</a></li>
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item" asp-controller="Logins" asp-action="Logout">Sair</a></li>
 								</ul>

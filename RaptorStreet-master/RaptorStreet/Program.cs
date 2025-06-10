@@ -56,11 +56,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
 
-
-app.UseAuthentication();   
-app.UseSession();          
-app.UseAuthorization();    
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
