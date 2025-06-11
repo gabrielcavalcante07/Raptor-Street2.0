@@ -7,6 +7,11 @@ html {
 :root {
     --vermelho: #CB2828;
     --body: #1A1A1A;
+
+}
+
+*{
+    text-decoration: none;
 }
 
 :focus {
@@ -847,7 +852,7 @@ h3, .h3 {
 }
 
 .sidebar {
-    background-color: #f1f1f1;
+    background-color: var(--body);
     width: 250px;
     padding: 20px;
     border-right: 2px solid #ccc;
@@ -876,6 +881,17 @@ h3, .h3 {
         border-bottom: 1px solid #ccc;
         cursor: pointer;
     }
+    .sidebar-menu a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+    .sidebar-menu a:hover {
+        transition: 0.5s;
+        color: #c62828;
+        
+    }
+
 
 .btn-voltar {
     background-color: #c62828;
@@ -891,7 +907,7 @@ h3, .h3 {
 .painel-conteudo {
     flex: 1;
     padding: 40px;
-    background-color: #e0e0e0;
+    background-color: var(--body);
     min-height: 100vh;
 }
 
@@ -902,7 +918,7 @@ h3, .h3 {
 }
 
 .painel-card {
-    background: white;
+    color: white;
     padding: 20px;
     margin-bottom: 30px;
     border-radius: 10px;

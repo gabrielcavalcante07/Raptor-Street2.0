@@ -7,20 +7,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <div class="painel-container" style="padding-top:100px;">
-    <aside class="sidebar">
+    <aside class="sidebar text-white">
         <img src="~/assets/img/dinossauro-beje.png" alt="Logo" class="sidebar-logo" />
         <h2 class="sidebar-title">Área do Usuário</h2>
         <ul class="sidebar-menu">
-            <li>Conta</li>
-            <li>Status dos Pedidos</li>
-            <li>Favoritos</li>
-            <li>Histórico de compras</li>
+            <li><a href="~/Clientes/Painel">Conta</a></li>
+            <li><a href="~/Favoritar">Favoritos</a></li>
+            <li><a href="~/Pedidoes/Index">Histórico de compras</a></li>
             <li>Ajuda</li>
         </ul>
         <button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
     </aside>
 
-    <main class="painel-conteudo">
+    <main class="painel-conteudo ">
         <h2 class="titulo-bemvindo">Bem vindo, @Model.NomeCliente!</h2>
 
         @if (TempData["Msg"] != null)
@@ -31,8 +30,8 @@
         }
 
         <!-- Seção de edição dos dados -->
-        <div class="painel-card">
-            <h3>Editar Dados do Cliente</h3>
+        <div class="painel-card bg-dark text-white">
+            <h3 class="text-white">Editar Dados do Cliente</h3>
             <form asp-action="EditarCliente" method="post" class="painel-form" onsubmit="limparFormatacao()">
                 <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
 
@@ -72,15 +71,15 @@
         </div>
 
         <!-- Endereços -->
-        <div class="painel-card">
-            <h3>Endereços Cadastrados</h3>
+        <div class="painel-card bg-dark">
+            <h3 class="text-white">Endereços Cadastrados</h3>
             @if (Model.ClienteEnderecos != null && Model.ClienteEnderecos.Any())
             {
                 <ul class="lista-enderecos">
                     @foreach (var ce in Model.ClienteEnderecos)
                     {
                         var end = ce.Enderecos;
-                        <li>
+                        <li class="bg-dark">
                             <div>
                                 <strong>@end.Logradouro, @end.NumeroEndereco</strong><br />
                                 @end.Bairro - @end.Cidade/@end.Estado<br />
@@ -104,8 +103,8 @@
         </div>
 
         <!-- Adicionar Endereço -->
-        <div class="painel-card">
-            <h3>Adicionar Novo Endereço</h3>
+        <div class="painel-card bg-dark text-white">
+            <h3 class="text-white">Adicionar Novo Endereço</h3>
             <form asp-action="AdicionarEndereco" method="post" class="painel-form">
                 <input type="hidden" name="idCliente" value="@Model.IdCliente" />
 

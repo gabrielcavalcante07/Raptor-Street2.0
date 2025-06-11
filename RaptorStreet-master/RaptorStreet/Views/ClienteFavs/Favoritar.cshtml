@@ -3,27 +3,42 @@
     ViewData["Title"] = "Favoritos";
     var favoritos = ViewBag.ClienteFavs as List<ClienteFav>;
 }
-<div class="container">
 
-<h2>Meus Produtos Favoritos</h2>
+<div class="painel-container" style="padding-top:100px;">
+    <aside class="sidebar text-white">
+        <img src="~/assets/img/dinossauro-beje.png" alt="Logo" class="sidebar-logo" />
+        <h2 class="sidebar-title">Área do Usuário</h2>
+        <ul class="sidebar-menu">
+            <li><a href="~/Clientes/Painel">Conta</a></li>
+            <li><a href="~/Favoritar">Favoritos</a></li>
+            <li><a href="~/Pedidoes/Index">Histórico de compras</a></li>
+            <li>Ajuda</li>
+        </ul>
+        <button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
+    </aside>
+    <main class="painel-conteudo ">
+        <h2 class="titulo-bemvindo">Meus Produtos Favoritos</h2>
 
-<div class="produtos-favoritos">
-    @foreach (var fav in Model)
-    {
-        <div class="card-produto">
-            <img src="@fav.Produtos.ImagemProduto" alt="Imagem do Produto" class="imagem-produto" />
-            <div class="detalhes-produto">
-                <strong>@fav.Produtos.NomeProduto</strong>
-                <p>R$ @fav.Produtos.PrecoProduto.ToString("N2")</p>
-                <form method="post" asp-controller="ClienteFavs" asp-action="Favoritar">
-                    <input type="hidden" name="idProd" value="@fav.IdProduto" />
-                    <button type="submit" class="btn-remover">Desfavoritar</button>
-                </form>
+        <div class="container">
+            <div class="produtos-favoritos">
+                @foreach (var fav in Model)
+                    {
+                    <div class="card-produto">
+                        <img src="@fav.Produtos.ImagemProduto" alt="Imagem do Produto" class="imagem-produto" />
+                         <div class="detalhes-produto">
+                            <strong>@fav.Produtos.NomeProduto</strong>
+                            <p>R$ @fav.Produtos.PrecoProduto.ToString("N2")</p>
+                            <form method="post" asp-controller="ClienteFavs" asp-action="Favoritar">
+                                <input type="hidden" name="idProd" value="@fav.IdProduto" />
+                                <button type="submit" class="btn-remover">Desfavoritar</button>
+                            </form>
+                         </div>
+                    </div>
+                    }
             </div>
         </div>
-    }
-</div>
-</div>
+    </main>
+</div>  
 
 <script>
     document.querySelectorAll('.btn-desfavoritar').forEach(button => {

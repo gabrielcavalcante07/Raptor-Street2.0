@@ -1,9 +1,22 @@
 ﻿@model IEnumerable<RaptorStreet.Models.Pedido>
 
+
+<div class="painel-container" style="padding-top:100px;">
+	<aside class="sidebar text-white">
+		<img src="~/assets/img/dinossauro-beje.png" alt="Logo" class="sidebar-logo" />
+		<h2 class="sidebar-title">Área do Usuário</h2>
+		<ul class="sidebar-menu">
+			<li><a href="~/Clientes/Painel">Conta</a></li>
+			<li><a href="~/Favoritar">Favoritos</a></li>
+			<li><a href="~/Pedidoes/Index">Histórico de compras</a></li>
+			<li>Ajuda</li>
+		</ul>
+		<button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
+	</aside>
+
+	<main class="painel-conteudo ">
+		<h2 class="titulo-bemvindo">Meus Pedidos</h2>
 <div class="container text-white">
-
-	<h1>Pedidos</h1>
-
 	<table class="table table-dark">
 		<thead>
 			<tr>
@@ -57,4 +70,6 @@
 			}
 		</tbody>
 	</table>
+</div>
+</main>
 </div>
