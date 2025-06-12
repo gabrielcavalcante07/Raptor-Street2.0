@@ -426,5 +426,14 @@ namespace RaptorStreet.Controllers
             TempData["Msg"] = "Endereço removido com sucesso!";
             return RedirectToAction("Painel");
         }
+
+        [HttpPost]
+        public IActionResult LimparCarrinho()
+        {
+            _cookieCarrinhoCompra.RemoverTodos();
+            TempData["Msg"] = "Carrinho limpo com sucesso!";
+            return RedirectToAction("Carrinho");
+        }
+
     }
 }
