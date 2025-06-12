@@ -168,9 +168,6 @@ namespace RaptorStreet.Controllers
         }
 
 
-
-
-
         [HttpPost]
         public IActionResult Favoritar(int idProd)
         {

@@ -1,6 +1,6 @@
 CREATE DATABASE DBRaptor;
 USE DBRaptor;
-
+-- drop database DBRaptor;
 -- Tabela de Endereços
 CREATE TABLE tbEnderecos (
     IdEndereco INT PRIMARY KEY AUTO_INCREMENT,

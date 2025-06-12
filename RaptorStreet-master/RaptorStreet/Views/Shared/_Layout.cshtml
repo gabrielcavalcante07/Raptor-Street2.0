@@ -22,8 +22,55 @@
 			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar mb-3 fixed-top">
 				<div class="container-fluid justify-content-between mx-4">
 					<div class="logo">
-						<a class="navbar-brand navbar-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo-combination.copy.png" /></a>
+						<img src="~/assets/img/logo-combination.copy.png" class="logo-desktop d-none d-md-block" onclick="location.href='/home/Index'">
+						<img src="~/assets/img/logo.png" class="logo-mobile d-md-none" style="margin-left: 45%" onclick="location.href='/home/Index'" />
+				</div>
+
+
+					<!-- Botão Hamburguer (visível apenas em telas pequenas) -->
+					<button class="navbar-toggler d-inline-block d-sm-none me-2"
+							type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+							aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!-- Offcanvas Menu -->
+					<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+						 aria-labelledby="offcanvasDarkNavbarLabel">
+						<div class="offcanvas-header">
+							<h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+									aria-label="Close"></button>
+						</div>
+						<div class="offcanvas-body">
+							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+								<li class="nav-item">
+									<a class="nav-link active" href="#">Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">Link</a>
+								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+										Dropdown
+									</a>
+									<ul class="dropdown-menu dropdown-menu-dark">
+										<li><a class="dropdown-item" href="#">Action</a></li>
+										<li><a class="dropdown-item" href="#">Another action</a></li>
+										<li><hr class="dropdown-divider"></li>
+										<li><a class="dropdown-item" href="#">Something else</a></li>
+									</ul>
+								</li>
+							</ul>
+
+							<form class="d-flex mt-3" role="search">
+								<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+								<button class="btn btn-success" type="submit">Search</button>
+							</form>
+						</div>
 					</div>
+
+
 
 					@*input search*@
 					<div class="search-container">
@@ -33,8 +80,7 @@
 						</form>
 					</div>
 
-
-					<div class="d-flex justify-content-center align-items-center">
+					<div class="d-flex justify-content-center align-items-center ">
 						@* Se cliente está logado *@
 						@if (!string.IsNullOrEmpty(emailCliente))
 						{
@@ -52,29 +98,28 @@
 						}
 						else
 						{
-							<a class="btn btn-danger" asp-area="" asp-controller="Logins" asp-action="Login">Login</a>
+							<a class="btn btn-danger " asp-controller="Logins" asp-action="Login">Login</a>
 						}
-
+						
 						@*icon cart*@
-						<a asp-area="" asp-controller="Pedidoes" asp-action="Carrinho"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
+						<a style="margin-left: 1vh;" asp-controller="Pedidoes" asp-action="Carrinho"><img src="~/assets/icons/icon-cart.svg" id="cart" /></a>
 
 					</div>
 				</div>
 
 					@*navbar marcas*@
 					<div class="nav-marcas">
-						<a asp-controller="Produtoes" asp-action="Vans"><img src="~/assets/img/vans.png" id="Vans" class="nav-marcas-icons" /></a>
-						<a asp-controller="Produtoes" asp-action="Adidas"><img src="~/assets/img/adidas.png" id="Adidas" class="nav-marcas-icons" /></a>
-						<a asp-controller="Produtoes" asp-action="Mizuno"><img src="~/assets/img/mizuno.png" id="Mizuno" class="nav-marcas-icons" /></a>
-						<a asp-controller="Produtoes" asp-action="Nike"><img src="~/assets/img/nike.png" id="Nike" class="nav-marcas-icons" /></a>
-						<a asp-controller="Produtoes" asp-action="Puma"><img src="~/assets/img/puma.png" id="Puma" class="nav-marcas-icons" /></a>
+					<a asp-controller="Home" asp-action="Marca" asp-route-nome="Vans"><img src="~/assets/img/vans.png" id="Vans" class="nav-marcas-icons" /></a>
+					<a asp-controller="Home" asp-action="Marca" asp-route-nome="Adidas"><img src="~/assets/img/adidas.png" id="Adidas" class="nav-marcas-icons" /></a>
+					<a asp-controller="Home" asp-action="Marca" asp-route-nome="Mizuno"><img src="~/assets/img/mizuno.png" id="Mizuno" class="nav-marcas-icons" /></a>
+					<a asp-controller="Home" asp-action="Marca" asp-route-nome="Nike"><img src="~/assets/img/nike.png" id="Nike" class="nav-marcas-icons" /></a>
+					<a asp-controller="Home" asp-action="Marca" asp-route-nome="Puma"><img src="~/assets/img/puma.png" id="Puma" class="nav-marcas-icons" /></a>
 					</div>
 
-					@*menu-hamburguer*@
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+				
+						
+				
+			
 			</nav>
 		}
 	</header>

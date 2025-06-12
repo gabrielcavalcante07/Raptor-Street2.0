@@ -31,6 +31,10 @@ body{
     .modal-body hr {
         display: none !important;
     }
+.pd-10{
+    padding-top: 10vh;
+}
+
 
 
 @media (min-width: 768px) {
@@ -76,6 +80,7 @@ header {
 }
 
 .nav-marcas {
+    border: 2px solid #920000;
     display: flex;
     width: 30vw;
     height: auto;
@@ -133,15 +138,16 @@ header {
 }
 
 
-.carrousel{
+.carrousel {
     margin-top: 11vh;
+
 }
 .carousel-inner {
     margin-top: 11vh;
 }
 
 .carousel-item {
-    height: calc(100vh - 10vh); /*Subtrai a altura da navbar*/
+   
 }
 
 .carousel-item img {
@@ -475,6 +481,7 @@ header {
 }
 
 
+
 /*banner*/
 .promotion-banner {
     /* Estilos para o banner de promoção */
@@ -575,6 +582,107 @@ header {
         color: #c62828;
         text-decoration: none;
     }
+
+/* Estilos gerais */
+.userauth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.userauth-central {
+    display: flex;
+    flex-direction: column; /* Coluna em mobile */
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 0 3px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 900px;
+}
+
+.userauth-box {
+    display: flex;
+    flex-direction: column; /* Coluna em mobile */
+    width: 100%;
+    padding: 0;
+    margin-left: 0;
+}
+
+.userauth-image-container {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9b5de5;
+    order: 1; /* Faz a imagem vir primeiro */
+}
+
+    .userauth-image-container img {
+        width: 200px;
+        height: auto;
+        max-width: 100%;
+    }
+
+.userauth-form {
+    padding: 30px;
+    order: 2; /* Faz o formulário vir depois */
+}
+
+/* Estilos para desktop */
+@media (min-width: 768px) {
+    .userauth-central {
+        flex-direction: row; /* Linha em desktop */
+        height: auto;
+    }
+
+    .userauth-box {
+        flex-direction: row; /* Linha em desktop */
+        padding: 100px 0;
+        margin-left: 45px;
+    }
+
+    .userauth-image-container {
+        flex: 1;
+        order: 0; /* Volta à ordem original */
+    }
+
+    .userauth-form {
+        flex: 1;
+        padding: 50px 40px;
+        order: 0; /* Volta à ordem original */
+    }
+
+    .userauth-image-container img {
+        width: 300px;
+    }
+}
+
+/* Restante do seu CSS permanece igual */
+.userauth-form h2 {
+    color: #c62828;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.userauth-form input[type="email"],
+.userauth-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
 
 
 /*Carrinho*/
@@ -838,6 +946,7 @@ h3, .h3 {
     }
 
     /* Painel do Cliente */
+/* Painel do Cliente */
 .painel-container {
     display: flex;
     background-color: #1a1a1a;
@@ -847,7 +956,7 @@ h3, .h3 {
 }
 
 .sidebar {
-    background-color: #f1f1f1;
+    background-color: var(--body);
     width: 250px;
     padding: 20px;
     border-right: 2px solid #ccc;
@@ -877,6 +986,18 @@ h3, .h3 {
         cursor: pointer;
     }
 
+    .sidebar-menu a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+
+        .sidebar-menu a:hover {
+            transition: 0.5s;
+            color: #c62828;
+        }
+
+
 .btn-voltar {
     background-color: #c62828;
     color: white;
@@ -891,7 +1012,7 @@ h3, .h3 {
 .painel-conteudo {
     flex: 1;
     padding: 40px;
-    background-color: #e0e0e0;
+    background-color: var(--body);
     min-height: 100vh;
 }
 
@@ -902,7 +1023,7 @@ h3, .h3 {
 }
 
 .painel-card {
-    background: white;
+    color: white;
     padding: 20px;
     margin-bottom: 30px;
     border-radius: 10px;
@@ -992,7 +1113,6 @@ input {
     .senha-toggle-btn i {
         font-size: 1rem;
     }
-
 /*mensagem flutuante*/
 .temp-message {
     position: absolute;
@@ -1043,3 +1163,278 @@ input {
     border: none;
     border-radius: 5px;
 }
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    position: relative;
+}
+
+. /* Esconde o menu lateral abaixo de 600px */
+@media (max-width: 599px) {
+    .offcanvas
+
+{
+    display: none !important;
+}
+
+.navbar-toggler {
+    display: none !important;
+}
+
+}
+
+/* Mostra o menu lateral e o botão acima de 600px */
+@media (min-width: 600px) {
+    .navbar-toggler {
+        display: none !important;
+    }
+}
+
+
+  
+
+/* Link ativo (logo) */
+.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* Mostrar os links ao lado em telas grandes */
+@media screen and (min-width: 600px) {
+    .topnav a {
+        display: inline-block;
+    }
+
+    .topnav #myLinks {
+        display: inline-block !important;
+    }
+
+    .topnav a.icon {
+        display: none;
+    }
+}
+
+/*--Responsividade 350px a 768px------------------------------------------------------------------------------------------------------------------*/
+
+    @media (max-width: 768px) {
+        .ml-1{
+            margin-left: 1vw;
+        }
+        .mt-10 {
+            margin-top: 10vh !important;
+        }
+        .logo-mobile{
+           left:51%;
+        }
+
+        #tenis-sonic {
+            display: none !important;
+        }
+        .sec-blbl {
+            display: none !important;
+        }
+
+        .navbar {
+            height: 18vh;
+            justify-content: center !important;
+        }
+
+        .container-fluid {
+            flex-wrap: nowrap;
+            justify-content: space-between !important;
+        }
+
+        .logo {
+            order: 2;
+            margin: 0 auto;
+        }
+
+        .search-container {
+            display: none !important;
+        }
+
+        .nav-marcas {
+            margin-top: 8vh;
+            width: 50vw;
+        }
+
+        .d-flex {
+            order: 3;
+            margin-left: auto;
+        }
+
+        .btn.btn-danger {
+            display: block !important;
+            margin-left: 10px;
+        }
+
+        #cart {
+            display: none !important;
+        }
+
+
+
+        .nav-marcas-icons:hover {
+            transform: scale(1.2);
+        }
+
+
+
+
+    /*Produtos-card*/
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+
+    /*Página Produtos*/
+    .product {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .image-container {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+
+    .product-image {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    .product-info {
+        width: 100% !important;
+        padding: 0 15px;
+    }
+
+    .product-carousel-wrapper {
+        padding: 0 10px;
+    }
+
+    .product-carousel-track {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .form-select, .btn {
+        width: 100% !important;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    #calcular {
+        border-radius: 4px !important;
+        margin-bottom: 5px;
+    }
+
+    .input-group .btn-dark {
+        width: 100%;
+        border-radius: 4px !important;
+    }
+
+    /*CARROUSEL*/
+        .carrousel {
+            max-width: 100%;
+            overflow: hidden;
+          
+        }
+
+    .carousel-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+    /*Navbar-mobile*/
+
+
+        /* Style the navigation menu */
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+            position: relative;
+        }
+
+            /* Hide the links inside the navigation menu (except for logo/home) */
+            .topnav #myLinks {
+                display: none;
+            }
+
+            /* Style navigation menu links */
+            .topnav a {
+                color: white;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+                display: block;
+            }
+
+                /* Style the hamburger menu */
+                .topnav a.icon {
+                    background: black;
+                    display: block;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+
+                /* Add a grey background color on mouse-over */
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+        /* Style the active link (or home/logo) */
+        .active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+}
+
+
+/*--Responsividade 768px a 991px------------------------------------------------------------------------------------------------------------------*/
+@media (max-width: 991px) and (min-width: 768px) {
+    #tenis-sonic {
+        display: none !important;
+    }
+
+    .sec-blbl {
+        display: none !important;
+    }
+
+    /*Produtos-card*/
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+
+    }
+
+    .carrousel {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+
+
+
+
+
+
+
+
+}
+
+
+
+

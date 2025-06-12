@@ -17,14 +17,14 @@
 		<div class="carrousel">
 			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="hover">
 				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="~/assets/banners/banner-parcelas.png" class="d-block w-100 alt="..." onclick="location.href='/home/Produto/1'" />
+					<div class="carousel-item active" >
+						<img src="~/assets/banners/banner-parcelas.png" class="d-block" alt="..." onclick="location.href='/home/Produto/1'" />
+					</div>
+					<div class="carousel-item" >
+						<img src="~/assets/banners/banner-jordan5.png" class="d-block" alt="..." onclick="location.href='/home/Produto/2'" />
 					</div>
 					<div class="carousel-item">
-						<img src="~/assets/banners/banner-jordan5.png" class="d-block w-100" alt="..." />
-					</div>
-					<div class="carousel-item">
-						<img src="~/assets/tenis/tenis-shadow.png" class="d-block w-100" alt="..." />
+						<img src="~/assets/tenis/tenis-shadow.png" class="d-block" alt="..." onclick="location.href='/home/Produto/3'" />
 					</div>
 				</div>
 
@@ -46,33 +46,36 @@
 			</div>
 		</div>
 
-		<div class="banner-frete d-flex justify-content-center justify-content-evenly align-items-center">
-			<div class="d-flex align-items-center gap-2 img-fluid">
+	
+		<div class="banner-frete d-flex justify-content-center justify-content-evenly align-items-center sec-blbl">
+			<div class="d-flex align-items-center gap-2 img">
 				<img src="~/assets/icons/icon-frete.svg" />
 				<h1 class="text-frete">Frete Grátis</h1>
 			</div>
 
-			<div class="d-flex align-items-center gap-2 img-fluid">
+			<div class="d-flex align-items-center gap-2 img">
 				<img src="~/assets/icons/icon-credit.svg" />
 				<h1 class="text-frete">Diversas formas <br />de pagamentos</h1>
 			</div>
 
-			<div class="d-flex align-items-center gap-2 img-fluid">
+			<div class="d-flex align-items-center gap-2 img">
 				<img src="~/assets/icons/icon-security.svg" />
 				<h1 class="text-frete">Compra Segura</h1>
 			</div>
-		</div>
 
+		</div>
 		<div class="img-fluid d-flex justify-content-center align-items-center">
 			<img src="~/assets/tenis/tenis-sonic.jpg" id="tenis-sonic" />
 		</div>
 	</section>
 
-	<section class="col-md-9 container">
+
+	<section class="col-md-9 container ml-1">
+		<h1 class="text-white text-center mt-3">Produtos favoritos</h1>
 		<div class="product-grid">
 			@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
 			{
-				<div class="product-card card h-100" data-id="@produto.IdProduto">
+				<div class="ind product-card card h-100" data-id="@produto.IdProduto">
 					<div class="product-image-container">
 						<img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
 							 alt="@produto.NomeProduto"

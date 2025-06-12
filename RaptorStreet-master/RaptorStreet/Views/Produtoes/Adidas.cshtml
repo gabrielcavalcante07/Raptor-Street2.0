@@ -1,10 +1,11 @@
 ﻿
 <body>
-	<section style="padding-top: 100px;">
-		<h1 class="text-white text-center mt-3">Nike</h1>
-		<section class="col-md-9 container">
+	<section class="pd-10">
+		<h1 class=" text-white text-center mt-10">Adidas</h1>
+		<section class="col-md-9 container ml-1">
 			<div class="product-grid">
-				@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
+
+				@foreach (var produto in Model)
 				{
 					<div class="product-card card h-100">
 						<div class="product-image-container">

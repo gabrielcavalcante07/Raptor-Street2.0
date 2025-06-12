@@ -7,7 +7,7 @@
             <div class="image-container col-md-6 text-center">
                 <img src="@Model.ImagemProduto" class="product-image img-fluid" id="imagem" />
             </div>
-            <div class="gap-1 text-white">
+            <div class="container my-5 text-white">
                 <h1 id="nome">@Model.NomeProduto</h1>
                 <h2 class="price" id="preco">@Model.PrecoProduto.ToString("C")</h2>
                 <p>10% de Desconto</p>
@@ -31,12 +31,6 @@
                     <input type="hidden" name="qtd" value="1" />
                     <button type="submit" class="btn btn-danger mt-2 container">Adicionar ao Carrinho</button>
                 </form>
-                <h6 class="mt-4">Calcular Frete e Entrega</h6>
-
-                <div class="input-group mb-3">
-                    <input type="tel" class="form-control" name="CEP" value="" id="calcular" placeholder="Insira seu CEP" maxlength="9" />
-                    <button class="btn btn-dark" type="button">Calcular</button>
-                </div>
             </div>
         </div>
 
@@ -57,9 +51,9 @@
                     {
                         if (produto.IdProduto == Model.IdProduto)
                         {
-                            continue; // Pula o produto que já está sendo exibido acima
+                            continue; 
                         }
-                        <div class="product-card">
+                        <div class="prod product-card">
                             <div class="product-image-container">
                                 <img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
                                      alt="@produto.NomeProduto"

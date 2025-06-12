@@ -10,7 +10,7 @@
 
     <div class="d-flex">
         <!-- Menu Lateral  -->
-        <div class="d-flex flex-column me-4" style="width: 380px; min-height: 100%;">
+        <div class="d-flex flex-column me-md-4 mb-4 mb-md-0" style="width: 100%; max-width: 380px;">
             <img src="~/assets/img/logo-combination.png" class="w-100 mb-4 rounded" alt="Logo Loja de Tênis" />
 
             <a class="btn btn-outline-danger mb-2" asp-controller="produtoes" asp-action="Create">Cadastrar Tênis</a>
@@ -21,7 +21,7 @@
         </div>
 
         <!-- Área de Gráficos -->
-        <div style="flex-grow: 1; max-width: calc(100% - 300px);">
+        <div style="flex-grow: 1;">
             <!-- Gráfico de Barras -->
             <div class="card bg-dark text-white p-4 mb-4">
                 <h5 style="color: #ff4d4d;">Vendas Mensais</h5>
@@ -29,6 +29,7 @@
                     <canvas id="graficoBarra"></canvas>
                 </div>
             </div>
+
 
             <!-- Pizza -->
             <div class="card bg-dark text-white p-4">
