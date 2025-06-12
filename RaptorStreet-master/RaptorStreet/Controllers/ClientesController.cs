@@ -65,10 +65,10 @@ namespace RaptorStreet.Controllers
         public async Task<IActionResult> Create([Bind("IdCliente,NomeCliente,DataNascimento,CPF,Telefone,SenhaCliente,EmailCliente")] Cliente cliente)
         {
 
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-         
+            _context.Add(cliente);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
             return View(cliente);
         }
 
@@ -100,25 +100,25 @@ namespace RaptorStreet.Controllers
                 return NotFound();
             }
 
-       
-                try
+
+            try
+            {
+                _context.Update(cliente);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ClienteExists(cliente.IdCliente))
                 {
-                    _context.Update(cliente);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ClienteExists(cliente.IdCliente))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
-            
+            }
+            return RedirectToAction(nameof(Index));
+
             return View(cliente);
         }
 
@@ -227,7 +227,7 @@ namespace RaptorStreet.Controllers
                     .ThenInclude(ce => ce.Enderecos)
                 .FirstOrDefaultAsync(c => c.IdCliente == idCliente);
 
-            if (cliente == null) 
+            if (cliente == null)
             {
                 return NotFound();
             }
@@ -297,7 +297,7 @@ namespace RaptorStreet.Controllers
             // Remove a relação ClienteEndereco primeiro
             var clienteEndereco = await _context.ClienteEnderecos
                 .FirstOrDefaultAsync(ce => ce.IdEnd == idEndereco && ce.Fk_IdCliente == idCliente);
-            
+
             if (clienteEndereco != null)
             {
                 _context.ClienteEnderecos.Remove(clienteEndereco);
@@ -314,6 +314,11 @@ namespace RaptorStreet.Controllers
 
             TempData["Msg"] = "Endereço removido com sucesso!";
             return RedirectToAction("Painel");
+        }
+
+        public IActionResult Ajuda()
+        {
+            return View();
         }
     }
 }
