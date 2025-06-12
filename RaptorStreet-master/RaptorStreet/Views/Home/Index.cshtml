@@ -72,7 +72,7 @@
 		<div class="product-grid">
 			@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
 			{
-				<div class="product-card card h-100" data-id="@produto.IdProduto">
+				<div class="product-card card h-100 bg-dark" data-id="@produto.IdProduto">
 					<div class="product-image-container">
 						<img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
 							 alt="@produto.NomeProduto"
@@ -92,23 +92,16 @@
 							   onclick="alternarFavorito(this)">
 							♥
 						</label>
-
-
-
-
-
 					</div>
 					<div class="product-info">
 						<h5 class="product-name">@produto.NomeProduto</h5>
-						<p class="product-price">@produto.PrecoProduto.ToString("C")</p>
+						<p class="product-price text-success">@produto.PrecoProduto.ToString("C")</p>
 						<div>
 							<a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
 						</div>
 					</div>
 				</div>
-
 			}
-
 		</div>
 	</section>
 

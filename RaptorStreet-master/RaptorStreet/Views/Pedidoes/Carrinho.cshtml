@@ -27,10 +27,10 @@
 					total += subTotal;
 
 					<div>
-						<div class="card mb-4">
+						<div class="card mb-4 bg-dark text-white">
 							<div class="card-body">
 								<h2 class="h5 mb-3">PRODUTO</h2>
-								<div class="row">
+								<div class="row text-white">
 									<div class="col-3">
 										<img src="@item.ImagemProduto" alt="@item.NomeProduto" class="product-image" style="width: 150px; height: 100px; object-fit: cover;">
 									</div>
@@ -42,33 +42,33 @@
 									<div class="col-3 text-end">
 										<button class="btn btn-sm btn-outline-danger" onclick="confirmRemove(@item.IdProduto, @item.Tamanho)">EXCLUIR</button>
 									</div>
-									<div class="card mb-4">
+									<div class="card mb-4 bg-dark">
 										<div class="card-body">
-											<div class="row align-items-center">
+											<div class="row align-items-center text-white">
 												<div class="col-md-4">
-													<h6>QUANTIDADE</h6>
+													<h6>Quantidade</h6>
 													<div class="d-flex align-items-center">
-														<form asp-action="DiminuirItem" asp-controller="Pedidoes" method="post" class="d-inline">
+														<form asp-action="DiminuirItem" asp-controller="Pedidoes" method="post" class="d-inline ">
 															<input type="hidden" name="id" value="@item.IdProduto" />
 															<input type="hidden" name="tamanho" value="@item.Tamanho" />
-															<button type="submit" class="btn btn-outline-secondary btn-sm">-</button>
+															<button type="submit" class="btn btn-outline-danger btn-sm">-</button>
 														</form>
-														<div class="px-3 mx-2 border">@item.QuantidadeProd</div>
+														<div class="px-3 mx-2 text-danger">@item.QuantidadeProd</div>
 														<form asp-action="AdicionarItem" asp-controller="Pedidoes" method="post" class="d-inline">
 															<input type="hidden" name="id" value="@item.IdProduto" />
 															<input type="hidden" name="tamanho" value="@item.Tamanho" />
-															<button type="submit" class="btn btn-outline-secondary btn-sm">+</button>
+															<button type="submit" class="btn btn-outline-danger btn-sm">+</button>
 														</form>
 													</div>
 												</div>
 
 												<div class="col-md-4">
-													<h6>VALOR UNITÁRIO</h6>
-													<p class="mb-0">@preco.ToString("C")</p>
+													<h6>Valor Unitário</h6>
+													<p class="mb-0 fw-bold">@preco.ToString("C")</p>
 												</div>
 
 												<div class="col-md-4">
-													<h6>SUBTOTAL</h6>
+													<h6 class="">Subotal</h6>
 													<p class="mb-0 fw-bold">@subTotal.ToString("C")</p>
 												</div>
 											</div>
@@ -77,20 +77,18 @@
 								</div>
 							</div>
 						</div>
-
-
 					</div>
 				}
 
 
 				<!-- Resumo da Compra -->
 				<div>
-					<div class="card mb-3">
+					<div class="card mb-3 bg-dark">
 						<div class="card-body">
-							<h5 class="mb-3">RESUMO DA COMPRA</h5>
+							<h5 class="mb-3">Resumo da compra</h5>
 							<div class="d-flex justify-content-between mb-2">
 								<span>Valor dos produtos</span>
-								<span>@total.ToString("C")</span>
+								<span class="fw-bold">@total.ToString("C")</span>
 							</div>
 							<hr>
 							<div class="d-flex justify-content-between fw-bold">

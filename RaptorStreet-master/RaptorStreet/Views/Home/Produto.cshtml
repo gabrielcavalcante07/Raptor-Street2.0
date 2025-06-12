@@ -42,7 +42,7 @@
 
         <div class="container my-5 text-white">
             <h3 class="text-center">Sobre o Produto</h3>
-            <p class="product-description" id="descricao">
+            <p class="product-description text-center" id="descricao">
                 @Model.Descricao
             </p>
         </div>
@@ -72,11 +72,9 @@
                             <div class="product-info">
                                 <h5 class="product-name">@produto.NomeProduto</h5>
                                 <p class="product-price">@produto.PrecoProduto.ToString("C")</p>
-                                <form method="post" asp-controller="Pedidoes" asp-action="AdicionarItem">
-                                    <input type="hidden" name="id" value="@produto.IdProduto" />
-                                    <input type="hidden" name="quantidade" value="1" />
-                                    <button type="submit" class="btn btn-danger">Adicionar ao Carrinho</button>
-                                </form>
+                                <div>
+                                    <a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
+                                </div>
                             </div>
                         </div>
                     }

@@ -4,14 +4,14 @@
 
     <h1>Resumo do Pedido</h1>
 
-    <h4>Dados do Cliente</h4>
-    <p><strong>Nome:</strong> @Model.Cliente.NomeCliente</p>
-    <p><strong>Email:</strong> @Model.Cliente.EmailCliente</p>
-    <div class="painel-card">
-        <h3>Adicionar Novo Endereço</h3>
-
-
-
+    <div>
+        <h4>Dados do Cliente</h4>
+        <p><strong>Nome:</strong> @Model.Cliente.NomeCliente</p>
+        <p><strong>Email:</strong> @Model.Cliente.EmailCliente</p>
+        <p><strong>CPF:</strong> @Model.Cliente.CPF</p>
+    </div>
+    <div class="painel-card bg-dark">
+        <h3 class="text-white">Adicionar Novo Endereço</h3>
         <form asp-action="AdicionarEndereco" method="post" class="painel-form">
             <input type="hidden" name="idCliente" value="@Model.Cliente.IdCliente" />
 
@@ -28,11 +28,12 @@
         </form>
     </div>
 
+        <form method="post" asp-action="ConfirmarPedido" class="d-flex flex-column w-25 gap-2">
     <p><strong>Endereço:</strong></p>
     <select class="form-select" required>
         @foreach (var enderecoCliente in Model.Cliente.ClienteEnderecos)
         {
-            <option disabled selected hidden value="">@enderecoCliente.Enderecos.Logradouro</option>
+            <option disabled selected value="">Selecione um endereço</option>
             <option value="@enderecoCliente.IdEnd">
                 @enderecoCliente.Enderecos.Logradouro, nº @enderecoCliente.Enderecos.NumeroEndereco,
                 Bairro: @enderecoCliente.Enderecos.Bairro,
@@ -75,7 +76,6 @@
 
     <h4 class="text-success"><strong class="text-white">Total:</strong> @Model.Total.ToString("C")</h4>
     <div class="d-flealign-content-xl-around justify-content-start">
-        <form method="post" asp-action="ConfirmarPedido" class="d-flex flex-column w-25 gap-2">
             <select name="Fk_IdPag" class="form-select" required>
                 <option disabled selected hidden value="">Escolha a forma de pagamento</option>
                 <option value="1">Cartão</option>
