@@ -11,59 +11,61 @@
         <button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
     </aside>
 
-<div class="bg-dark text-light">
+    <body class="bg-dark text-light">
 
-  <div class="container py-5">
-    <div class="text-center mb-4">
-      <h1 class="text-danger">Central de Ajuda</h1>
-      <p class="lead">Precisa de ajuda? Estamos aqui para você!</p>
-    </div>
+        <div class="container py-5">
+            <div class="text-center mb-4">
+                <h1 class="text-danger">Central de Ajuda</h1>
+                <p class="lead">Precisa de ajuda? Estamos aqui para você!</p>
+            </div>
 
-    <div class="accordion" id="faqAccordion">
-      <div class="accordion-item bg-dark border-danger text-light">
-        <h2 class="accordion-header">
-          <button class="accordion-button bg-dark text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-            Como posso rastrear meu pedido?
-          </button>
-        </h2>
-        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Você pode rastrear seu pedido acessando sua conta e clicando em "Meus Pedidos". Lá você verá o status e o código de rastreamento.
-          </div>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item bg-dark border-danger text-light">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button bg-dark text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Como posso rastrear meu pedido?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Você pode rastrear seu pedido acessando sua conta e clicando em "Meus Pedidos". Lá você verá o status e o código de rastreamento.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-dark border-danger text-light">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-dark text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Como faço uma troca ou devolução?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Você tem até 7 dias após o recebimento para solicitar a troca ou devolução. Acesse "Meus Pedidos" e clique em "Solicitar Troca".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-dark border-danger text-light">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-dark text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Quais são as formas de pagamento aceitas?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Aceitamos cartão de crédito, débito, PIX e boleto bancário.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="mb-2">Ainda precisa de ajuda?</p>
+                <a href="mailto:suporte@lojadetenis.com" class="btn btn-danger">Fale com o Suporte</a>
+            </div>
         </div>
-      </div>
 
-      <div class="accordion-item bg-dark border-danger text-light">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed bg-dark text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-            Como faço uma troca ou devolução?
-          </button>
-        </h2>
-        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Você tem até 7 dias após o recebimento para solicitar a troca ou devolução. Acesse "Meus Pedidos" e clique em "Solicitar Troca".
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-item bg-dark border-danger text-light">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed bg-dark text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-            Quais são as formas de pagamento aceitas?
-          </button>
-        </h2>
-        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Aceitamos cartão de crédito, débito, PIX e boleto bancário.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="text-center mt-5">
-      <p class="mb-2">Ainda precisa de ajuda?</p>
-      <a href="mailto:suporte@lojadetenis.com" class="btn btn-danger">Fale com o Suporte</a>
-    </div>
-  </div>
-</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </div>
