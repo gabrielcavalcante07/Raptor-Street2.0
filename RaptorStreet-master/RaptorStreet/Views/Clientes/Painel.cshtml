@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <div class="painel-container" style="padding-top:100px;">
-    <aside class="sidebar text-white">
+    <aside class="sidebar text-white r-none">
         <img src="~/assets/img/dinossauro-beje.png" alt="Logo" class="sidebar-logo" />
         <h2 class="sidebar-title">Área do Usuário</h2>
         <ul class="sidebar-menu">
@@ -92,7 +92,7 @@
                                 <input type="hidden" name="idCliente" value="@Model.IdCliente" />
                             </form>
                             <div class="col-3 text-end">
-                                <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmRemove(@end.IdEndereco, @Model.IdCliente)">EXCLUIR</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmRemove(@end.IdEndereco, @Model.IdCliente)" style="padding: 10px;">EXCLUIR</button>
                             </div>
                         </li>
                     }

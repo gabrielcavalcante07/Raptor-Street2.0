@@ -23,20 +23,22 @@
 				<div class="container-fluid justify-content-between mx-4">
 					<div class="logo">
 						<img src="~/assets/img/logo-combination.copy.png" class="logo-desktop d-none d-md-block" onclick="location.href='/home/Index'">
-						<img src="~/assets/img/logo.png" class="logo-mobile d-md-none" style="margin-left: 45%" onclick="location.href='/home/Index'" />
+						<img src="~/assets/img/logo.png" class="logo-mobile d-md-none" onclick="location.href='/home/Index'" />
 				</div>
 
 
 					<!-- Botão Hamburguer (visível apenas em telas pequenas) -->
+				<div class="d-sm-none">
 					<button class="navbar-toggler d-inline-block d-sm-none me-2"
 							type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
 							aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
+
+					
 					<!-- Offcanvas Menu -->
-					<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-						 aria-labelledby="offcanvasDarkNavbarLabel">
+					<div class="offcanvas offcanvas-start  bg-black text-white" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
 						<div class="offcanvas-header">
 							<h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
 							<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
@@ -44,36 +46,41 @@
 						</div>
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-								<li class="nav-item">
-									<a class="nav-link active" href="#">Home</a>
+								<li class="nav-item" >
+									<a onclick="location.href='/home/Index'" class="nav-link active" style="background-color: #dc3545">Inicio</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">Link</a>
 								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-										Dropdown
-									</a>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+											Marcas
+										</a>
 									<ul class="dropdown-menu dropdown-menu-dark">
-										<li><a class="dropdown-item" href="#">Action</a></li>
-										<li><a class="dropdown-item" href="#">Another action</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Something else</a></li>
+										<li><a asp-controller="Home" asp-action="Marca" asp-route-nome="Vans" class="dropdown-item">Vans</a></li>
+										<li><a asp-controller="Home" asp-action="Marca" asp-route-nome="Adidas" class="dropdown-item">Adidas</a></li>
+										<li><a asp-controller="Home" asp-action="Marca" asp-route-nome="Mizuno" class="dropdown-item">Mizuno</a></li>
+										<li><a asp-controller="Home" asp-action="Marca" asp-route-nome="Nike" class="dropdown-item">Nike</a></li>
+										<li><a asp-controller="Home" asp-action="Marca" asp-route-nome="Puma" class="dropdown-item">Puma</a></li>
 									</ul>
 								</li>
 							</ul>
 
-							<form class="d-flex mt-3" role="search">
-								<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-								<button class="btn btn-success" type="submit">Search</button>
-							</form>
+
+
+							<div class="search-container s2">
+								<form class="d-flex" asp-controller="Home" asp-action="Pesquisar" method="get" role="search">
+									<img src="~/assets/icons/icon-search-dark.svg" id="icon-search" />
+									<input class="form-control" type="search" name="nome" placeholder="Pesquisar" aria-label="Search">
+								</form>
+							</div>
 						</div>
 					</div>
-
-
+				</div>
+				
 
 					@*input search*@
-					<div class="search-container">
+					<div class="search-container s1">
 						<form class="d-flex" asp-controller="Home" asp-action="Pesquisar" method="get" role="search">
 							<img src="~/assets/icons/icon-search-dark.svg" id="icon-search" />
 							<input class="form-control" type="search" name="nome" placeholder="Pesquisar" aria-label="Search">
@@ -91,6 +98,7 @@
 								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="perfilDropdown">
 									<li><a class="dropdown-item" asp-controller="Clientes" asp-action="Painel">Painel do Cliente</a></li>
 									<li><a class="dropdown-item" asp-controller="ClienteFavs" asp-action="Favoritar">Favoritos</a></li>
+									<li><a class="dropdown-item" asp-controller="Pedidoes" asp-action="Index">Histórico de pedidos</a></li>
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item" asp-controller="Logins" asp-action="Logout">Sair</a></li>
 								</ul>
@@ -116,10 +124,6 @@
 					<a asp-controller="Home" asp-action="Marca" asp-route-nome="Puma"><img src="~/assets/img/puma.png" id="Puma" class="nav-marcas-icons" /></a>
 					</div>
 
-				
-						
-				
-			
 			</nav>
 		}
 	</header>

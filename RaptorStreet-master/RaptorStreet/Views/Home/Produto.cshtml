@@ -7,13 +7,13 @@
             <div class="image-container col-md-6 text-center">
                 <img src="@Model.ImagemProduto" class="product-image img-fluid" id="imagem" />
             </div>
-            <div class="container my-5 text-white">
+            <div class="container my-5 text-white" style="margin: 8vh;">
                 <h1 id="nome">@Model.NomeProduto</h1>
                 <h2 class="price" id="preco">@Model.PrecoProduto.ToString("C")</h2>
                 <p>10% de Desconto</p>
                 <p>Parcelamos em até 10x sem juros</p>
                 <form method="post" asp-controller="Pedidoes" asp-action="AdicionarItem">
-                    <select name="tamanho" class="form-select" aria-label="Default select example" required>
+                    <select name="tamanho" class="form-select" aria-label="Default select example" style="margin: 0vw;" required>
                         <option disabled selected hidden value="">Escolha o tamanho</option>
                         <option value="35">35</option>
                         <option value="36">36</option>
@@ -29,7 +29,7 @@
                     </select>
                     <input type="hidden" name="id" value="@Model.IdProduto" />
                     <input type="hidden" name="qtd" value="1" />
-                    <button type="submit" class="btn btn-danger mt-2 container">Adicionar ao Carrinho</button>
+                    <button type="submit" class="btn btn-danger mt-2 container" style="margin: 0vw;"> Adicionar ao Carrinho</button>
                 </form>
             </div>
         </div>
