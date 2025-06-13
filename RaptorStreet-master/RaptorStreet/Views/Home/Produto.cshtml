@@ -47,44 +47,7 @@
             </p>
         </div>
 
-        <!--Carrousel de cards-->
-        <div class="product-carousel-wrapper">
-            <button class="product-carousel-button prev">&#10094;</button>
-
-            <div class="product-carousel-container">
-                <div class="product-carousel-track">
-                    @foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
-                    {
-                        if (produto.IdProduto == Model.IdProduto)
-                        {
-                            continue; // Pula o produto que já está sendo exibido acima
-                        }
-                        <div class="product-card">
-                            <div class="product-image-container">
-                                <img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
-                                     alt="@produto.NomeProduto"
-                                     class="product-image"
-                                     onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
-
-                                <input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
-                                <label for="fav-@produto.IdProduto" class="fav-button">♥</label>
-                            </div>
-                            <div class="product-info">
-                                <h5 class="product-name">@produto.NomeProduto</h5>
-                                <p class="product-price">@produto.PrecoProduto.ToString("C")</p>
-                                <div>
-                                    <a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
-            <button class="product-carousel-button next">&#10095;</button>
-        </div>
-
-
-
     </section>
 </body>
+
+                     

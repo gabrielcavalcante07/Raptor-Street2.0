@@ -36,6 +36,10 @@ body{
     .modal-body hr {
         display: none !important;
     }
+.pd-10 {
+    padding-top: 10vh;
+}
+
 
 
 @media (min-width: 768px) {
@@ -145,7 +149,7 @@ header {
 }
 
 .carousel-item {
-    height: calc(100vh - 10vh); /*Subtrai a altura da navbar*/
+
 }
 
 .carousel-item img {
@@ -242,7 +246,6 @@ header {
     border-bottom-left-radius: 3px;
 }
 
-
 .product-carousel-wrapper {
     position: relative;
     width: 100%;
@@ -268,12 +271,12 @@ header {
     border-radius: 10px;
 }
 
-.product-image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px;
-}
+    .product-image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+    }
 
 .product-info {
     margin-top: 0.5rem;
@@ -315,6 +318,7 @@ header {
     .product-carousel-button.next {
         right: 10px;
     }
+
 
 
 /*NIKE*/
@@ -580,9 +584,107 @@ header {
     }
 
 
-/*Carrinho*/
+/* Estilos gerais */
+.userauth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
 
-/* Estilos Gerais */
+.userauth-central {
+    display: flex;
+    flex-direction: column; /* Coluna em mobile */
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 0 3px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 900px;
+}
+
+.userauth-box {
+    display: flex;
+    flex-direction: column; /* Coluna em mobile */
+    width: 100%;
+    padding: 0;
+    margin-left: 0;
+}
+
+.userauth-image-container {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9b5de5;
+    order: 1; /* Faz a imagem vir primeiro */
+}
+
+    .userauth-image-container img {
+        width: 200px;
+        height: auto;
+        max-width: 100%;
+    }
+
+.userauth-form {
+    padding: 30px;
+    order: 2; /* Faz o formulário vir depois */
+}
+
+/* Estilos para desktop */
+@media (min-width: 768px) {
+    .userauth-central {
+        flex-direction: row; /* Linha em desktop */
+        height: auto;
+    }
+
+    .userauth-box {
+        flex-direction: row; /* Linha em desktop */
+        padding: 100px 0;
+        margin-left: 45px;
+    }
+
+    .userauth-image-container {
+        flex: 1;
+        order: 0; /* Volta à ordem original */
+    }
+
+    .userauth-form {
+        flex: 1;
+        padding: 50px 40px;
+        order: 0; /* Volta à ordem original */
+    }
+
+    .userauth-image-container img {
+        width: 300px;
+    }
+}
+
+
+.userauth-form h2 {
+    color: #c62828;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.userauth-form input[type="email"],
+.userauth-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -1050,11 +1152,318 @@ input {
     margin-top: 10px;
 }
 
-.btn-remover {
-    margin-top: 10px;
-    background-color: crimson;
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    position: relative;
+}
+
+. /* Esconde o menu lateral abaixo de 600px */
+@media (max-width: 599px) {
+    .offcanvas
+
+{
+    display: none !important;
+}
+
+.navbar-toggler {
+    display: none !important;
+}
+
+}
+
+/* Mostra o menu lateral e o botão acima de 600px */
+@media (min-width: 600px) {
+    .navbar-toggler {
+        display: none !important;
+    }
+}
+
+
+
+
+/* Link ativo (logo) */
+.active {
+    background-color: #04AA6D;
     color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
+}
+
+/* Mostrar os links ao lado em telas grandes */
+@media screen and (min-width: 600px) {
+    .topnav a {
+        display: inline-block;
+    }
+
+    .topnav #myLinks {
+        display: inline-block !important;
+    }
+
+    .topnav a.icon {
+        display: none;
+    }
+}
+
+/*--Responsividade 350px a 768px------------------------------------------------------------------------------------------------------------------*/
+
+@media (max-width: 768px) {
+    .ml-1 {
+        margin-left: 1vw;
+    }
+
+    .mt-10 {
+        margin-top: 10vh !important;
+    }
+
+    .logo-mobile {
+        left: 51%;
+    }
+
+    #tenis-sonic {
+        display: none !important;
+    }
+
+    .sec-blbl {
+        display: none !important;
+    }
+
+    .navbar {
+        height: 18vh;
+        justify-content: center !important;
+    }
+
+    .container-fluid {
+        flex-wrap: nowrap;
+        justify-content: space-between !important;
+    }
+
+    .logo {
+        order: 2;
+        margin: 0 auto;
+    }
+
+    .search-container {
+        display: none !important;
+    }
+
+    .nav-marcas {
+        display: none;
+    }
+
+    .d-flex {
+        order: 3;
+        margin-left: auto;
+    }
+
+    .btn.btn-danger {
+        display: block !important;
+        margin-left: 10px;
+    }
+
+    #cart {
+        display: none !important;
+    }
+
+
+
+    .nav-marcas-icons:hover {
+        transform: scale(1.2);
+    }
+
+
+
+
+    /*Produtos-card*/
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+
+    /*Página Produtos*/
+    .product {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .image-container {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+
+    .product-image {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    .product-info {
+        width: 100% !important;
+        padding: 0 15px;
+    }
+
+    .product-carousel-wrapper {
+        padding: 0 10px;
+    }
+
+    .product-carousel-track {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .form-select, .btn {
+        width: 100% !important;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    #calcular {
+        border-radius: 4px !important;
+        margin-bottom: 5px;
+    }
+
+    .input-group .btn-dark {
+        width: 100%;
+        border-radius: 4px !important;
+    }
+
+    /*CARROUSEL*/
+    .carrousel {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+
+    /*pedidos*/
+    .pedido-card {
+        background-color: #1a1a1a;
+        border-radius: 12px;
+        border: 1px solid #333;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .pedido-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
+        }
+
+        .pedido-card .btn-outline-danger {
+            border-color: #e63946;
+            color: #e63946;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .pedido-card .btn-outline-danger:hover {
+                background-color: #e63946;
+                color: #fff;
+            }
+
+    h2 {
+        font-weight: 700;
+        color: #e63946;
+    }
+
+    .text-muted {
+        color: #999 !important;
+    }
+
+    @media (max-width: 576px) {
+        .pedido-card {
+            padding: 1rem;
+        }
+
+            .pedido-card .btn {
+                width: 100%;
+            }
+    }
+
+    /*Navbar-mobile*/
+
+
+    /* Style the navigation menu */
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        position: relative;
+    }
+
+        /* Hide the links inside the navigation menu (except for logo/home) */
+        .topnav #myLinks {
+            display: none;
+        }
+
+        /* Style navigation menu links */
+        .topnav a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            display: block;
+        }
+
+            /* Style the hamburger menu */
+            .topnav a.icon {
+                background: black;
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            /* Add a grey background color on mouse-over */
+            .topnav a:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+    /* Style the active link (or home/logo) */
+    .active {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+
+    .r-none {
+        display: none;
+    }
+}
+
+
+/*--Responsividade 768px a 991px------------------------------------------------------------------------------------------------------------------*/
+@media (max-width: 991px) and (min-width: 768px) {
+    #tenis-sonic {
+        display: none !important;
+    }
+
+    .sec-blbl {
+        display: none !important;
+    }
+
+    /*Produtos-card*/
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+    }
+
+    .carrousel {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+
+    .r-none {
+        display: none;
+    }
 }

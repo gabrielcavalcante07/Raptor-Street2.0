@@ -222,7 +222,7 @@ namespace RaptorStreet.Controllers
                 .Where(cf => cf.IdCliente == idCliente.Value && cf.ativado == true)
                 .ToList();
 
-            ViewBag.ClienteFavoritos = clienteFavoritos;
+            ViewBag.FavoritosIds = clienteFavoritos.Select(cf => cf.IdProduto).ToList();
 
             return View(clienteFavoritos);
         }

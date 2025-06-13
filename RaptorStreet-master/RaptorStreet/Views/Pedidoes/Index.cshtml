@@ -2,74 +2,48 @@
 
 
 <div class="painel-container" style="padding-top:100px;">
-	<aside class="sidebar text-white">
+	<aside class="r-none sidebar text-white ">
 		<img src="~/assets/img/dinossauro-beje.png" alt="Logo" class="sidebar-logo" />
 		<h2 class="sidebar-title">Área do Usuário</h2>
 		<ul class="sidebar-menu">
 			<li><a href="~/Clientes/Painel">Conta</a></li>
 			<li><a href="~/Favoritar">Favoritos</a></li>
 			<li><a href="~/Pedidoes/Index">Histórico de compras</a></li>
-			<li>Ajuda</li>
+			<li><a href="~/Clientes/Ajuda">Ajuda</a></li>
 		</ul>
 		<button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
 	</aside>
 
-	<main class="painel-conteudo ">
-		<h2 class="titulo-bemvindo">Meus Pedidos</h2>
-<div class="container text-white">
-	<table class="table table-dark">
-		<thead>
-			<tr>
-				<th>Cliente</th>
-				<th>N° Pedido</th>
-				<th>Endereço</th>
-				<th>Forma de Pagamento</th>
-				<th>Data do Pedido</th>
-				<th>Total</th>
-				<th>Ações</th>
-			<tr />
-		</thead>
-		<tbody>
-			@foreach (var item in Model)
-			{
-				<tr class="bg-white text-center">
-					<td>
-						@item.Clientes.NomeCliente
-					</td>
 
-					<td>
-						@foreach (var produto in item.ItemPedidos)
-						{
-							<div>
-								<strong>@produto.Fk_IdPedido</strong>
-							</div>
-						}
-					</td>
+    <main class="painel-conteudo">
+        <h2 class="titulo-bemvindo">Histórico de Compras</h2>
+            @if (Model.Any())
+                {
+        <section class="container">
+                @foreach (var pedido in Model)
+                {
+                    <div class="pedido-card p-4 mb-4 rounded" style="background-color: #1a1a1a; border: 1px solid #333;">
+                        <div class="mb-3">
+                            <span class="text-muted">Pedido Nº:</span> <span class="fw-bold text-white">@pedido.IdPedido</span> |
+                            <span class="text-muted">Data:</span> <span class="fw-bold text-white">@pedido.dataPed.ToString("dd/MM/yyyy HH:mm")</span>
+                        </div>
 
+                        <div class="mt-2">
+                            <p class="mb-1 text-muted">Cliente: <span class="text-white">@pedido.Clientes.NomeCliente</span> | <span class="text-white">@pedido.Clientes.Telefone</span></p>
+                            <p class="mb-1 text-muted">Endereço: <span class="text-white">@pedido.Enderecos.Logradouro, Nº @pedido.Enderecos.NumeroEndereco, @pedido.Enderecos.Bairro - @pedido.Enderecos.Cidade/@pedido.Enderecos.Estado</span></p>
+                            <p class="mb-1 text-muted">Forma de Pagamento: <span class="text-white">@pedido.Pagamentos.MetodoPag</span></p>
+                            <p class="fw-bold text-white mb-0">Total do Pedido: R$ @pedido.totalPedido.ToString("N2")</p>
+                        </div>
+                    </div>
+                }
+        </section>
+        }
+        else
+        {
+    <div class="alert alert-warning">
+        Nenhuma compra efetuada.
+    </div>
+        }
 
-					<td>
-						@item.Enderecos.Logradouro, Nº @item.Enderecos.NumeroEndereco, @item.Enderecos.Bairro - @item.Enderecos.Cidade/@item.Enderecos.Estado
-					</td>
+ </main>
 
-					<td>
-					@item.Pagamentos.MetodoPag
-					</td>
-
-					<td>
-						@item.dataPed
-					</td>
-
-					<td>
-					@item.totalPedido
-					</td>
-
-					<td>
-						<a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.IdPedido">Details</a>
-					</td>
-				</tr>
-			}
-		</tbody>
-	</table>
-</div>
-</main>
-</div>

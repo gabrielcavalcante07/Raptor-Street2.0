@@ -1,29 +1,43 @@
-﻿
-<body>
-	<section style="padding-top: 100px;">
-		<h1 class="text-white text-center mt-3">Puma</h1>
+﻿@model List<RaptorStreet.Models.Produto>
+
+@{
+    ViewData["Title"] = "Produtos da marca " + ViewBag.TermoPesquisa;
+}
+
+<section style="padding-top: 10vh">
+
+    <h1><i>@ViewBag.TermoPesquisa</i></h1>
+
+    @if (Model.Any())
+    {
 		<section class="col-md-9 container">
 			<div class="product-grid">
-				@foreach (var produto in ViewBag.ProdutosDoBanco as List<Produto>)
+				@foreach (var produto in Model)
 				{
-					<div class="product-card card h-100">
+					<div class="product-card card h-100 bg-dark" data-id="@produto.IdProduto">
 						<div class="product-image-container">
 							<img src="@(string.IsNullOrEmpty(produto.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : produto.ImagemProduto)"
 								 alt="@produto.NomeProduto"
 								 class="product-image card-img-top" style="height: 200px; object-fit: cover;"
 								 onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
-
-							<input type="checkbox" id="fav-@produto.IdProduto" class="fav-checkbox">
-							<label for="fav-@produto.IdProduto" class="fav-button">♥</label>
+							@{
+								var favoritosIds = ViewBag.FavoritosIds as List<int> ?? new List<int>();
+								bool estaFavoritado = favoritosIds.Contains(produto.IdProduto);
+								string cor = estaFavoritado ? "red" : "black";
+								string estado = estaFavoritado ? "true" : "false";
+							}
+							<label class="fav-button"
+								   style="cursor:pointer; color:@cor;"
+								   data-id="@produto.IdProduto"
+								   data-favorited="@estado"
+								   data-url="@Url.Action("Favoritar", "ClienteFavs")"
+								   onclick="alternarFavorito(this)">
+								♥
+							</label>
 						</div>
 						<div class="product-info">
 							<h5 class="product-name">@produto.NomeProduto</h5>
-							<p class="product-price">@produto.PrecoProduto.ToString("C")</p>
-							@* @using (Html.BeginForm("Carrinho", "Home", FormMethod.Post))
-						{
-							<input type="hidden" name="id" value="@produto.IdProduto" />
-							<input type="hidden" name="quantidade" value="1" />
-						} *@
+							<p class="product-price text-success">@produto.PrecoProduto.ToString("C")</p>
 							<div>
 								<a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@produto.IdProduto">Ver mais</a>
 							</div>
@@ -32,21 +46,48 @@
 				}
 			</div>
 		</section>
-		</div>
-		</div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            Nenhum produto encontrado para "<strong>@ViewBag.TermoPesquisa</strong>".
+        </div>
+    }
 
 
-		<div class="promotion-banner mt-4">
-			<div class="row align-items-center bg-light rounded p-3">
-				<div class="col-md-6">
-					<h3>Parcelamos Suas Compras!</h3>
-					<p>Aproveite nossas condições especiais de parcelamento.</p>
-					<a href="#" class="btn btn-success">Saiba Mais</a>
-				</div>
-				<div class="col-md-6 text-end">
-					<img src="~/assets/img/banner_promo.jpg" alt="Banner de Promoção" class="img-fluid rounded">
-				</div>
-			</div>
-		</div>
-	</section>
-</body>
+	<script>
+		function alternarFavorito(botao) {
+			const idProd = botao.getAttribute("data-id");
+			const urlFavoritar = botao.getAttribute("data-url");
+
+			console.log("Tentando favoritar produto ID:", idProd);
+			console.log("Enviando para:", urlFavoritar);
+
+			fetch(urlFavoritar, {
+				method: "POST",
+				headers: { "Content-Type": "application/x-www-form-urlencoded" },
+				credentials: "same-origin",
+				body: `idProd=${encodeURIComponent(idProd)}`
+			})
+			.then(response => {
+				console.log("Resposta HTTP:", response.status);
+				if (!response.ok) throw new Error(`Erro na requisição: ${response.status}`);
+				return response.json();
+			})
+			.then(data => {
+				console.log("Resposta JSON:", data);
+				if (data.success) {
+					botao.style.color = data.estaFavoritado ? "red" : "black";
+				} else {
+					alert(data.message || "Erro ao atualizar favorito.");
+				}
+			})
+			.catch(error => {
+				console.error("Erro no fetch:", error);
+				alert("Erro ao processar a requisição.");
+			});
+		}
+
+	</script>
+</section>
+

@@ -22,23 +22,21 @@
 			<div class="userauth-image-container" id="login-container">
 				<img src="~/assets/img/dinossauro-verde.png" class="img-raptor-logo" alt="Raptor">
 			</div>
+
 			<div class="userauth-form">
 				<h2>Entrar</h2>
 				<form asp-action="Login" method="post">
 					<input type="email" name="email" placeholder="E-mail" required>
-					<div class="input-senha-wrapper">
+
+					<div class="input-senha-wrapper" style="position: relative;">
 						<input type="password" name="senha" placeholder="Senha"
-							   id="senhaInput" required />
-						<button type="button" id="senhaToggle" class="senha-toggle-btn" onclick="toggleSenha('senhaInput', 'senhaToggleIcon')">
+							   id="senhaInput" required
+							   style="padding-right: 40px; /* Espaço para o ícone */" />
+						<button type="button" id="senhaToggle" class="senha-toggle-btn"
+								onclick="toggleSenha('senhaInput', 'senhaToggleIcon')"
+								style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
 							<i id="senhaToggleIcon" class="fa-solid fa-eye-slash"></i>
 						</button>
-					</div>
-					<div class="options">
-						<label>
-							<input type="checkbox">
-							<span>Lembrar de mim</span>
-						</label>
-						<a href="#">esqueceu a senha?</a>
 					</div>
 					<button type="submit" class="btn btn-danger container">Login</button>
 					<div class="d-flex mt-1	">

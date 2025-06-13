@@ -4,60 +4,102 @@
     var favoritos = ViewBag.ClienteFavs as List<ClienteFav>;
 }
 
-<div class="painel-container" style="padding-top:100px;">
-    <aside class="sidebar text-white">
+<section class="painel-container" style="padding-top:100px;">
+    <aside class="r-none sidebar text-white ">
         <img src="~/assets/img/dinossauro-beje.png" alt="Logo" class="sidebar-logo" />
         <h2 class="sidebar-title">Área do Usuário</h2>
         <ul class="sidebar-menu">
             <li><a href="~/Clientes/Painel">Conta</a></li>
             <li><a href="~/Favoritar">Favoritos</a></li>
             <li><a href="~/Pedidoes/Index">Histórico de compras</a></li>
-            <li>Ajuda</li>
+            <li><a href="~/Clientes/Ajuda">Ajuda</a></li>
         </ul>
         <button class="btn-voltar" onclick="location.href='/home/index'">Voltar</button>
     </aside>
     <main class="painel-conteudo ">
         <h2 class="titulo-bemvindo">Meus Produtos Favoritos</h2>
-
-        <div class="container">
-            <div class="produtos-favoritos">
+        @if (Model.Any())
+    {
+        <section class="col-md-9 container">
+            <div class="product-grid">
                 @foreach (var fav in Model)
-                    {
-                    <div class="card-produto">
-                        <img src="@fav.Produtos.ImagemProduto" alt="Imagem do Produto" class="imagem-produto" />
-                         <div class="detalhes-produto">
-                            <strong>@fav.Produtos.NomeProduto</strong>
-                            <p>R$ @fav.Produtos.PrecoProduto.ToString("N2")</p>
-                            <form method="post" asp-controller="ClienteFavs" asp-action="Favoritar">
-                                <input type="hidden" name="idProd" value="@fav.IdProduto" />
-                                <button type="submit" class="btn-remover">Desfavoritar</button>
-                            </form>
-                         </div>
-                    </div>
-                    }
+                {
+				<div class="product-card card h-100 bg-dark" data-id="@fav.Produtos.IdProduto">
+					<div class="product-image-container">
+						<img src="@(string.IsNullOrEmpty(fav.Produtos.ImagemProduto) ? Url.Content("/assets/img/default-image.png") : fav.Produtos.ImagemProduto)"
+							 alt="@fav.Produtos.NomeProduto"
+							 class="product-image card-img-top" style="height: 200px; object-fit: cover;"
+							 onerror="this.onerror=null;this.src='@Url.Content("/assets/img/default-image.png")';" />
+						@{
+							var favoritosIds = ViewBag.FavoritosIds as List<int> ?? new List<int>();
+							bool estaFavoritado = favoritosIds.Contains(fav.Produtos.IdProduto);
+							string cor = estaFavoritado ? "red" : "black";
+							string estado = estaFavoritado ? "true" : "false";
+						}
+						<label class="fav-button"
+							   style="cursor:pointer; color:@cor;"
+                                   data-id="@fav.Produtos.IdProduto"
+							   data-favorited="@estado"
+							   data-url="@Url.Action("Favoritar", "ClienteFavs")"
+							   onclick="alternarFavorito(this)">
+							♥
+						</label>
+					</div>
+					<div class="product-info">
+						<h5 class="product-name">@fav.Produtos.NomeProduto</h5>
+						<p class="product-price text-success">@fav.Produtos.PrecoProduto.ToString("C")</p>
+						<div>
+                                <a class="btn btn-danger" asp-controller="home" asp-action="Produto" asp-route-id="@fav.Produtos.IdProduto">Ver mais</a>
+						</div>
+					</div>
+				</div>
+                }
             </div>
-        </div>
-    </main>
-</div>  
+        </section>
+ 
+        }
+        else
+        {
+    <div class="alert alert-warning">
+        Nenhum produto favoritado.
+    </div>
+        }
 
 <script>
-    document.querySelectorAll('.btn-desfavoritar').forEach(button => {
-        button.addEventListener('click', function () {
-            const idProd = this.getAttribute('data-id');
+    function alternarFavorito(botao) {
+        const idProd = botao.getAttribute("data-id");
+        const urlFavoritar = botao.getAttribute("data-url");
+        const cardProduto = botao.closest('.product-card');
 
-            fetch('/ClienteFavs/Favoritar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ idProd: parseInt(idProd) })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload();
+        fetch(urlFavoritar, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            credentials: "same-origin",
+            body: `idProd=${encodeURIComponent(idProd)}`
+        })
+        .then(response => {
+            if (!response.ok) throw new Error(`Erro na requisição: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                // Atualiza a cor do botão
+                botao.style.color = data.estaFavoritado ? "red" : "black";
+
+                if (!data.estaFavoritado) {
+                    cardProduto.remove();
                 }
-            });
+            } else {
+                alert(data.message || "Erro ao atualizar favorito.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro no fetch:", error);
+            alert("Erro ao processar a requisição.");
         });
-    });
+    }
 </script>
+
+    </main>
+</section>
+

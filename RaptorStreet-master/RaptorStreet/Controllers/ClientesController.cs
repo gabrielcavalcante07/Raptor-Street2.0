@@ -235,9 +235,8 @@ namespace RaptorStreet.Controllers
             return View(cliente);
         }
 
-        [HttpPost]
-        //Edita os dados do cliente
-        public async Task<IActionResult> EditarCliente(int IdCliente, string Nome, string Email, string Telefone)
+        [HttpPost("Clientes/EditarCliente")]
+        public async Task<IActionResult> EditarCliente(int IdCliente, string Nome, string Email, string Telefone, string SenhaCliente, string CPF, DateTime DataNascimento)
         {
             var cliente = await _context.Clientes.FindAsync(IdCliente);
 
@@ -249,6 +248,9 @@ namespace RaptorStreet.Controllers
             cliente.NomeCliente = Nome;
             cliente.EmailCliente = Email;
             cliente.Telefone = Telefone;
+            cliente.SenhaCliente = SenhaCliente; 
+            cliente.CPF = CPF;
+            cliente.DataNascimento = DataNascimento;
 
             _context.Clientes.Update(cliente);
             await _context.SaveChangesAsync();
@@ -256,6 +258,7 @@ namespace RaptorStreet.Controllers
             TempData["Msg"] = "Seus Dados foram atualizados com sucesso!";
             return RedirectToAction("Painel");
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AdicionarEndereco(int idCliente, string CEP, int NumeroEndereco, string Logradouro, string Complemento, string Bairro, string Cidade, string Estado)
