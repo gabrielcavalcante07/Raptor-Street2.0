@@ -883,6 +883,7 @@ h3, .h3 {
 
 .img-raptor-logo {
     max-width: 100%;
+
     height: auto;
 }
 
@@ -1216,7 +1217,7 @@ input {
     }
 
     .logo-mobile {
-        left: 51%;
+        margin: 0 0 0 3vh;
     }
 
     #tenis-sonic {
@@ -1230,6 +1231,10 @@ input {
     .navbar {
         height: 18vh;
         justify-content: center !important;
+    }
+
+    .container {
+        margin: 0 0 0 1vh;
     }
 
     .container-fluid {
@@ -1257,7 +1262,6 @@ input {
 
     .btn.btn-danger {
         display: block !important;
-        margin-left: 10px;
     }
 
     #cart {
